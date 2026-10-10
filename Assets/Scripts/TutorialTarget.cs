@@ -8,6 +8,12 @@ public class TutorialTarget : MonoBehaviour
     public bool IsDestroyed { get; private set; }
     public bool IsShielded => shielded;
 
+    public void Complete()
+    {
+        IsDestroyed = true;
+        gameObject.SetActive(false);
+    }
+
     public void Hit(bool reflected, bool shieldBreaking)
     {
         if (IsDestroyed) return;
@@ -21,7 +27,6 @@ public class TutorialTarget : MonoBehaviour
             return;
         }
         if (requireReflectedHit && !reflected) return;
-        IsDestroyed = true;
-        gameObject.SetActive(false);
+        Complete();
     }
 }

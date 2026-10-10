@@ -16,7 +16,9 @@ The existing `SampleScene` still generates the prototype when played.
 All visuals use `Assets/Sprites/Square.png` or `Assets/Sprites/Circle.png`, with
 the unlit material in `Assets/Materials/ArenaUnlit.mat`. The four walls have
 static BoxCollider2D components, and the tank uses
-a dynamic Rigidbody2D with no gravity and a fixed body rotation. Shots sweep a
+a dynamic Rigidbody2D with no gravity and a body that turns toward movement.
+The turret aims independently, and CameraDeadZone follows outside its central
+zone. Shots sweep a
 circle across their full movement distance to avoid crossing walls at high speed.
 The tank is on Ignore Raycast so returning shots pass through it. The projectile
 sweep checks all other physics layers. Only colliders with `BlueMirror` on their

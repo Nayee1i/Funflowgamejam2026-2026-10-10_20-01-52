@@ -12,6 +12,7 @@ public class TutorialLevel : MonoBehaviour
         public Vector2 size = new Vector2(18, 10);
         public GameObject gate;
         public TutorialTarget[] targets;
+        public Transform checkpoint;
     }
 
     [SerializeField] private Transform player;
@@ -23,6 +24,47 @@ public class TutorialLevel : MonoBehaviour
     private bool restarting;
     private GUIStyle textStyle;
     private float finishedAt;
+    private static int resumeRoom = -1;
+    private static string resumeScene;
+
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+    private static void ResetResumeState()
+    {
+        resumeRoom = -1;
+        resumeScene = null;
+    }
+
+    private void Start()
+    {
+        if (resumeRoom < 0 || resumeScene != SceneManager.GetActiveScene().path) return;
+        CurrentRoom = Mathf.Clamp(resumeRoom, 0, rooms.Length - 1);
+        resumeRoom = -1;
+        resumeScene = null;
+        // A fresh scene resets the current encounter, while completed rooms stay cleared.
+        for (int i = 0; i < CurrentRoom; i++)
+        {
+            foreach (TutorialTarget target in rooms[i].targets)
+                if (target != null) target.Complete();
+            if (rooms[i].gate != null) rooms[i].gate.SetActive(false);
+        }
+        Transform checkpoint = rooms[CurrentRoom].checkpoint;
+        Vector3 position = checkpoint != null ? checkpoint.position : (Vector3)rooms[CurrentRoom].center;
+        Quaternion rotation = checkpoint != null ? checkpoint.rotation : Quaternion.identity;
+        player.SetPositionAndRotation(position, rotation);
+        if (player.TryGetComponent<Rigidbody2D>(out var body))
+        {
+            body.position = position;
+            body.rotation = rotation.eulerAngles.z;
+            body.linearVelocity = Vector2.zero;
+            body.angularVelocity = 0f;
+        }
+        Physics2D.SyncTransforms();
+        if (gameCamera != null)
+        {
+            gameCamera.transform.position = new Vector3(position.x, position.y, gameCamera.transform.position.z);
+            if (gameCamera.TryGetComponent<CameraDeadZone>(out var follow)) follow.ResetSmoothing();
+        }
+    }
 
     private bool Cleared(int index)
     {
@@ -68,24 +110,6 @@ public class TutorialLevel : MonoBehaviour
     private void LateUpdate()
     {
         if (gameCamera == null || rooms == null || rooms.Length == 0) return;
-        Vector2 center = rooms[CurrentRoom].center;
-        // Keep the player visible if they walk back to an earlier room.
-        if (player != null)
-        {
-            center = player.position;
-            foreach (Room room in rooms)
-            {
-                Vector2 offset = (Vector2)player.position - room.center;
-                if (Mathf.Abs(offset.x) < room.size.x * .5f && Mathf.Abs(offset.y) < room.size.y * .5f)
-                {
-                    center = room.center;
-                    break;
-                }
-            }
-        }
-        Vector3 target = new Vector3(center.x, center.y, -10);
-        gameCamera.transform.position = Vector3.Lerp(gameCamera.transform.position, target,
-            1f - Mathf.Exp(-5f * Time.deltaTime));
         gameCamera.orthographicSize = Mathf.Max(7f, 10.5f / gameCamera.aspect);
     }
 
@@ -93,6 +117,8 @@ public class TutorialLevel : MonoBehaviour
     {
         if (restarting) return;
         restarting = true;
+        resumeRoom = CurrentRoom;
+        resumeScene = SceneManager.GetActiveScene().path;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
@@ -106,7 +132,7 @@ public class TutorialLevel : MonoBehaviour
         GUI.Box(new Rect(10, 10, Screen.width - 20, 76),
             Finished ? "Обучение пройдено!" : $"Комната {CurrentRoom + 1}/5\n{rooms[CurrentRoom].instruction}", textStyle);
         GUI.Box(new Rect(10, Screen.height - 42, Screen.width - 20, 32),
-            "WASD / стрелки — движение    Мышь — прицел    ЛКМ — огонь    R — заново", textStyle);
+            "WASD / стрелки — движение    Мышь — прицел    ЛКМ — огонь    R — чекпоинт", textStyle);
         if (!Finished) return;
         float x = Screen.width * .5f - 140;
         if (GUI.Button(new Rect(x, Screen.height * .5f, 280, 48), "Выбор уровня"))

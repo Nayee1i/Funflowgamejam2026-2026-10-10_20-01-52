@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 public class TankMovement : MonoBehaviour
 {
     [SerializeField] private float moveSpeed = 4f;
+    [SerializeField] private float turnSpeed = 540f;
     [SerializeField] private Transform turret;
     [SerializeField] private Transform muzzle;
     [SerializeField] private Bullet bulletPrefab;
@@ -36,6 +37,12 @@ public class TankMovement : MonoBehaviour
 
         if (gameCamera == null)
             gameCamera = Camera.main;
+        if (gameCamera != null)
+        {
+            CameraDeadZone follow = gameCamera.GetComponent<CameraDeadZone>();
+            if (follow == null) follow = gameCamera.gameObject.AddComponent<CameraDeadZone>();
+            follow.SetTarget(transform);
+        }
     }
 
     private void Update()
@@ -54,7 +61,10 @@ public class TankMovement : MonoBehaviour
 
         // Диагональ не должна давать дополнительную скорость.
         movement = movement.normalized;
+    }
 
+    private void LateUpdate()
+    {
         var mouse = Mouse.current;
 
         if (mouse == null || gameCamera == null || turret == null || muzzle == null)
@@ -100,6 +110,11 @@ public class TankMovement : MonoBehaviour
     private void FixedUpdate()
     {
         body.linearVelocity = movement * moveSpeed;
+        if (movement.sqrMagnitude > 0.001f)
+        {
+            float angle = Mathf.Atan2(movement.y, movement.x) * Mathf.Rad2Deg - 90f;
+            body.MoveRotation(Mathf.MoveTowardsAngle(body.rotation, angle, turnSpeed * Time.fixedDeltaTime));
+        }
     }
 
     private void OnDisable()

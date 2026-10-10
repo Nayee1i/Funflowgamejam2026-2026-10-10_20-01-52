@@ -15,6 +15,7 @@ public class Bullet : MonoBehaviour
     private Collider2D owner;
     private readonly RaycastHit2D[] hits = new RaycastHit2D[32];
     private const float Separation = 0.002f;
+    public float Radius => radius;
 
     public void Launch(Vector2 aim, Collider2D shooter, bool enemyShot = false)
     {
@@ -101,6 +102,7 @@ public class Bullet : MonoBehaviour
         {
             Collider2D collider = hits[i].collider;
             if (collider == owner) continue;
+            if (collider.GetComponentInParent<BallPassBarrier>() != null) continue;
             if (!hostile && collider.GetComponentInParent<TutorialPlayer>() != null) continue;
             if (hostile && collider.GetComponentInParent<TutorialTarget>() != null) continue;
             return hits[i];
