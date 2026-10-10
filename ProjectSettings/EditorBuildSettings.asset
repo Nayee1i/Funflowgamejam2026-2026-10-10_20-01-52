@@ -6,6 +6,15 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/Tutorial.unity
+    guid: 9c6bff0a82cf477f9549a5e342b6ebd2
+  - enabled: 1
+    path: Assets/Scenes/LevelSelection.unity
+    guid: 5b0c4fc1bba648849afce33893b13116
+  - enabled: 1
+    path: Assets/Scenes/TankArena.unity
+    guid: 8d842e8f6a95480b9a4c55c704c1cb17
+  - enabled: 1
     path: Assets/Scenes/SampleScene.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
   m_configObjects:
