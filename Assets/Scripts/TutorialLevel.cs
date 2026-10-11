@@ -19,6 +19,7 @@ public class TutorialLevel : MonoBehaviour
     [SerializeField] private Camera gameCamera;
     [SerializeField] private Room[] rooms;
     [SerializeField] private string levelSelectionScene;
+    [SerializeField] private string completionMessage = "Обучение пройдено!";
     public int CurrentRoom { get; private set; }
     public bool Finished { get; private set; }
     private bool restarting;
@@ -71,6 +72,19 @@ public class TutorialLevel : MonoBehaviour
         foreach (TutorialTarget target in rooms[index].targets)
             if (target != null && !target.IsDestroyed) return false;
         return true;
+    }
+
+    public bool TryGetRoomIndex(TutorialTarget target, out int index)
+    {
+        if (target != null && rooms != null)
+            for (int i = 0; i < rooms.Length; i++)
+                if (rooms[i].targets != null && System.Array.IndexOf(rooms[i].targets, target) >= 0)
+                {
+                    index = i;
+                    return true;
+                }
+        index = -1;
+        return false;
     }
 
     private void Update()
@@ -130,7 +144,7 @@ public class TutorialLevel : MonoBehaviour
             textStyle = new GUIStyle(GUI.skin.box) { fontSize = 18, alignment = TextAnchor.MiddleCenter, wordWrap = true };
         }
         GUI.Box(new Rect(10, 10, Screen.width - 20, 76),
-            Finished ? "Обучение пройдено!" : $"Комната {CurrentRoom + 1}/5\n{rooms[CurrentRoom].instruction}", textStyle);
+            Finished ? completionMessage : $"Комната {CurrentRoom + 1}/{rooms.Length}\n{rooms[CurrentRoom].instruction}", textStyle);
         GUI.Box(new Rect(10, Screen.height - 42, Screen.width - 20, 32),
             "WASD / стрелки — движение    Мышь — прицел    ЛКМ — огонь    R — чекпоинт", textStyle);
         if (!Finished) return;

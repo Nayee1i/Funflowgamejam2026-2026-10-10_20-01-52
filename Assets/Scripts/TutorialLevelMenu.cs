@@ -7,9 +7,12 @@ public class TutorialLevelMenu : MonoBehaviour
     {
         GUIStyle style = new GUIStyle(GUI.skin.label) { fontSize = 28, alignment = TextAnchor.MiddleCenter };
         float x = Screen.width * .5f - 160;
-        float y = Screen.height * .5f - 100;
+        float y = Screen.height * .5f - 210;
         GUI.Label(new Rect(x, y, 320, 50), "Выбор уровня", style);
         if (GUI.Button(new Rect(x, y + 70, 320, 50), "Обучение")) SceneManager.LoadScene("Tutorial");
         if (GUI.Button(new Rect(x, y + 132, 320, 50), "Арена")) SceneManager.LoadScene("TankArena");
+        if (GUI.Button(new Rect(x, y + 194, 320, 50), "level1")) SceneManager.LoadScene("level1");
+        if (GUI.Button(new Rect(x, y + 256, 320, 50), "level2")) SceneManager.LoadScene("level2");
+        if (GUI.Button(new Rect(x, y + 318, 320, 50), "level3")) SceneManager.LoadScene("level3");
     }
 }

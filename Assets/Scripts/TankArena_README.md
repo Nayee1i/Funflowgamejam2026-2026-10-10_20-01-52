@@ -10,8 +10,8 @@ The existing `SampleScene` still generates the prototype when played.
 - Mouse: aim the turret.
 - Hold left mouse button: fire a ball every 0.4 seconds.
 - An ordinary wall absorbs a ball immediately.
-- A blue mirror reflects a yellow ball once and turns it orange.
-- Any subsequent solid contact removes it. Shots also expire after 8 seconds.
+- Mirrors reflect a ball up to five times without changing its color.
+- A sixth mirror contact or any ordinary wall removes it. Shots also expire after 8 seconds.
 
 All visuals use `Assets/Sprites/Square.png` or `Assets/Sprites/Circle.png`, with
 the unlit material in `Assets/Materials/ArenaUnlit.mat`. The four walls have
@@ -22,7 +22,7 @@ zone. Shots sweep a
 circle across their full movement distance to avoid crossing walls at high speed.
 The tank is on Ignore Raycast so returning shots pass through it. The projectile
 sweep checks all other physics layers. Only colliders with `BlueMirror` on their
-object or parent reflect balls; all other solid surfaces absorb them.
+object or parent, or `RedMirror`, reflect balls; all other solid surfaces absorb them.
 
 Drag `Assets/Prefabs/BlueMirror.prefab` into a scene to place a blue rectangular
 mirror. It has a Square sprite, an unlit material, a solid BoxCollider2D and a
@@ -41,7 +41,7 @@ Tuning:
 Manual gameplay checks:
 
 1. Move into each wall and confirm the tank stays inside the arena.
-2. Aim diagonally at a blue mirror. Confirm one reflection, then removal on the next contact.
+2. Aim diagonally at a blue mirror. Confirm up to five reflections with unchanged color, then removal on a sixth mirror contact.
 3. Fire at ordinary walls, beside walls and into corners. Confirm ordinary walls absorb shots.
 4. Hold fire while moving. Confirm continuous shots and independent turret aiming.
 5. Resize the Game view. Confirm all four walls remain visible.

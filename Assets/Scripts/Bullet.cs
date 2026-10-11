@@ -8,19 +8,20 @@ public class Bullet : MonoBehaviour
     [SerializeField] private float lifetime = 8f;
 
     private Vector2 direction;
-    private bool bounced;
+    private int reflectionCount;
     private float age;
     private bool hostile;
     private bool shieldBreaking;
     private Collider2D owner;
     private readonly RaycastHit2D[] hits = new RaycastHit2D[32];
     private const float Separation = 0.002f;
+    private const int MaxReflections = 5;
     public float Radius => radius;
 
     public void Launch(Vector2 aim, Collider2D shooter, bool enemyShot = false)
     {
         direction = aim.normalized;
-        bounced = false;
+        reflectionCount = 0;
         age = 0f;
         hostile = enemyShot;
         shieldBreaking = false;
@@ -51,8 +52,8 @@ public class Bullet : MonoBehaviour
         }
 
         float remaining = speed * Time.fixedDeltaTime;
-        // Ordinary walls absorb shots. Only a blue mirror permits one reflection.
-        for (int contact = 0; contact < 2 && remaining > 0f; contact++)
+        // Allow five reflections plus one final hit or movement in the same physics step.
+        for (int contact = 0; contact < MaxReflections + 1 && remaining > 0f; contact++)
         {
             Vector2 position = transform.position;
             RaycastHit2D hit = Cast(position, direction, remaining);
@@ -72,12 +73,12 @@ public class Bullet : MonoBehaviour
             TutorialTarget target = hit.collider.GetComponentInParent<TutorialTarget>();
             if (!hostile && target != null)
             {
-                target.Hit(bounced, shieldBreaking);
+                target.Hit(reflectionCount > 0, shieldBreaking);
                 Destroy(gameObject);
                 return;
             }
             bool red = hit.collider.GetComponentInParent<RedMirror>() != null;
-            if (bounced || (!red && hit.collider.GetComponentInParent<BlueMirror>() == null))
+            if (reflectionCount >= MaxReflections || (!red && hit.collider.GetComponentInParent<BlueMirror>() == null))
             {
                 Destroy(gameObject);
                 return;
@@ -86,9 +87,9 @@ public class Bullet : MonoBehaviour
             transform.position = hit.centroid + hit.normal * Separation;
             remaining -= hit.distance;
             direction = Vector2.Reflect(direction, hit.normal).normalized;
-            bounced = true;
-            shieldBreaking = red;
-            GetComponent<SpriteRenderer>().color = red ? new Color(1f, 0.15f, 0.2f) : new Color(1f, 0.48f, 0.22f);
+            reflectionCount++;
+            // A red mirror charges the shot for the rest of its flight, including blue bounces.
+            shieldBreaking |= red;
         }
     }
 

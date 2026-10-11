@@ -156,7 +156,7 @@ public class TankArena : MonoBehaviour
         }
         GUI.Label(new Rect(0, 12, Screen.width, 34), "ONE BOUNCE", titleStyle);
         GUI.Label(new Rect(0, Screen.height - 40, Screen.width, 30),
-            "WASD / Arrows: move     Mouse: aim     Hold left click: shoot     Blue mirror: one bounce. Walls: absorb.", controlsStyle);
+            "WASD / Arrows: move     Mouse: aim     Hold left click: shoot     Mirrors: up to 5 bounces. Walls: absorb.", controlsStyle);
     }
 
     private void OnDestroy()

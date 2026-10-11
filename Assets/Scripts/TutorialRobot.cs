@@ -8,17 +8,35 @@ public class TutorialRobot : MonoBehaviour
     [SerializeField] private Bullet bulletPrefab;
     [SerializeField] private TutorialLevel level;
     [SerializeField] private int roomIndex = 2;
-    [SerializeField] private float shotInterval = 2f;
-    [SerializeField] private float firstShotDelay = 1f;
+    [Tooltip("Seconds between shots while the player remains visible.")]
+    [SerializeField, Min(.01f)] private float shotInterval = 2.1f;
+    [Tooltip("Reaction delay on every new sighting, including after leaving cover.")]
+    [SerializeField, Min(0f)] private float firstShotDelay = .8f;
+    [Tooltip("Extra per-enemy reaction delay added to First Shot Delay.")]
+    [SerializeField, Min(0f)] private float reactionOffset;
     [SerializeField] private float sightRange = 16f;
     [Range(0f, 360f)]
     [SerializeField] private float sightAngle = 150f;
     private float nextShot;
-    private bool activated;
+    private bool hasVisualContact;
     private Collider2D ownCollider;
     private readonly RaycastHit2D[] visibilityHits = new RaycastHit2D[32];
 
     private void Awake() => ownCollider = GetComponent<Collider2D>();
+
+    private void Start()
+    {
+        if (level == null) level = FindAnyObjectByType<TutorialLevel>();
+        if (player == null)
+        {
+            TutorialPlayer tank = FindAnyObjectByType<TutorialPlayer>();
+            if (tank != null) player = tank.transform;
+        }
+        if (level != null && level.TryGetRoomIndex(GetComponent<TutorialTarget>(), out int index))
+            roomIndex = index;
+    }
+
+    private void OnDisable() => hasVisualContact = false;
 
     private bool CanSeePlayer()
     {
@@ -45,17 +63,27 @@ public class TutorialRobot : MonoBehaviour
     private void Update()
     {
         if (level == null || level.CurrentRoom != roomIndex || level.Finished ||
-            player == null || turret == null || muzzle == null || bulletPrefab == null) return;
-        if (!activated)
+            player == null || turret == null || muzzle == null || bulletPrefab == null)
         {
-            if (!CanSeePlayer()) return;
-            activated = true;
-            nextShot = Time.time + firstShotDelay;
+            hasVisualContact = false;
+            return;
+        }
+        // Test visibility before aiming, including while the weapon is on cooldown.
+        // Losing sight freezes the turret and cancels the current reaction period.
+        if (!CanSeePlayer())
+        {
+            hasVisualContact = false;
+            return;
+        }
+        if (!hasVisualContact)
+        {
+            hasVisualContact = true;
+            // Reacquisition always grants a full reaction delay without shortening shot cooldown.
+            nextShot = Mathf.Max(nextShot, Time.time + firstShotDelay + reactionOffset);
         }
         Vector2 aim = player.position - turret.position;
         turret.rotation = Quaternion.Euler(0, 0, Mathf.Atan2(aim.y, aim.x) * Mathf.Rad2Deg - 90f);
         if (Time.time < nextShot) return;
-        if (!CanSeePlayer()) return;
         nextShot = Time.time + shotInterval;
         Bullet ball = Instantiate(bulletPrefab, muzzle.position, muzzle.rotation);
         ball.gameObject.SetActive(true);
