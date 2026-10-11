@@ -15,8 +15,9 @@ public static class Level1TextureQuality
         foreach(var entry in Entries) if(entry.name==name){importer.spritePixelsPerUnit=entry.ppu;break;}
         importer.textureType=TextureImporterType.Sprite;
         importer.spriteImportMode=SpriteImportMode.Single;
-        importer.filterMode=FilterMode.Bilinear;
-        importer.mipmapEnabled=false;
+        bool tank = name == "56_3036";
+        importer.filterMode=tank ? FilterMode.Trilinear : FilterMode.Bilinear;
+        importer.mipmapEnabled=tank;
         importer.alphaIsTransparency=true;
         importer.npotScale=TextureImporterNPOTScale.None;
         importer.maxTextureSize=8192;

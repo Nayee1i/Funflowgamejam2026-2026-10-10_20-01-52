@@ -21,7 +21,6 @@ public static class BuildFirstLevelRooms
             importer.spriteImportMode = SpriteImportMode.Single;
             Level1TextureQuality.Configure(importer,path);
             importer.alphaIsTransparency = true;
-            importer.mipmapEnabled = false;
             importer.maxTextureSize = 4096;
             importer.textureCompression = TextureImporterCompression.Uncompressed;
             importer.SaveAndReimport();
@@ -29,7 +28,7 @@ public static class BuildFirstLevelRooms
         var scene = EditorSceneManager.NewScene(NewSceneSetup.EmptyScene, NewSceneMode.Single);
         var camera = new GameObject("Main Camera", typeof(Camera), typeof(AudioListener)).GetComponent<Camera>();
         camera.tag = "MainCamera";
-        camera.transform.position = new Vector3(0, .4315f, -10);
+        camera.transform.position = new Vector3(0, 0, -10);
         camera.orthographic = true;
         camera.orthographicSize = 5.15f;
         camera.backgroundColor = new Color(25/255f, 24/255f, 23/255f);
@@ -58,6 +57,7 @@ public static class BuildFirstLevelRooms
         tank.transform.localScale = Vector3.one * .7f;
         tank.transform.position = new Vector3(-4.45f, -.55f, 0);
         controller.player = tank.transform;
+        InstallFirstLevelShooting.ConfigurePlayer(controller);
         var canvas = new GameObject("Level HUD", typeof(Canvas), typeof(CanvasScaler), typeof(GraphicRaycaster));
         canvas.GetComponent<Canvas>().renderMode = RenderMode.ScreenSpaceOverlay;
         var scaler = canvas.GetComponent<CanvasScaler>();

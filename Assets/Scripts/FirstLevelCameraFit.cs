@@ -6,7 +6,7 @@ public class FirstLevelCameraFit : MonoBehaviour
 {
     public float minimumHalfHeight = 5.15f;
     public float horizontalHalfWidth = 8.2f;
-    public float verticalOffset = .4315f;
+    public float verticalOffset = 0f;
     private void LateUpdate() => Apply();
     public void Apply()
     {

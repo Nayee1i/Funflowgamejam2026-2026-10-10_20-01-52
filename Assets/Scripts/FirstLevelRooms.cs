@@ -16,6 +16,7 @@ public class FirstLevelRooms : MonoBehaviour
     public int CurrentRoom { get; private set; }
     private bool transitioning;
     private bool paused;
+    public bool CanPlay => !paused && !transitioning;
     private static readonly Vector3 Spawn = new Vector3(-4.45f, -.55f, 0);
 
     private void Start() { ShowRoom(0); SetFade(0); }
@@ -92,6 +93,7 @@ public class FirstLevelRooms : MonoBehaviour
     }
     private void ShowRoom(int index)
     {
+        FirstLevelShot.ClearAll();
         CurrentRoom = index;
         for (int i = 0; i < rooms.Length; i++) rooms[i].SetActive(i == index);
         player.position = Spawn;

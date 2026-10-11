@@ -74,8 +74,10 @@ public static class FigmaLevelObstacles
         if(normal.y<0)normal=-normal;
         float angle=Mathf.Atan2(-normal.x,normal.y)*Mathf.Rad2Deg;
         mirror.localRotation=Quaternion.Euler(0,0,angle);
-        var surface=mirror.gameObject.AddComponent<MirrorRicochetSurface>();
+        var surface=mirror.GetComponent<MirrorRicochetSurface>();
+        if(surface==null)surface=mirror.gameObject.AddComponent<MirrorRicochetSurface>();
         surface.localReflectionPoint=localPoint; surface.chargesShot=charges;
+        surface.reflectFromCollider=false;
         mirror.position+=(Vector3)(point-surface.ReflectionPoint);
         return surface;
     }
@@ -132,7 +134,12 @@ public static class FigmaLevelObstacles
             float angle=i*Mathf.PI*2/points.Length;
             points[i]=new Vector2(cx+87*Mathf.Cos(angle),cy+67*Mathf.Sin(angle));
         }
-        return Create(root,"Blue Mirror — "+id,id,x,y,points);
+        var mirror=Create(root,"Blue Mirror — "+id,id,x,y,points);
+        var surface=mirror.gameObject.AddComponent<MirrorRicochetSurface>();
+        surface.localReflectionPoint=new Vector2(0,(id=="56_3085"?164:161.5f)-cy)/100f;
+        surface.chargesShot=false;
+        surface.reflectFromCollider=true;
+        return mirror;
     }
     private static Transform Create(Transform root,string name,string id,float x,float y,Vector2[] pixels)
     {
