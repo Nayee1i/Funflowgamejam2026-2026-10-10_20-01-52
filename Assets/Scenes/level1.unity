@@ -173,7 +173,6 @@ MonoBehaviour:
     targets:
     - {fileID: 1000067}
     - {fileID: 1000091}
-    checkpoint: {fileID: 1000063}
   - instruction: "\u041A2 \xB7 \u0437\u0430\u0440\u044F\u0434 \u0434\u043B\u044F \u0449\u0438\u0442\u0430"
     center: {x: 20, y: 0}
     size: {x: 18, y: 10}
@@ -181,7 +180,6 @@ MonoBehaviour:
     targets:
     - {fileID: 1000173}
     - {fileID: 1000197}
-    checkpoint: {fileID: 1000169}
   - instruction: "\u041A3 \xB7 \u043C\u0438\u043D\u0438-\u0444\u0438\u043D\u0430\u043B"
     center: {x: 40, y: 0}
     size: {x: 18, y: 10}
@@ -190,9 +188,8 @@ MonoBehaviour:
     - {fileID: 1000281}
     - {fileID: 1000305}
     - {fileID: 1000328}
-    checkpoint: {fileID: 1000277}
-  levelSelectionScene: LevelSelection
-  completionMessage: "\u0423\u0440\u043E\u0432\u0435\u043D\u044C \u043F\u0440\u043E\u0439\u0434\u0435\u043D!"
+  levelSelectionScene: MainMenu
+  completionMessage: Level completed
 --- !u!1 &1020
 GameObject:
   m_ObjectHideFlags: 0
@@ -316,6 +313,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   level: {fileID: 1002}
+  heartIcon: {fileID: 21300000, guid: d178ac173c89400ca445aad0efc0a658, type: 3}
 --- !u!114 &1025
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -335,6 +333,8 @@ MonoBehaviour:
   bulletPrefab: {fileID: 1003, guid: 560677720a8c452ca65d5fb48a36451b, type: 3}
   gameCamera: {fileID: 519420031}
   shotInterval: 0.4
+  reloadDuration: 1.5
+  ammoIcon: {fileID: 21300000, guid: cd64c354c1aa4844bee2e400cc4e51fc, type: 3}
 --- !u!1 &1080
 GameObject:
   m_ObjectHideFlags: 0
@@ -720,7 +720,6 @@ Transform:
   - {fileID: 1000052}
   - {fileID: 1000055}
   - {fileID: 1000059}
-  - {fileID: 1000063}
   - {fileID: 1000065}
   - {fileID: 1000089}
   m_Father: {fileID: 0}
@@ -2729,37 +2728,6 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!1 &1000062
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1000063}
-  m_Layer: 0
-  m_Name: Checkpoint Room 1
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1000063
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1000062}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1000002}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1000065 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2981, guid: 343a4285988648618c8a8be9bf007692, type: 3}
@@ -2835,7 +2803,6 @@ Transform:
   - {fileID: 1000158}
   - {fileID: 1000161}
   - {fileID: 1000165}
-  - {fileID: 1000169}
   - {fileID: 1000171}
   - {fileID: 1000195}
   m_Father: {fileID: 0}
@@ -4705,37 +4672,6 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!1 &1000168
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1000169}
-  m_Layer: 0
-  m_Name: Checkpoint Room 2
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1000169
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1000168}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1000112}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1000171 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2981, guid: 343a4285988648618c8a8be9bf007692, type: 3}
@@ -4810,7 +4746,6 @@ Transform:
   - {fileID: 1000264}
   - {fileID: 1000269}
   - {fileID: 1000273}
-  - {fileID: 1000277}
   - {fileID: 1000279}
   - {fileID: 1000303}
   - {fileID: 1000326}
@@ -6602,37 +6537,6 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!1 &1000276
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1000277}
-  m_Layer: 0
-  m_Name: Checkpoint Room 3
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1000277
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1000276}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1000222}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1000279 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2981, guid: 343a4285988648618c8a8be9bf007692, type: 3}
@@ -6929,7 +6833,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2980, guid: 343a4285988648618c8a8be9bf007692, type: 3}
       propertyPath: m_Name
-      value: Ricochet Enemy 2
+      value: Shooting Enemy 2
       objectReference: {fileID: 0}
     - target: {fileID: 2981, guid: 343a4285988648618c8a8be9bf007692, type: 3}
       propertyPath: m_LocalScale.x
@@ -6998,6 +6902,10 @@ PrefabInstance:
     - target: {fileID: 519420152, guid: 343a4285988648618c8a8be9bf007692, type: 3}
       propertyPath: roomIndex
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 519420152, guid: 343a4285988648618c8a8be9bf007692, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -7281,7 +7189,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2980, guid: 343a4285988648618c8a8be9bf007692, type: 3}
       propertyPath: m_Name
-      value: Ricochet Enemy 2
+      value: Shooting Enemy 2
       objectReference: {fileID: 0}
     - target: {fileID: 2981, guid: 343a4285988648618c8a8be9bf007692, type: 3}
       propertyPath: m_LocalScale.x
@@ -7350,6 +7258,10 @@ PrefabInstance:
     - target: {fileID: 519420152, guid: 343a4285988648618c8a8be9bf007692, type: 3}
       propertyPath: roomIndex
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 519420152, guid: 343a4285988648618c8a8be9bf007692, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

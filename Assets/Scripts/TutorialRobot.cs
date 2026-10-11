@@ -5,11 +5,16 @@ public class TutorialRobot : MonoBehaviour
     [SerializeField] private Transform player;
     [SerializeField] private Transform turret;
     [SerializeField] private Transform muzzle;
+    [Tooltip("Extra barrels fired in the same volley; keep their transforms under the turret rig.")]
+    [SerializeField] private Transform[] additionalMuzzles;
     [SerializeField] private Bullet bulletPrefab;
     [SerializeField] private TutorialLevel level;
     [SerializeField] private int roomIndex = 2;
-    [Tooltip("Seconds between shots while the player remains visible.")]
+    [Tooltip("Cooldown after the last bullet of a burst while the player remains visible.")]
     [SerializeField, Min(.01f)] private float shotInterval = 2.1f;
+    [SerializeField, Min(1)] private int shotsPerBurst = 1;
+    [Tooltip("Seconds between bullets within a burst.")]
+    [SerializeField, Min(.01f)] private float burstShotInterval = .25f;
     [Tooltip("Reaction delay on every new sighting, including after leaving cover.")]
     [SerializeField, Min(0f)] private float firstShotDelay = .8f;
     [Tooltip("Extra per-enemy reaction delay added to First Shot Delay.")]
@@ -18,6 +23,8 @@ public class TutorialRobot : MonoBehaviour
     [Range(0f, 360f)]
     [SerializeField] private float sightAngle = 150f;
     private float nextShot;
+    private float nextBurstShot;
+    private int burstShotsRemaining;
     private bool hasVisualContact;
     private Collider2D ownCollider;
     private readonly RaycastHit2D[] visibilityHits = new RaycastHit2D[32];
@@ -36,7 +43,13 @@ public class TutorialRobot : MonoBehaviour
             roomIndex = index;
     }
 
-    private void OnDisable() => hasVisualContact = false;
+    private void OnDisable() => LoseVisualContact();
+
+    private void LoseVisualContact()
+    {
+        hasVisualContact = false;
+        burstShotsRemaining = 0;
+    }
 
     private bool CanSeePlayer()
     {
@@ -65,14 +78,14 @@ public class TutorialRobot : MonoBehaviour
         if (level == null || level.CurrentRoom != roomIndex || level.Finished ||
             player == null || turret == null || muzzle == null || bulletPrefab == null)
         {
-            hasVisualContact = false;
+            LoseVisualContact();
             return;
         }
         // Test visibility before aiming, including while the weapon is on cooldown.
         // Losing sight freezes the turret and cancels the current reaction period.
         if (!CanSeePlayer())
         {
-            hasVisualContact = false;
+            LoseVisualContact();
             return;
         }
         if (!hasVisualContact)
@@ -83,10 +96,29 @@ public class TutorialRobot : MonoBehaviour
         }
         Vector2 aim = player.position - turret.position;
         turret.rotation = Quaternion.Euler(0, 0, Mathf.Atan2(aim.y, aim.x) * Mathf.Rad2Deg - 90f);
-        if (Time.time < nextShot) return;
+        if (Time.timeScale <= 0f) return;
+        if (burstShotsRemaining > 0)
+        {
+            if (Time.time < nextBurstShot) return;
+        }
+        else
+        {
+            if (Time.time < nextShot) return;
+            burstShotsRemaining = Mathf.Max(1, shotsPerBurst);
+        }
         nextShot = Time.time + shotInterval;
-        Bullet ball = Instantiate(bulletPrefab, muzzle.position, muzzle.rotation);
+        Fire(muzzle);
+        if (additionalMuzzles != null)
+            foreach (Transform extraMuzzle in additionalMuzzles)
+                if (extraMuzzle != null) Fire(extraMuzzle);
+        burstShotsRemaining--;
+        nextBurstShot = Time.time + Mathf.Max(.01f, burstShotInterval);
+    }
+
+    private void Fire(Transform barrelMuzzle)
+    {
+        Bullet ball = Instantiate(bulletPrefab, barrelMuzzle.position, barrelMuzzle.rotation);
         ball.gameObject.SetActive(true);
-        ball.Launch(muzzle.up, ownCollider, true);
+        ball.Launch(barrelMuzzle.up, ownCollider, true);
     }
 }

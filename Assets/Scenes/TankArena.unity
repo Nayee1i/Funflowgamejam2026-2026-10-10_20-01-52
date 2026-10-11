@@ -173,6 +173,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: ""
   spriteShader: {fileID: 4800000, guid: "13c02b14c4d048fa9653293d54f6e0e1", type: 3}
   generateOnPlay: 0
+  heartIcon: {fileID: 21300000, guid: d178ac173c89400ca445aad0efc0a658, type: 3}
+  ammoIcon: {fileID: 21300000, guid: cd64c354c1aa4844bee2e400cc4e51fc, type: 3}
 --- !u!1 &1020
 GameObject:
   m_ObjectHideFlags: 0
@@ -2348,6 +2350,7 @@ GameObject:
   - component: {fileID: 1642}
   - component: {fileID: 1643}
   - component: {fileID: 1644}
+  - component: {fileID: 620000100}
   m_Layer: 2
   m_Name: "Tank"
   m_TagString: "Untagged"
@@ -2463,6 +2466,22 @@ MonoBehaviour:
   bulletPrefab: {fileID: 1003, guid: "560677720a8c452ca65d5fb48a36451b", type: 3}
   gameCamera: {fileID: 519420031}
   shotInterval: 0.4
+  reloadDuration: 1.5
+  ammoIcon: {fileID: 21300000, guid: cd64c354c1aa4844bee2e400cc4e51fc, type: 3}
+--- !u!114 &620000100
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1640}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b1f095e0e8d4567ac4bcca29ff67f17, type: 3}
+  m_Name:
+  m_EditorClassIdentifier:
+  level: {fileID: 0}
+  heartIcon: {fileID: 21300000, guid: d178ac173c89400ca445aad0efc0a658, type: 3}
 --- !u!1 &1700
 GameObject:
   m_ObjectHideFlags: 0

@@ -171,7 +171,6 @@ MonoBehaviour:
     size: {x: 18, y: 10}
     gate: {fileID: 0}
     targets: []
-    checkpoint: {fileID: 519420277}
   - instruction: "Мышь — прицел, ЛКМ — огонь. Уничтожь три мишени: у каждой 1 HP. Затем выход слева."
     center: {x: 20, y: 12}
     size: {x: 18, y: 10}
@@ -180,7 +179,6 @@ MonoBehaviour:
     - {fileID: 2323}
     - {fileID: 2383}
     - {fileID: 2443}
-    checkpoint: {fileID: 519420297}
   - instruction: "Уничтожь двух роботов (5 HP) и уклоняйся от пуль. Прямое попадание — 1 урон, пуля после зеркала — 5. Попадание в тебя — возврат к чекпоинту. Выход снизу."
     center: {x: 0, y: 12}
     size: {x: 18, y: 10}
@@ -188,21 +186,18 @@ MonoBehaviour:
     targets:
     - {fileID: 2503}
     - {fileID: 2663}
-    checkpoint: {fileID: 519420317}
   - instruction: "Враг за колонной. Используй синее зеркало сверху или снизу: рикошет наносит 5 урона. Затем выход слева."
     center: {x: 0, y: 0}
     size: {x: 18, y: 10}
     gate: {fileID: 3260}
     targets:
     - {fileID: 2823}
-    checkpoint: {fileID: 519420337}
   - instruction: "\u041A\u0440\u0430\u0441\u043D\u044B\u0439 \u0449\u0438\u0442 \u0431\u043B\u043E\u043A\u0438\u0440\u0443\u0435\u0442 \u043E\u0431\u044B\u0447\u043D\u044B\u0435 \u0448\u0430\u0440\u044B. \u0428\u0430\u0440 \u043E\u0442 \u043A\u0440\u0430\u0441\u043D\u043E\u0433\u043E \u0437\u0435\u0440\u043A\u0430\u043B\u0430 \u0441\u043D\u0438\u043C\u0430\u0435\u0442 \u0449\u0438\u0442. \u0417\u0430\u0442\u0435\u043C \u0434\u043E\u0431\u0435\u0439 \u0432\u0440\u0430\u0433\u0430."
     center: {x: -20, y: 0}
     size: {x: 18, y: 10}
     gate: {fileID: 0}
     targets:
     - {fileID: 2983}
-    checkpoint: {fileID: 519420357}
   levelSelectionScene: LevelSelection
 --- !u!1 &1020
 GameObject:
@@ -327,6 +322,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   level: {fileID: 1002}
+  heartIcon: {fileID: 21300000, guid: d178ac173c89400ca445aad0efc0a658, type: 3}
 --- !u!114 &1025
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -346,6 +342,8 @@ MonoBehaviour:
   bulletPrefab: {fileID: 1003, guid: 560677720a8c452ca65d5fb48a36451b, type: 3}
   gameCamera: {fileID: 519420031}
   shotInterval: 0.4
+  reloadDuration: 1.5
+  ammoIcon: {fileID: 21300000, guid: cd64c354c1aa4844bee2e400cc4e51fc, type: 3}
 --- !u!1 &1080
 GameObject:
   m_ObjectHideFlags: 0
@@ -724,7 +722,6 @@ Transform:
   - {fileID: 1301}
   - {fileID: 2261}
   - {fileID: 2281}
-  - {fileID: 519420277}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1200
@@ -1554,7 +1551,6 @@ Transform:
   - {fileID: 2381}
   - {fileID: 2441}
   - {fileID: 3221}
-  - {fileID: 519420297}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1340
@@ -2522,7 +2518,6 @@ Transform:
   - {fileID: 2501}
   - {fileID: 2661}
   - {fileID: 3241}
-  - {fileID: 519420317}
   - {fileID: 1000002}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3493,7 +3488,6 @@ Transform:
   - {fileID: 3161}
   - {fileID: 3181}
   - {fileID: 3261}
-  - {fileID: 519420337}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1660
@@ -4459,7 +4453,6 @@ Transform:
   - {fileID: 1921}
   - {fileID: 2981}
   - {fileID: 3201}
-  - {fileID: 519420357}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1820
@@ -9301,161 +9294,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 2823}
---- !u!1 &519420276
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 519420277}
-  m_Layer: 0
-  m_Name: Checkpoint Room 1
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &519420277
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 519420276}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -3, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1181}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &519420296
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 519420297}
-  m_Layer: 0
-  m_Name: Checkpoint Room 2
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &519420297
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 519420296}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4, y: -8, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1321}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &519420316
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 519420317}
-  m_Layer: 0
-  m_Name: Checkpoint Room 3
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &519420317
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 519420316}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 12, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1481}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &519420336
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 519420337}
-  m_Layer: 0
-  m_Name: Checkpoint Room 4
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &519420337
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 519420336}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.03, y: 7.97, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1641}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &519420356
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 519420357}
-  m_Layer: 0
-  m_Name: Checkpoint Room 5
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &519420357
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 519420356}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 12.15, y: -3, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1801}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1000001
 GameObject:
   m_ObjectHideFlags: 0
