@@ -39,6 +39,7 @@ public class MainMenuWindows : MonoBehaviour
     public void Settings() { Close(); settingsWindow.SetActive(true); }
     public void Exit() { Close(); exitWindow.SetActive(true); }
     public void Play() { Close(); modesWindow.SetActive(true); }
+    public void StartLevel1() { UnityEngine.SceneManagement.SceneManager.LoadScene("Level1Rooms"); }
     public void Close() { settingsWindow.SetActive(false); exitWindow.SetActive(false); modesWindow.SetActive(false); }
     public void Quit()
     {

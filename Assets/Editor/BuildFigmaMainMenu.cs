@@ -157,6 +157,7 @@ public static class BuildFigmaMainMenu
             if (layer.id == "48:2837" || layer.id == "48:2828" || layer.id == "48:2831") soundBars.Add(graphic);
             if (layer.id == "48:2825" || layer.id == "48:2834") musicBars.Add(graphic);
             UnityEngine.Events.UnityAction action = null;
+            if (layer.id == "48:2691") action = windows.StartLevel1;
             if (layer.id == "48:2815") action = windows.SoundUp;
             if (layer.id == "48:2819") action = windows.SoundDown;
             if (layer.id == "48:2820") action = windows.MusicUp;
