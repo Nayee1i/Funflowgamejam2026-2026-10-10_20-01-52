@@ -1,0 +1,143 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a12295503b94ee7802c36891e088885, type: 3}
+  m_Name: SoundLibrary
+  m_EditorClassIdentifier: 
+  effectsVolume:
+    low: 0.1
+    medium: 0.45
+    high: 1
+  musicVolume:
+    low: 0.3
+    medium: 0.45
+    high: 1
+  sounds:
+  - name: shot
+    clip: {fileID: 0}
+    volume: 0.25
+    pitchVariation: 0.08
+    cooldown: 0.05
+  - name: enemy_shot
+    clip: {fileID: 0}
+    volume: 0.45
+    pitchVariation: 0.08
+    cooldown: 0.05
+  - name: reload
+    clip: {fileID: 0}
+    volume: 0.5
+    pitchVariation: 0
+    cooldown: 0.2
+  - name: bounce
+    clip: {fileID: 0}
+    volume: 0.6
+    pitchVariation: 0.1
+    cooldown: 0.03
+  - name: charge
+    clip: {fileID: 0}
+    volume: 0.8
+    pitchVariation: 0.05
+    cooldown: 0.03
+  - name: wall_hit
+    clip: {fileID: 0}
+    volume: 0.2
+    pitchVariation: 0.1
+    cooldown: 0.03
+  - name: enemy_hit
+    clip: {fileID: 0}
+    volume: 0.7
+    pitchVariation: 0.08
+    cooldown: 0.03
+  - name: shield_break
+    clip: {fileID: 0}
+    volume: 0.5
+    pitchVariation: 0
+    cooldown: 0.05
+  - name: enemy_die
+    clip: {fileID: 0}
+    volume: 0.3
+    pitchVariation: 0.05
+    cooldown: 0.05
+  - name: player_hit
+    clip: {fileID: 0}
+    volume: 0.9
+    pitchVariation: 0
+    cooldown: 0.1
+  - name: block_hit
+    clip: {fileID: 0}
+    volume: 0.5
+    pitchVariation: 0.1
+    cooldown: 0.03
+  - name: block_break
+    clip: {fileID: 0}
+    volume: 0.8
+    pitchVariation: 0.05
+    cooldown: 0.05
+  - name: victory
+    clip: {fileID: 0}
+    volume: 0.9
+    pitchVariation: 0
+    cooldown: 0.5
+  - name: lose
+    clip: {fileID: 0}
+    volume: 0.9
+    pitchVariation: 0
+    cooldown: 0.5
+  - name: hover
+    clip: {fileID: 0}
+    volume: 0.35
+    pitchVariation: 0
+    cooldown: 0.05
+  - name: click
+    clip: {fileID: 0}
+    volume: 0.6
+    pitchVariation: 0
+    cooldown: 0.05
+  - name: music_menu
+    clip: {fileID: 0}
+    volume: 0.6
+    pitchVariation: 0
+    cooldown: 0
+  - name: music_level
+    clip: {fileID: 0}
+    volume: 0.45
+    pitchVariation: 0
+    cooldown: 0
+  - name: music_boss
+    clip: {fileID: 0}
+    volume: 0.5
+    pitchVariation: 0
+    cooldown: 0
+  - name: music_level1
+    clip: {fileID: 0}
+    volume: 0.5
+    pitchVariation: 0
+    cooldown: 0.03
+  - name: music_level2
+    clip: {fileID: 0}
+    volume: 0.5
+    pitchVariation: 0
+    cooldown: 0.03
+  - name: tank_idle
+    clip: {fileID: 0}
+    volume: 0.08
+    pitchVariation: 0
+    cooldown: 0.03
+  - name: tank_move
+    clip: {fileID: 0}
+    volume: 0.08
+    pitchVariation: 0
+    cooldown: 0.03
+  - name: music_level3
+    clip: {fileID: 0}
+    volume: 0.5
+    pitchVariation: 0
+    cooldown: 0.03

@@ -121,7 +121,6 @@ public class MainMenuWindows : MonoBehaviour
     {
         for (int i = 0; i < soundBars.Length; i++) soundBars[i].sprite = i < soundLevel ? filledBar : emptyBar;
         for (int i = 0; i < musicBars.Length; i++) musicBars[i].sprite = i < musicLevel ? filledBar : emptyBar;
-        AudioListener.volume = soundLevel / 3f;
         RefreshSensitivity();
     }
     public void Settings() { Close(); settingsWindow.SetActive(true); }

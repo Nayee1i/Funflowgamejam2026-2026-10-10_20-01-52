@@ -65,6 +65,7 @@ public class TutorialTarget : MonoBehaviour
 
     public void Complete()
     {
+        if (!IsDestroyed) GameAudio.Play("enemy_die");
         Health = 0;
         IsDestroyed = true;
         gameObject.SetActive(false);

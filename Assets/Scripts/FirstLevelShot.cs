@@ -89,6 +89,7 @@ public class FirstLevelShot : MonoBehaviour
                 Direction=contact.Reflect(Direction);
                 lastMirrorCollider=mirrorCollider;Reflections++;
                 Charged|=mirror.chargesShot;
+                GameAudio.Play(mirror.chargesShot ? "charge" : "bounce");
                 if(Charged)FirstLevelEffects.ProjectileVisual(gameObject,hostile,level,true);
                 OrientVisual();
                 transform.position+=(Vector3)(Direction*Separation);
@@ -107,6 +108,9 @@ public class FirstLevelShot : MonoBehaviour
                 if(target!=null)target.Hit(Damage,Charged);
                 var cover=solid.GetComponentInParent<DestructibleCover>();
                 if(cover!=null && !hostile)cover.Hit(Reflections>0 ? 5 : 1);
+                if(shieldBroken)GameAudio.Play("shield_break");
+                else if(robot!=null && !hostile){if(!robot.IsDestroyed)GameAudio.Play("enemy_hit");}
+                else if(cover==null || hostile)GameAudio.Play("wall_hit");
                 Finish();return;
             }
             else return;

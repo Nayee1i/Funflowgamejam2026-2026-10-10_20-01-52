@@ -48,7 +48,6 @@ public class FigmaPauseMenu : MonoBehaviour
         var full=Resources.Load<Sprite>("FirstLevelFX/MenuBarFull");var empty=Resources.Load<Sprite>("FirstLevelFX/MenuBarEmpty");
         int s=Mathf.Clamp(PlayerPrefs.GetInt("Menu.SoundLevel",1),0,3),m=Mathf.Clamp(PlayerPrefs.GetInt("Menu.MusicLevel",2),0,3);
         for(int i=0;i<3;i++){sound[i].sprite=i<s ? full : empty;music[i].sprite=i<m ? full : empty;}
-        AudioListener.volume=s/3f;
     }
     void Dispatch(string action)
     {
