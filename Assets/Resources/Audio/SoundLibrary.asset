@@ -12,10 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a12295503b94ee7802c36891e088885, type: 3}
   m_Name: SoundLibrary
   m_EditorClassIdentifier: 
+  effectsVolume:
+    low: 0.1
+    medium: 0.5
+    high: 1
+  musicVolume:
+    low: 0.3
+    medium: 0.6
+    high: 1
   sounds:
   - name: shot
     clip: {fileID: 0}
-    volume: 0.7
+    volume: 0.25
     pitchVariation: 0.08
     cooldown: 0.05
   - name: enemy_shot
@@ -45,7 +53,7 @@ MonoBehaviour:
     cooldown: 0.03
   - name: wall_hit
     clip: {fileID: 0}
-    volume: 0.5
+    volume: 1
     pitchVariation: 0.1
     cooldown: 0.03
   - name: enemy_hit
@@ -113,3 +121,23 @@ MonoBehaviour:
     volume: 0.5
     pitchVariation: 0
     cooldown: 0
+  - name: music_level1
+    clip: {fileID: 0}
+    volume: 0.5
+    pitchVariation: 0
+    cooldown: 0.03
+  - name: music_level2
+    clip: {fileID: 0}
+    volume: 0.5
+    pitchVariation: 0
+    cooldown: 0.03
+  - name: tank_idle
+    clip: {fileID: 0}
+    volume: 0.05
+    pitchVariation: 0
+    cooldown: 0.03
+  - name: tank_move
+    clip: {fileID: 0}
+    volume: 0.06
+    pitchVariation: 0
+    cooldown: 0.03
