@@ -27,8 +27,15 @@ public class GameAudio : MonoBehaviour
     readonly List<RaycastResult> uiHits = new();
     Selectable hovered;
 
-    public static float SoundVolume => Mathf.Clamp(PlayerPrefs.GetInt(SoundKey, 1), 0, 3) / 3f;
-    public static float MusicVolume => Mathf.Clamp(PlayerPrefs.GetInt(MusicKey, 2), 0, 3) / 3f;
+    public static float SoundVolume => Steps(PlayerPrefs.GetInt(SoundKey, 1), library => library.effectsVolume);
+    public static float MusicVolume => Steps(PlayerPrefs.GetInt(MusicKey, 2), library => library.musicVolume);
+
+    static float Steps(int level, System.Func<SoundLibrary, SoundLibrary.VolumeSteps> pick)
+    {
+        level = Mathf.Clamp(level, 0, 3);
+        var library = instance != null ? instance.library : null;
+        return library != null ? pick(library).For(level) : level / 3f;
+    }
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
     static void Boot()
