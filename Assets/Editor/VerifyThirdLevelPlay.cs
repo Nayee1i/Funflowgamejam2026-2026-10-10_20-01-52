@@ -25,7 +25,7 @@ public static class VerifyThirdLevelPlay
             // Previous automated runs cannot be legitimate sub-ten-second five-room results.
             if(File.Exists("Tools/third-level-play-result.txt") && LevelProgression.BestTime(3)>=0 && LevelProgression.BestTime(3)<10)PlayerPrefs.DeleteKey("Progress.Time.3");
             SessionState.SetFloat(Flag+".Best",LevelProgression.BestTime(3));SessionState.SetInt(Flag+".Unlocked",PlayerPrefs.GetInt("Progress.UnlockedLevel",1));
-            EditorSceneManager.OpenScene("Assets/Scenes/level3.unity");SessionState.SetBool(Flag,true);EditorApplication.isPlaying=true;return;
+            EditorSceneManager.OpenScene("Assets/Scenes/level3.unity");SessionState.SetBool(Flag,true);EditorGameLaunch.PlayCurrentScene();return;
         }
         if(!EditorApplication.isPlaying || EditorApplication.isPaused || EditorApplication.timeSinceStartup<next)return;
         try{Advance();}catch(Exception e){File.AppendAllText("Tools/third-level-play-result.txt","FAILED: "+e);Stop();Debug.LogException(e);}

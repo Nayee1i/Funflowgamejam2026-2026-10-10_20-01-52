@@ -138,7 +138,7 @@ public static class FigmaLevelObstacles
         var surface=mirror.gameObject.AddComponent<MirrorRicochetSurface>();
         surface.localReflectionPoint=new Vector2(0,(id=="56_3085"?164:161.5f)-cy)/100f;
         surface.chargesShot=false;
-        surface.reflectFromCollider=true;
+        surface.reflectFromCollider=false;
         return mirror;
     }
     private static Transform Create(Transform root,string name,string id,float x,float y,Vector2[] pixels)

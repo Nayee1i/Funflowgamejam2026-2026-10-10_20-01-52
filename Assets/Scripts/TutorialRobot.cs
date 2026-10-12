@@ -103,6 +103,12 @@ public class TutorialRobot : MonoBehaviour
             return;
         }
         // Test visibility before aiming, including while the weapon is on cooldown.
+        var patrol = GetComponent<RobotCoverPatrol>();
+        if (patrol != null && !patrol.CanAttack)
+        {
+            LoseVisualContact();
+            return;
+        }
         // Losing sight freezes the turret and cancels the current reaction period.
         if (!CanSeePlayer())
         {
@@ -133,6 +139,7 @@ public class TutorialRobot : MonoBehaviour
             foreach (Transform extraMuzzle in additionalMuzzles)
                 if (extraMuzzle != null) Fire(extraMuzzle);
         burstShotsRemaining--;
+        if (patrol != null && burstShotsRemaining == 0) patrol.NotifyVolley();
         nextBurstShot = Time.time + Mathf.Max(.01f, burstShotInterval);
     }
 

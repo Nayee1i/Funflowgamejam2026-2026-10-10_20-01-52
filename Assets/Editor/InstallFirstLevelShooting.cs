@@ -28,11 +28,11 @@ public static class InstallFirstLevelShooting
         {
             if(!renderer.name.StartsWith("Blue Mirror"))continue;
             var surface=renderer.GetComponent<MirrorRicochetSurface>();
-            if(surface!=null){if(renderer.name.Contains("3067") || renderer.name.Contains("3068"))surface.reflectFromCollider=true;continue;}
+            if(surface!=null){if(renderer.name.Contains("3067") || renderer.name.Contains("3068"))surface.reflectFromCollider=false;continue;}
             surface=renderer.gameObject.AddComponent<MirrorRicochetSurface>();
             surface.localReflectionPoint=new Vector2(0,renderer.name.Contains("56:3068") || renderer.name.Contains("56_3068") ? -.125f : .045f);
             surface.chargesShot=false;
-            surface.reflectFromCollider=true;
+            surface.reflectFromCollider=false;
         }
     }
     static void ConfigureLayers()

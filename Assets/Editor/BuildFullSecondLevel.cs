@@ -110,7 +110,7 @@ public static class BuildFullSecondLevel
                 // Move the upper red mirror a little right, as requested, to make aiming clearer.
                 if(mirror.art.node=="71:3577")picture.transform.position+=Vector3.right*(30f*1586f/1270f/100f);
                 picture.gameObject.AddComponent<PolygonCollider2D>().points=mirror.art.outline;
-                var surface=picture.gameObject.AddComponent<MirrorRicochetSurface>();surface.chargesShot=mirror.red;surface.reflectFromCollider=true;
+                var surface=picture.gameObject.AddComponent<MirrorRicochetSurface>();surface.chargesShot=mirror.red;surface.reflectFromCollider=false;
             }
             foreach(var enemy in data.enemies)BuildEnemy(enemy,room.transform,i,level);
             if(i==0)AddWorkshopChainMirror.Restore(room);
@@ -284,7 +284,7 @@ public static class BuildFullSecondLevel
             foreach(var d in new[]{Vector2Int.up,Vector2Int.down,Vector2Int.left,Vector2Int.right})
             {
                 var next=id+d;if(seen.Contains(next))continue;var q=start+(Vector2)next*step;
-                if(Mathf.Abs(q.x)>8 || Mathf.Abs(q.y)>4.6f)continue;
+                if(Mathf.Abs(q.x)>Mathf.Max(8,level.exitX+.5f) || Mathf.Abs(q.y)>4.6f)continue;
                 if(Physics2D.CircleCast(p,level.playerRadius,(q-p).normalized,step).collider!=null)continue;
                 seen.Add(next);queue.Enqueue(next);
             }
@@ -356,6 +356,9 @@ public static class BuildFullSecondLevel
     }
     static bool TraceChargedStepped(Vector2 origin,Vector2 direction,TutorialTarget target)
     {
+        Vector2 playerOrigin=origin;
+        var level=Object.FindAnyObjectByType<FirstLevelRooms>();
+        float playerClearance=(level!=null ? level.playerRadius : .54f)+.035f;
         bool charged=false;Collider2D last=null;int reflections=0;
         for(int frame=0;frame<1600;frame++)
         {
@@ -364,6 +367,11 @@ public static class BuildFullSecondLevel
             {
                 var hit=FirstLevelShotPath.Cast(origin,direction,.035f,remaining,last);
                 float travel=hit.Hit ? hit.distance : remaining;
+                if(reflections>0)
+                {
+                    float along=Mathf.Clamp(Vector2.Dot(playerOrigin-origin,direction),0,travel);
+                    if(Vector2.Distance(origin+direction*along,playerOrigin)<playerClearance)return false;
+                }
                 origin+=direction*travel;remaining-=travel;
                 if(hit.mirror!=null)
                 {
@@ -381,11 +389,23 @@ public static class BuildFullSecondLevel
     public static void Capture(string path)
     {
         var camera=Camera.main;
-        foreach(var canvas in Object.FindObjectsByType<Canvas>(FindObjectsSortMode.None))
-        {canvas.renderMode=RenderMode.ScreenSpaceCamera;canvas.worldCamera=camera;canvas.planeDistance=1;}
-        var target=new RenderTexture(1920,1080,24);camera.targetTexture=target;camera.GetComponent<FirstLevelCameraFit>().Apply();Canvas.ForceUpdateCanvases();camera.Render();
-        var previous=RenderTexture.active;RenderTexture.active=target;var image=new Texture2D(1920,1080,TextureFormat.RGB24,false);
-        image.ReadPixels(new Rect(0,0,1920,1080),0,0);image.Apply();File.WriteAllBytes(path,image.EncodeToPNG());
-        camera.targetTexture=null;RenderTexture.active=previous;Object.DestroyImmediate(target);Object.DestroyImmediate(image);
+        if(camera==null)throw new InvalidOperationException("A camera is required for capture");
+        var canvases=Object.FindObjectsByType<Canvas>(FindObjectsSortMode.None);
+        var modes=canvases.Select(c=>c.renderMode).ToArray();var cameras=canvases.Select(c=>c.worldCamera).ToArray();var planes=canvases.Select(c=>c.planeDistance).ToArray();
+        var previousTarget=camera.targetTexture;var previousActive=RenderTexture.active;float previousSize=camera.orthographicSize;Vector3 previousPosition=camera.transform.position;
+        var target=new RenderTexture(1920,1080,24);Texture2D image=null;
+        try
+        {
+            foreach(var canvas in canvases){canvas.renderMode=RenderMode.ScreenSpaceCamera;canvas.worldCamera=camera;canvas.planeDistance=1;}
+            camera.targetTexture=target;var fit=camera.GetComponent<FirstLevelCameraFit>();if(fit!=null)fit.Apply();Canvas.ForceUpdateCanvases();camera.Render();
+            RenderTexture.active=target;image=new Texture2D(1920,1080,TextureFormat.RGB24,false);
+            image.ReadPixels(new Rect(0,0,1920,1080),0,0);image.Apply();File.WriteAllBytes(path,image.EncodeToPNG());
+        }
+        finally
+        {
+            camera.targetTexture=previousTarget;camera.orthographicSize=previousSize;camera.transform.position=previousPosition;RenderTexture.active=previousActive;
+            for(int i=0;i<canvases.Length;i++)if(canvases[i]!=null){canvases[i].renderMode=modes[i];canvases[i].worldCamera=cameras[i];canvases[i].planeDistance=planes[i];}
+            Object.DestroyImmediate(target);if(image!=null)Object.DestroyImmediate(image);Canvas.ForceUpdateCanvases();
+        }
     }
 }

@@ -23,7 +23,7 @@ public static class VerifySecondLevelPlay
             SavePref("Progress.UnlockedLevel",true);SavePref("Progress.Time.1",false);SavePref("Progress.Time.2",false);
             SessionState.SetBool(Key+"active",true);SessionState.SetInt(Key+"stage",0);
             SessionState.SetFloat(Key+"deadline",(float)EditorApplication.timeSinceStartup+40);
-            EditorSceneManager.OpenScene("Assets/Scenes/level2.unity");EditorApplication.isPlaying=true;return;
+            EditorSceneManager.OpenScene("Assets/Scenes/level2.unity");EditorGameLaunch.PlayCurrentScene();return;
         }
         try
         {

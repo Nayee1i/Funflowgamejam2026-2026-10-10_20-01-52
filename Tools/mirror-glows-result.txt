@@ -1,0 +1,5 @@
+Using native level3 room1 glows.
+Level1Rooms: 4 mirrors with matching glow, no duplicate old glows.
+level2: 8 mirrors with matching glow, no duplicate old glows.
+level3: 15 mirrors with matching glow, no duplicate old glows.
+PASSED: 27 mirrors. Positions, scale and collisions unchanged.

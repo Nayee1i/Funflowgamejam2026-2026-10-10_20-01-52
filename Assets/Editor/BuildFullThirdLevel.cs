@@ -84,7 +84,7 @@ public static class BuildFullThirdLevel
             {
                 var image=BuildFullSecondLevel.Draw(mirror.art,room.transform,7,(mirror.red?"Red":"Blue")+" Mirror РІР‚вЂќ "+mirror.art.node,"ThirdLevel");
                 image.gameObject.AddComponent<PolygonCollider2D>().points=mirror.art.outline;
-                var surface=image.gameObject.AddComponent<MirrorRicochetSurface>();surface.chargesShot=mirror.red;surface.reflectFromCollider=true;
+                var surface=image.gameObject.AddComponent<MirrorRicochetSurface>();surface.chargesShot=mirror.red;surface.reflectFromCollider=false;
             }
             foreach(var enemy in data.enemies)
             {

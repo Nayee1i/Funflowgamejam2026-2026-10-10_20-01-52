@@ -1,13 +1,12 @@
 Checking authored castle...
-Room 1: 2556 accessible positions.
-5,5:; 5,7:; 5,9:; 6,099999:; 6,299999:; 6,499999:; 6,699999:; 6,899999:; 7,099998:; 7,299998:; 7,499998:; 7,699998:; 7,899998:; 8,099998:; Exit room 0 maxX=7,91 clear=True barriers=Entrance:True,Exit:False
-Room 2: 2165 accessible positions.
-5,5:; 5,7:; 5,9:; 6,099999:; 6,299999:; 6,499999:; 6,699999:; 6,899999:; 7,099998:; 7,299998:; 7,499998:; 7,699998:; 7,899998:; 8,099998:; Exit room 1 maxX=7,91 clear=True barriers=Entrance:False,Exit:False
-Room 3: 3163 accessible positions.
-5,5:; 5,7:; 5,9:; 6,099999:; 6,299999:; 6,499999:; 6,699999:; 6,899999:; 7,099998:; 7,299998:; 7,499998:; 7,699998:; 7,899998:; 8,099998:; Exit room 2 maxX=7,91 clear=True barriers=Entrance:False,Exit:False
-Room 4: 1888 accessible positions.
-5,5:; 5,7:; 5,9:; 6,099999:; 6,299999:; 6,499999:; 6,699999:; 6,899999:; 7,099998:; 7,299998:; 7,499998:; 7,699998:; 7,899998:; 8,099998:; Exit room 3 maxX=7,99 clear=True barriers=Entrance:False,Exit:False
-Room 5: 1749 accessible positions.
-5,5:; 5,7:; 5,9:; 6,099999:; 6,299999:; 6,499999:; 6,699999:; 6,899999:; 7,099998:; 7,299998:; 7,499998:; 7,699998:; 7,899998:; 8,099998:; Exit room 4 maxX=7,91 clear=True barriers=Entrance:False,Exit:False
-PASSED: 1261 perimeter contacts over five passes, 14 block health checks, six real shield-breaking routes, all five exits and boss health.
-Native damage texture checks, unchanged block collider, actual ordinary/ricochet block destruction, first-level combat regression: PASSED.
+Room 1: 2357 accessible positions.
+5,5:; 5,7:; 5,9:; 6,099999:; 6,299999:; 6,499999:; 6,699999:; 6,899999:; 7,099998:; 7,299998:; 7,499998:; 7,699998:; 7,899998:; 8,099998:; Exit room 0 maxX=8,27 clear=True barriers=Entrance:True,Exit:False
+Room 2: 1995 accessible positions.
+5,5:; 5,7:; 5,9:; 6,099999:; 6,299999:; 6,499999:; 6,699999:; 6,899999:; 7,099998:; 7,299998:; 7,499998:; 7,699998:; 7,899998:; 8,099998:; Exit room 1 maxX=8,27 clear=True barriers=Entrance:False,Exit:False
+Room 3: 2762 accessible positions.
+5,5:; 5,7:; 5,9:; 6,099999:; 6,299999:; 6,499999:; 6,699999:; 6,899999:; 7,099998:; 7,299998:; 7,499998:; 7,699998:; 7,899998:; 8,099998:; Exit room 2 maxX=8,27 clear=True barriers=Entrance:False,Exit:False
+Room 4: 1715 accessible positions.
+5,5:; 5,7:; 5,9:; 6,099999:; 6,299999:; 6,499999:; 6,699999:; 6,899999:; 7,099998:; 7,299998:; 7,499998:; 7,699998:; 7,899998:; 8,099998:; Exit room 3 maxX=8,27 clear=True barriers=Entrance:False,Exit:False
+Room 5: 1382 accessible positions.
+5,5:; 5,7:; 5,9:; 6,099999:; 6,299999:; 6,499999:; 6,699999:; 6,899999:; 7,099998:; 7,299998:; 7,499998:; 7,699998:; 7,899998:; 8,099998:; Exit room 4 maxX=8,27 clear=True barriers=Entrance:False,Exit:False
+PASSED: 917 perimeter contacts over five passes, 14 block health checks, six real shield-breaking routes, all five exits and boss health.

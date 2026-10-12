@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class FirstLevelPresentation : MonoBehaviour
 {
-    [Serializable] class Part { public string asset,action; public float x,y,w,h; public bool close; }
+    [Serializable] class Part { public string asset,action; public float x,y,w,h; public bool close,flipX; }
     [Serializable] class Panel { public string name; public Part[] parts; }
     [Serializable] class Panels { public Panel[] panels; }
     FirstLevelRooms level;
@@ -114,6 +114,12 @@ public class FirstLevelPresentation : MonoBehaviour
         foreach(var part in panel.parts)
         {
             var image=Picture(part.asset,modalContent,part.asset,part.x,part.y,part.w,part.h);
+            if(part.flipX)
+            {
+                image.rectTransform.pivot=new Vector2(.5f,.5f);
+                image.rectTransform.anchoredPosition=new Vector2(part.x+part.w/2,-part.y-part.h/2);
+                image.rectTransform.localScale=new Vector3(-1,1,1);
+            }
             if(!part.close && string.IsNullOrEmpty(part.action))continue;
             image.raycastTarget=true;var button=image.gameObject.AddComponent<Button>();button.transition=Selectable.Transition.None;
             image.rectTransform.pivot=new Vector2(.5f,.5f);image.rectTransform.anchoredPosition=new Vector2(part.x+part.w/2,-part.y-part.h/2);
