@@ -1,0 +1,108 @@
+{
+  "panels": [
+    {
+      "name": "Pause",
+      "parts": [
+        {
+          "asset": "UI_73_3684",
+          "x": 509.0,
+          "y": 89.0,
+          "w": 901.0,
+          "h": 901.0,
+          "close": false,
+          "action": null
+        },
+        {
+          "asset": "UI_73_3685",
+          "x": 1225.0,
+          "y": 355.0,
+          "w": 82.0,
+          "h": 68.6090316772461,
+          "close": false,
+          "action": "close"
+        },
+        {
+          "asset": "UI_73_3696",
+          "x": 1177.0,
+          "y": 418.0,
+          "w": 28.0,
+          "h": 53.0,
+          "close": false,
+          "action": "soundUp"
+        },
+        {
+          "asset": "UI_73_3697",
+          "x": 684.0,
+          "y": 425.0,
+          "w": 82.0,
+          "h": 40.0,
+          "close": false,
+          "action": null
+        },
+        {
+          "asset": "UI_73_3698",
+          "x": 684.0,
+          "y": 541.0,
+          "w": 122.0,
+          "h": 40.0,
+          "close": false,
+          "action": null
+        },
+        {
+          "asset": "UI_73_3699",
+          "x": 855.0,
+          "y": 418.0,
+          "w": 28.0,
+          "h": 53.0,
+          "close": false,
+          "action": "soundDown"
+        },
+        {
+          "asset": "UI_73_3700",
+          "x": 1177.0,
+          "y": 528.0,
+          "w": 28.0,
+          "h": 53.0,
+          "close": false,
+          "action": "musicUp"
+        },
+        {
+          "asset": "UI_73_3701",
+          "x": 855.0,
+          "y": 528.0,
+          "w": 28.0,
+          "h": 53.0,
+          "close": false,
+          "action": "musicDown"
+        },
+        {
+          "asset": "UI_73_3722",
+          "x": 862.0,
+          "y": 662.0,
+          "w": 204.0,
+          "h": 178.0,
+          "close": false,
+          "action": "continue"
+        },
+        {
+          "asset": "UI_73_3729",
+          "x": 710.0,
+          "y": 702.0,
+          "w": 117.0,
+          "h": 117.0,
+          "close": false,
+          "action": "restart"
+        },
+        {
+          "asset": "UI_73_3721",
+          "x": 1101.0,
+          "y": 698.0,
+          "w": 109.0,
+          "h": 125.0,
+          "close": false,
+          "action": "menu"
+        }
+      ]
+    }
+  ]
+}

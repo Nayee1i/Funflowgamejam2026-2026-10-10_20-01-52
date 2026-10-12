@@ -1,0 +1,95 @@
+{
+  "panels": [
+    {
+      "name": "NewRobotHint",
+      "parts": [
+        {
+          "asset": "SecondLevel/Art_71_3593",
+          "x": 84.0,
+          "y": 716.0,
+          "w": 961.0,
+          "h": 530.0,
+          "close": false,
+          "action": null
+        },
+        {
+          "asset": "SecondLevel/Art_71_3596",
+          "x": 936.3984375,
+          "y": 956.740234375,
+          "w": 48.19981002807617,
+          "h": 47.55427551269531,
+          "close": true,
+          "action": null
+        },
+        {
+          "asset": "SecondLevel/Art_71_3598",
+          "x": 263.0,
+          "y": 936.146484375,
+          "w": 96.88814544677734,
+          "h": 82.10649871826172,
+          "close": false,
+          "action": null
+        },
+        {
+          "asset": "SecondLevel/Art_71_3599",
+          "x": 278.158203125,
+          "y": 920.0,
+          "w": 83.84144592285156,
+          "h": 94.53263854980469,
+          "close": false,
+          "action": null
+        },
+        {
+          "asset": "SecondLevel/Art_71_3600",
+          "x": 392.0,
+          "y": 962.0,
+          "w": 451.0,
+          "h": 44.0,
+          "close": false,
+          "action": null
+        }
+      ]
+    },
+    {
+      "name": "Victory",
+      "parts": [
+        {
+          "asset": "SecondLevel/Art_83_4011",
+          "x": 758.0,
+          "y": 376.0,
+          "w": 452.0,
+          "h": 569.0,
+          "close": false,
+          "action": null
+        },
+        {
+          "asset": "SecondLevel/Art_83_4012",
+          "x": 643.0,
+          "y": 60.0,
+          "w": 681.0,
+          "h": 306.0,
+          "close": false,
+          "action": null
+        },
+        {
+          "asset": "SecondLevel/Art_83_4013",
+          "x": 843.0,
+          "y": 628.0,
+          "w": 117.0,
+          "h": 134.0,
+          "close": false,
+          "action": "menu"
+        },
+        {
+          "asset": "SecondLevel/Art_83_4014",
+          "x": 984.0,
+          "y": 619.0,
+          "w": 165.0,
+          "h": 143.0,
+          "close": false,
+          "action": "next"
+        }
+      ]
+    }
+  ]
+}

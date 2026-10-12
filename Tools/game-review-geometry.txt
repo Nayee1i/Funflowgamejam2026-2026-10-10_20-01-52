@@ -1,0 +1,15 @@
+Real movement through authored rooms, not visual-only checks.
+Level1Rooms room 1: 2110 reachable cells; actual routes and retreat passed.
+Level1Rooms room 2: 2264 reachable cells; actual routes and retreat passed.
+Level1Rooms room 3: 1905 reachable cells; actual routes and retreat passed.
+level2 room 1: 19210 reachable cells; actual routes and retreat passed.
+level2 room 2: 17168 reachable cells; actual routes and retreat passed.
+level2 room 3: 18973 reachable cells; actual routes and retreat passed.
+level2 room 4: 17003 reachable cells; actual routes and retreat passed.
+level3 room 1: 2453 reachable cells; actual routes and retreat passed.
+level3 room 2: 2677 reachable cells; actual routes and retreat passed.
+level3 room 3: 3358 reachable cells; actual routes and retreat passed.
+level3 room 4: 3382 reachable cells; actual routes and retreat passed.
+level3 room 5: 3664 reachable cells; actual routes and retreat passed.
+Menu capture and failed-write camera/canvas restoration passed.
+PASSED: 164 real driving routes, 39191 movement steps, 240 contact/retreat checks, 26 mirror glows; mouse sensitivity and real ricochet preview/projectile tests.

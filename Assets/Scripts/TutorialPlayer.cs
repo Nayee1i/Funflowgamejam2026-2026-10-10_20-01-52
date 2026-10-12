@@ -7,7 +7,9 @@ public class TutorialPlayer : MonoBehaviour
     [SerializeField] private Sprite heartIcon;
 
     public const int MaxHealth = 3;
-    public int Health { get; private set; } = MaxHealth;
+    public int HealthHalves { get; private set; } = MaxHealth*2;
+    public int Health => (HealthHalves+1)/2;
+    public float Hearts => HealthHalves*.5f;
     public Sprite HeartIcon => heartIcon;
     public void ConfigureHeartIcon(Sprite icon) => heartIcon = icon;
 
@@ -16,10 +18,10 @@ public class TutorialPlayer : MonoBehaviour
         if (level == null) level = FindAnyObjectByType<TutorialLevel>();
     }
 
-    public void Hit()
+    public void Hit(int damageHalves=2)
     {
         if (Health <= 0 || (level != null && level.Finished)) return;
-        Health--;
+        HealthHalves=Mathf.Max(0,HealthHalves-Mathf.Max(0,damageHalves));
         if (Health > 0) return;
         if (level != null) level.Restart();
         else SceneManager.LoadScene(SceneManager.GetActiveScene().path);

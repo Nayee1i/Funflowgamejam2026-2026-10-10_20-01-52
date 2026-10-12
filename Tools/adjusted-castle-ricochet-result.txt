@@ -1,0 +1,1 @@
+PASSED: actual charged ricochets break both shields in room 3.4 after the approved mirror move; no mirror tuning performed.

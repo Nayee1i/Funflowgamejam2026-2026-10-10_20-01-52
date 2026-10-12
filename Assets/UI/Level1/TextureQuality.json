@@ -1,0 +1,116 @@
+[
+  {
+    "name": "56_3028",
+    "source": "f59e0d62a9319464592186b672437bb78d9b309f",
+    "width": 2336,
+    "height": 604,
+    "ppu": 400,
+    "matches": 125,
+    "error": 0.13114237785339355
+  },
+  {
+    "name": "56_3035",
+    "source": "2eb4c4ee8ab61f88c66d0a05b5db0c1172742ff3",
+    "width": 416,
+    "height": 384,
+    "ppu": 400
+  },
+  {
+    "name": "56_3042",
+    "source": "ce3d6e89693c57d64ec821c791f2130499ba28de",
+    "width": 952,
+    "height": 760,
+    "ppu": 400,
+    "matches": 123,
+    "error": 0.11478027701377869
+  },
+  {
+    "name": "56_3045",
+    "source": "ce3d6e89693c57d64ec821c791f2130499ba28de",
+    "width": 1096,
+    "height": 1072,
+    "ppu": 400,
+    "matches": 309,
+    "error": 0.10208152234554291
+  },
+  {
+    "name": "56_3064",
+    "source": "ce3d6e89693c57d64ec821c791f2130499ba28de",
+    "width": 980,
+    "height": 1292,
+    "ppu": 400,
+    "matches": 341,
+    "error": 0.09175124764442444
+  },
+  {
+    "name": "56_3067",
+    "source": "a558c49683522d8fda0a69078bbe801097092565",
+    "width": 1400,
+    "height": 1292,
+    "ppu": 400,
+    "matches": 153,
+    "error": 0.10924571752548218
+  },
+  {
+    "name": "56_3068",
+    "source": "a558c49683522d8fda0a69078bbe801097092565",
+    "width": 1400,
+    "height": 1292,
+    "ppu": 400,
+    "matches": 160,
+    "error": 0.11382752656936646
+  },
+  {
+    "name": "56_3085",
+    "source": "a558c49683522d8fda0a69078bbe801097092565",
+    "width": 1420,
+    "height": 1312,
+    "ppu": 400,
+    "matches": 152,
+    "error": 0.09453526139259338
+  },
+  {
+    "name": "56_3086",
+    "source": "ce3d6e89693c57d64ec821c791f2130499ba28de",
+    "width": 1096,
+    "height": 1072,
+    "ppu": 400,
+    "matches": 309,
+    "error": 0.10208152234554291
+  },
+  {
+    "name": "56_3029",
+    "ppu": 400,
+    "width": 1096,
+    "height": 416,
+    "source": "5cd106823686ca7e283eb2f1f1d7e732281ed710"
+  },
+  {
+    "name": "56_3036",
+    "ppu": 400,
+    "width": 896,
+    "height": 880,
+    "source": "4d0b611391bf7e69b57b0f242ac9c79e7c81762f"
+  },
+  {
+    "name": "56_3027",
+    "ppu": 101.58730158730158,
+    "width": 1536,
+    "height": 1024,
+    "source": "bc9d82ff8688b936f3d12facfebe9373ad387813"
+  },
+  {
+    "name": "56_3049",
+    "ppu": 101.58730158730158,
+    "width": 1536,
+    "height": 1024,
+    "source": "bc9d82ff8688b936f3d12facfebe9373ad387813"
+  },
+  {
+    "name": "56_3070",
+    "ppu": 101.58730158730158,
+    "width": 1536,
+    "height": 1024,
+    "source": "bc9d82ff8688b936f3d12facfebe9373ad387813"
+  }
+]

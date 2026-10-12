@@ -1,0 +1,1 @@
+FIGMA_SHIELD_VERIFIED: node 115:2, original 1278px art, 65% opacity, Lighten blend.

@@ -1,0 +1,9 @@
+Room 2.1: 1 targets, exit reachable=True, accepted perimeter preserved.
+Room 2.2: 3 targets, exit reachable=True, accepted perimeter preserved.
+Room 2.3: 3 targets, exit reachable=True, accepted perimeter preserved.
+Room 2.4: 3 targets, exit reachable=True, accepted perimeter preserved.
+FIVE_PERIMETER_PASSES: 1265 contacts.
+CHARGED_PROJECTILE_PATHS: 4.
+PROMOTED_TWO_DIRECT_OR_ONE_REFLECTED: passed.
+FIRST_LEVEL_REGRESSION_PASSED; first scene SHA256 unchanged.
+SECOND_LEVEL_READY: four rooms, native Figma artwork, HUD, combat and exits.

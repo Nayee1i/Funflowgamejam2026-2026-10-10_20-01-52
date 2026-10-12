@@ -24,6 +24,7 @@ public class TutorialLevel : MonoBehaviour
     private bool restarting;
     private GUIStyle textStyle;
     private float finishedAt;
+    private float elapsedSeconds;
     private bool Cleared(int index)
     {
         foreach (TutorialTarget target in rooms[index].targets)
@@ -57,6 +58,7 @@ public class TutorialLevel : MonoBehaviour
             return;
         }
         if (restarting || rooms == null || rooms.Length == 0 || player == null) return;
+        elapsedSeconds += Time.deltaTime;
         Room current = rooms[CurrentRoom];
         bool cleared = Cleared(CurrentRoom);
         if (cleared && current.gate != null) current.gate.SetActive(false);
@@ -64,7 +66,7 @@ public class TutorialLevel : MonoBehaviour
         {
             Finished = true;
             finishedAt = Time.time;
-            LevelProgression.Complete(SceneManager.GetActiveScene().name);
+            LevelProgression.RecordResult(SceneManager.GetActiveScene().name, elapsedSeconds);
             if (player.TryGetComponent<TankMovement>(out var movement)) movement.enabled = false;
             foreach (Bullet ball in FindObjectsByType<Bullet>())
                 Destroy(ball.gameObject);

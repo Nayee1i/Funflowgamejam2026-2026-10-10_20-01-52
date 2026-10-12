@@ -1,0 +1,86 @@
+{
+  "panels": [
+    {
+      "name": "DestructibleHint",
+      "parts": [
+        {
+          "asset": "ThirdLevel/Art_79_3851",
+          "x": 81.0,
+          "y": 705.0,
+          "w": 961.0,
+          "h": 530.0,
+          "close": false,
+          "action": null
+        },
+        {
+          "asset": "ThirdLevel/Art_79_3858",
+          "x": 389.0,
+          "y": 951.0,
+          "w": 451.0,
+          "h": 44.0,
+          "close": false,
+          "action": null
+        },
+        {
+          "asset": "ThirdLevel/Art_79_3859",
+          "x": 265.0,
+          "y": 914.0,
+          "w": 87.0,
+          "h": 103.0,
+          "close": false,
+          "action": null
+        },
+        {
+          "asset": "SecondLevel/Art_71_3596",
+          "x": 936.3984375,
+          "y": 956.740234375,
+          "w": 48.19981002807617,
+          "h": 47.55427551269531,
+          "close": true,
+          "action": null
+        }
+      ]
+    },
+    {
+      "name": "Victory",
+      "parts": [
+        {
+          "asset": "ThirdLevel/Art_98_4168",
+          "x": 746.0,
+          "y": 395.0,
+          "w": 452.0,
+          "h": 569.0,
+          "close": false,
+          "action": null
+        },
+        {
+          "asset": "ThirdLevel/Art_98_4169",
+          "x": 631.0,
+          "y": 79.0,
+          "w": 681.0,
+          "h": 306.0,
+          "close": false,
+          "action": null
+        },
+        {
+          "asset": "ThirdLevel/Art_98_4170",
+          "x": 831.0,
+          "y": 647.0,
+          "w": 117.0,
+          "h": 134.0,
+          "close": false,
+          "action": "menu"
+        },
+        {
+          "asset": "ThirdLevel/Art_98_4171",
+          "x": 972.0,
+          "y": 642.0,
+          "w": 165.0,
+          "h": 143.0,
+          "close": false,
+          "action": "restart"
+        }
+      ]
+    }
+  ]
+}

@@ -10,6 +10,7 @@ public class MainMenuWindows : MonoBehaviour
     public GameObject modesWindow;
     public Image[] soundBars;
     public Image[] musicBars;
+    public Image[] sensitivityBars = new Image[0];
     public Sprite emptyBar;
     public Sprite filledBar;
     public Button[] levelButtons;
@@ -31,7 +32,7 @@ public class MainMenuWindows : MonoBehaviour
     {
         soundLevel = Mathf.Clamp(PlayerPrefs.GetInt("Menu.SoundLevel", 1), 0, 3);
         musicLevel = Mathf.Clamp(PlayerPrefs.GetInt("Menu.MusicLevel", 2), 0, 3);
-        BindLevelButtons();
+        if (!FigmaFrontendUI.Configure(this)) BindLevelButtons();
         RefreshVolume();
         RefreshLevels();
     }
@@ -88,6 +89,7 @@ public class MainMenuWindows : MonoBehaviour
                 i < levelButtonArtwork.Length && levelButtonArtwork[i] != null)
                 levelButtonArtwork[i].sprite = unlockedLevelArtwork;
         }
+        FigmaFrontendUI.RefreshResults(this);
     }
     public void Level1() => OpenLevel(1);
     public void Level2() => OpenLevel(2);
@@ -95,12 +97,19 @@ public class MainMenuWindows : MonoBehaviour
     public void Arena() => SceneManager.LoadScene("TankArena");
     private void OpenLevel(int level)
     {
-        if (LevelProgression.IsUnlocked(level)) SceneManager.LoadScene("level" + level);
+        if (LevelProgression.IsUnlocked(level)) SceneManager.LoadScene(level == 1 ? "Level1Rooms" : "level" + level);
     }
     public void SoundUp() { soundLevel = Mathf.Min(3, soundLevel + 1); SaveVolume(); }
     public void SoundDown() { soundLevel = Mathf.Max(0, soundLevel - 1); SaveVolume(); }
     public void MusicUp() { musicLevel = Mathf.Min(3, musicLevel + 1); SaveVolume(); }
     public void MusicDown() { musicLevel = Mathf.Max(0, musicLevel - 1); SaveVolume(); }
+    public void SensitivityUp() { MouseSensitivitySettings.SetNormalized(MouseSensitivitySettings.NormalizedValue + 1f/3); RefreshSensitivity(); }
+    public void SensitivityDown() { MouseSensitivitySettings.SetNormalized(MouseSensitivitySettings.NormalizedValue - 1f/3); RefreshSensitivity(); }
+    public void RefreshSensitivity()
+    {
+        int count = Mathf.RoundToInt(MouseSensitivitySettings.NormalizedValue * 3);
+        foreach (var bar in sensitivityBars) if (bar != null) bar.sprite = count-- > 0 ? filledBar : emptyBar;
+    }
     private void SaveVolume()
     {
         PlayerPrefs.SetInt("Menu.SoundLevel", soundLevel);
@@ -113,10 +122,12 @@ public class MainMenuWindows : MonoBehaviour
         for (int i = 0; i < soundBars.Length; i++) soundBars[i].sprite = i < soundLevel ? filledBar : emptyBar;
         for (int i = 0; i < musicBars.Length; i++) musicBars[i].sprite = i < musicLevel ? filledBar : emptyBar;
         AudioListener.volume = soundLevel / 3f;
+        RefreshSensitivity();
     }
     public void Settings() { Close(); settingsWindow.SetActive(true); }
     public void Exit() { Close(); exitWindow.SetActive(true); }
     public void Play() { Close(); RefreshLevels(); modesWindow.SetActive(true); }
+    public void StartLevel1() { OpenLevel(1); }
     public void Close() { settingsWindow.SetActive(false); exitWindow.SetActive(false); modesWindow.SetActive(false); }
     public void Quit()
     {

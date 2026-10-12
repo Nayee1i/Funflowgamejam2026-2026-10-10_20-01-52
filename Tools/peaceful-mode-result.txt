@@ -1,0 +1,1 @@
+PASSED: peaceful turret tracks moving hero without firing; Figma toggle on/off, saved setting, suppressed/resumed robot fire, cancelled enemy shots, actual black/red projectile damage 0.5/1 hearts, native half-heart HUD. User scenes untouched.
