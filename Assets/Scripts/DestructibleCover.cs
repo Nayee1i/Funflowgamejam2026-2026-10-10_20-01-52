@@ -21,6 +21,7 @@ public class DestructibleCover : MonoBehaviour
   if(!gameObject.activeSelf)return;
   if(Health<=0)Health=maximumHealth;
   Health=Mathf.Max(0,Health-damage);
+  GameAudio.Play(Health==0 ? "block_break" : "block_hit");
   if(Health==0)
   {
    if(visual!=null && damageSprites!=null && damageSprites.Length>3)

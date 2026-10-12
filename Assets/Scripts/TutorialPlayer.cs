@@ -22,6 +22,7 @@ public class TutorialPlayer : MonoBehaviour
     {
         if (Health <= 0 || (level != null && level.Finished)) return;
         HealthHalves=Mathf.Max(0,HealthHalves-Mathf.Max(0,damageHalves));
+        GameAudio.Play(Health > 0 ? "player_hit" : "lose");
         if (Health > 0) return;
         if (level != null) level.Restart();
         else SceneManager.LoadScene(SceneManager.GetActiveScene().path);

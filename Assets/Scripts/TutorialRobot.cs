@@ -154,6 +154,7 @@ public class TutorialRobot : MonoBehaviour
     private void Fire(Transform barrelMuzzle)
     {
         if(PeacefulModeSettings.Enabled)return;
+        GameAudio.Play("enemy_shot");
         if(firstLevel!=null)
         {
             Vector2 origin=turret.position;
