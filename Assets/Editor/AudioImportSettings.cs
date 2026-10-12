@@ -15,9 +15,9 @@ public class AudioImportSettings : AssetPostprocessor
         var settings = importer.defaultSampleSettings;
         settings.loadType = longLoop ? AudioClipLoadType.Streaming : AudioClipLoadType.DecompressOnLoad;
         settings.compressionFormat = AudioCompressionFormat.Vorbis;
-        settings.quality = music ? .6f : .8f;
+        settings.quality = longLoop ? .6f : .8f;
         importer.defaultSampleSettings = settings;
-        importer.forceToMono = !music;
+        importer.forceToMono = !longLoop;
         importer.loadInBackground = longLoop;
     }
 }

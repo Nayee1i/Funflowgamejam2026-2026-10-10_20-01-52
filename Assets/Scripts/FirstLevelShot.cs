@@ -88,9 +88,8 @@ public class FirstLevelShot : MonoBehaviour
                 if(Reflections>=MaxReflections){Finish();return;}
                 Direction=contact.Reflect(Direction);
                 lastMirrorCollider=mirrorCollider;Reflections++;
-                bool wasCharged=Charged;
                 Charged|=mirror.chargesShot;
-                GameAudio.Play(Charged && !wasCharged ? "charge" : "bounce");
+                GameAudio.Play(mirror.chargesShot ? "charge" : "bounce");
                 if(Charged)FirstLevelEffects.ProjectileVisual(gameObject,hostile,level,true);
                 OrientVisual();
                 transform.position+=(Vector3)(Direction*Separation);

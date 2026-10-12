@@ -115,6 +115,7 @@ public class GameAudio : MonoBehaviour
         source.clip = clip;
         source.volume = 0f;
         source.Play();
+        Debug.Log($"GameAudio: мотор {soundName} запущен в сцене {sceneName}");
     }
 
     public static void Play(string soundName)
@@ -163,7 +164,7 @@ public class GameAudio : MonoBehaviour
 #if UNITY_EDITOR
         if (sound == null && Clip(soundName, null) != null)
         {
-            float volume = soundName.StartsWith("music") ? .5f : soundName.StartsWith("tank_") ? .3f : .8f;
+            float volume = soundName.StartsWith("music") ? .5f : soundName.StartsWith("tank_") ? .6f : .8f;
             sound = new SoundLibrary.Sound { name = soundName, volume = volume };
             var list = new List<SoundLibrary.Sound>(library.sounds) { sound };
             library.sounds = list.ToArray();
