@@ -33,7 +33,7 @@ MonoBehaviour:
     cooldown: 0.05
   - name: reload
     clip: {fileID: 0}
-    volume: 0.6
+    volume: 0.4
     pitchVariation: 0
     cooldown: 0.2
   - name: bounce
@@ -48,7 +48,7 @@ MonoBehaviour:
     cooldown: 0.03
   - name: wall_hit
     clip: {fileID: 0}
-    volume: 1
+    volume: 0.1
     pitchVariation: 0.1
     cooldown: 0.03
   - name: enemy_hit
@@ -134,5 +134,10 @@ MonoBehaviour:
   - name: tank_move
     clip: {fileID: 0}
     volume: 0.06
+    pitchVariation: 0
+    cooldown: 0.03
+  - name: music_level3
+    clip: {fileID: 0}
+    volume: 0.5
     pitchVariation: 0
     cooldown: 0.03
