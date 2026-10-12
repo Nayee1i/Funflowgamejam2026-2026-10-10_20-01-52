@@ -1,1 +1,0 @@
-PASSED: sensitivity removed; centered sound/music controls and six bars; plus/minus bindings work; settings close; editor scene saved.

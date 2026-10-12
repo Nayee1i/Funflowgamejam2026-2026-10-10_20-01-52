@@ -1,5 +1,0 @@
-Origin (-0.17, -2.84) direction (1.00, -0.05)
-Preview (-0.17, -2.84) -> (0.68, -2.89)
-Preview (0.68, -2.88) -> (4.37, -1.53)
-Actual bounce 1 at (0.73, -2.87, 0.00) direction (0.94, 0.34)
-Impact near (4.34, -1.54, 0.00)

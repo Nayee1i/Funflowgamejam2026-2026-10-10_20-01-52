@@ -1,7 +1,0 @@
-Restore Figma obstacle scales; retain mirror transforms.
-level2: restored 12 obstacle/block scales; 7 mirrors unchanged.
-Approved: room 3.4 lower red mirror moved down 0.6; angle and size retained.
-level3: restored 22 obstacle/block scales; 15 mirrors unchanged.
-PASSED: native half-heart aligned and composited on empty heart; runtime victory time frame added for every level.
-VERIFIED: half-heart rendered, both victory frames rendered, movement checks passed.
-

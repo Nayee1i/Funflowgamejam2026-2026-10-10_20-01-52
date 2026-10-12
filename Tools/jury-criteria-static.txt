@@ -1,7 +1,0 @@
-Current project review
-PASS Scene, prefab, sprite and collider inventory
-PASS 26 campaign mirrors and preview/projectile agreement
-PASS Real projectile contacts on campaign robots and shields
-PASS Movement through 12 campaign rooms and reverse from walls
-PASS Three arenas: navigation, mirrors and charged shield routes
-PASS Stars at third-level thresholds

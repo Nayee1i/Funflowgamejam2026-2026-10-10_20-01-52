@@ -118,3 +118,15 @@ InitTestScene*.unity*
 /Tools/*.request
 /Releases/
 .vscode/
+
+# Generated Python caches and local verification output
+__pycache__/
+*.pyc
+/Tools/*.txt
+!/Tools/*.cs.txt
+!/Tools/submission-campaign-runtime.txt
+!/Tools/submission-player-progression-test.txt
+!/Tools/submission-preparation-result.txt
+!/Tools/submission-windows-build.txt
+/Tools/FigmaLevel2/*-diagnostics.txt
+/Tools/FigmaLevel2/solid-bounds.txt

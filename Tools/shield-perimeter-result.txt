@@ -1,1 +1,0 @@
-PASSED: 24 native shield edge directions register in preview and actual red ricochets; shield disappears, body HP preserved; ordinary shot cannot break shield. Authored scenes untouched.

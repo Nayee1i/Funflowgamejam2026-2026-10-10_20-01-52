@@ -1,7 +1,0 @@
-level1.unity: 4 linked prefab mirrors
-Level1Rooms.unity: 4 linked prefab mirrors
-level2.unity: 7 linked prefab mirrors
-level3.unity: 15 linked prefab mirrors
-TankArena.unity: 2 linked prefab mirrors
-Tutorial.unity: 4 linked prefab mirrors
-VERIFIED: exact source edge colliders and glow children, copied sprite bytes/import settings, prefab links, and scene references. Unity runtime validation pending.

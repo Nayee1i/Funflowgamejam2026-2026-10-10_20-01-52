@@ -1,3 +1,0 @@
-PASSED: sees exposed side when centre is behind conveyor; real enemy shot hits player; fully hidden tank remains unseen.
-Visible (-2.65, 2.45) aim (-2.35, 2.86) covered (-3.15, 2.45)
-FIRST_LEVEL_COMBAT_REGRESSION_PASSED.

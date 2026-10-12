@@ -1,1 +1,0 @@
-PASSED: 27 face-reflecting mirrors; left shot/right aim icons and centred labels.

@@ -1,8 +1,0 @@
-Campaign Play Mode review
-PASSED: first level initialization/hints, actual direct projectile kills in all three rooms, charged shield contact, two room transitions, final victory and return to menu.
-Checking runtime patrol integration...
-level2 PASSED: 9 runtime patrols, 7 actual peek volleys; pause and no firing during retreat.
-level3 PASSED: 16 runtime patrols, 10 actual peek volleys; pause and no firing during retreat.
-
-PASSED: lethal hit removes last heart without restart; six Figma fire frames; delayed smooth defeat alpha/scale; home/restart callbacks; all three level victory panels animate exactly 1/2/3 earned stars with fade and scale settling; normal Play scene restored.
-PASSED

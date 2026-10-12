@@ -1,1 +1,0 @@
-PASSED: 42 intact/damaged block checks across all castle rooms; upper blocks draw over middle/lower blocks, debris below surviving blocks, mirrors and hero above blocks. Scene saved without changing placements or sizes.

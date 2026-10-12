@@ -1,1 +1,0 @@
-PLAY_MODE_PASSED: four-shot magazine, reload, pause, actual blue reflection, 3 fade transitions, Figma robot hint, no premature victory, waiting for impacts, final exit, second-level time and third-level unlock. Test progress restored afterwards.

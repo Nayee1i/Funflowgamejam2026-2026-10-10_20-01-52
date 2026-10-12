@@ -1,1 +1,0 @@
-PASSED: first level initialization/hints, actual direct projectile kills in all three rooms, charged shield contact, two room transitions, final victory and return to menu.

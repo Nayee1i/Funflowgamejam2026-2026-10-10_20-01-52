@@ -1,1 +1,0 @@
-10000 warmed collision queries: 5,4837 ms; managed allocation 0 bytes. Microbenchmark in Unity Editor, not game FPS.

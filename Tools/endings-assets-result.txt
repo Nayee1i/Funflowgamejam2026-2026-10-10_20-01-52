@@ -1,1 +1,0 @@
-PASSED: 16 current Figma ending assets imported as sprites.

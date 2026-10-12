@@ -1,1 +1,0 @@
-PASSED: info appears on pointer enter, hides on exit/disable; 42 intact/damaged block order checks, including Awake; lower blocks render over upper blocks; scene saved with unchanged placements/colliders.

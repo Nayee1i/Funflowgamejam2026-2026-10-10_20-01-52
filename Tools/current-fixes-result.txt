@@ -1,1 +1,0 @@
-PASSED: room 2.1 blue glass edge overrides, one collider, actual reflections from both sides; castle blocks retain images and room parents; full-size hero can cross centre of 3.1.

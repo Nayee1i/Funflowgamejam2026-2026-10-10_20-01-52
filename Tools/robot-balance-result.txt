@@ -1,1 +1,0 @@
-PASSED: black 2 direct / 1 ricochet; red 4 direct / 2 ricochets; repeated bounces stay at 2 damage; shield rules, outgoing half/full hearts and boss balance preserved.

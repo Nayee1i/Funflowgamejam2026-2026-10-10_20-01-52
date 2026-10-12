@@ -1,1 +1,0 @@
-PASSED: 11 scenes/prefabs compared to originals; only hierarchy names changed. Serialized references, component IDs, transforms and collider data identical. Four retired scenes and recovery/template content archived outside Assets. Gameplay code, sprites, audio and mirror prefabs retained.

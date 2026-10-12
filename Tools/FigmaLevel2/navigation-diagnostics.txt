@@ -1,1 +1,0 @@
-Room 3 cells 59348 maxX 7,85 radius 0,54

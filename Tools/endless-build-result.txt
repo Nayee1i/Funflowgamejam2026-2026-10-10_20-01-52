@@ -1,1 +1,0 @@
-CREATED: 3 waves / 12 enemies / 10 Vlad prefab mirrors / 10 destructible covers.

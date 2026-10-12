@@ -1,1 +1,0 @@
-FRONTEND_VERIFIED: settings bindings, persistence, best time, stars, tutorial and victory renders.

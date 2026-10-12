@@ -1,1 +1,0 @@
-PASSED: own direct shot is safe; blue/red returning ricochets each take one life and disappear; cover stops returning shots.
