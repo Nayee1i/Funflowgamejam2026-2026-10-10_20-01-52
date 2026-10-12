@@ -8,7 +8,8 @@ using UnityEngine.UI;
 // Все звуки игры. Создаётся сам при запуске и живёт между сценами.
 // Эффекты: GameAudio.Play("shot"). Файл ищется в Resources/Audio/<имя>,
 // громкость и разброс высоты берутся из Resources/Audio/SoundLibrary.
-// Музыка включается сама по имени сцены, наведение и клик по кнопкам озвучиваются сами.
+// Музыка включается сама по уровню (в последней комнате level3 — музыка босса),
+// мотор танка звучит сам, наведение и клик по кнопкам озвучиваются сами.
 public class GameAudio : MonoBehaviour
 {
     const string SoundKey = "Menu.SoundLevel", MusicKey = "Menu.MusicLevel";
@@ -26,6 +27,12 @@ public class GameAudio : MonoBehaviour
     SoundLibrary.Sound musicSettings;
     readonly List<RaycastResult> uiHits = new();
     Selectable hovered;
+    AudioSource engineIdle, engineMove;
+    float engineBlend, engineLevel;
+    string sceneName;
+    FirstLevelRooms rooms;
+    Transform tank;
+    Vector3 lastTankPosition;
 
     public static float SoundVolume => Steps(PlayerPrefs.GetInt(SoundKey, 1), library => library.effectsVolume);
     public static float MusicVolume => Steps(PlayerPrefs.GetInt(MusicKey, 2), library => library.musicVolume);
@@ -60,22 +67,60 @@ public class GameAudio : MonoBehaviour
         music = gameObject.AddComponent<AudioSource>();
         music.playOnAwake = false;
         music.loop = true;
+        engineIdle = LoopSource();
+        engineMove = LoopSource();
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
     void OnDestroy() => SceneManager.sceneLoaded -= OnSceneLoaded;
 
+    AudioSource LoopSource()
+    {
+        var source = gameObject.AddComponent<AudioSource>();
+        source.playOnAwake = false;
+        source.loop = true;
+        source.volume = 0f;
+        return source;
+    }
+
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         hovered = null;
-        bool menu = scene.name == "MainMenu" || scene.name == "LevelSelection";
-        Music(menu ? "music_menu" : "music_level");
+        sceneName = scene.name;
+        rooms = FindAnyObjectByType<FirstLevelRooms>();
+        var movement = rooms == null ? FindAnyObjectByType<TankMovement>() : null;
+        tank = rooms != null ? rooms.player : movement != null ? movement.transform : null;
+        if (tank != null) lastTankPosition = tank.position;
+        engineBlend = engineLevel = 0f;
+        StartLoop(engineIdle, tank != null ? "tank_idle" : null);
+        StartLoop(engineMove, tank != null ? "tank_move" : null);
+        Music(LevelTrack());
+    }
+
+    string LevelTrack()
+    {
+        if (sceneName == "MainMenu" || sceneName == "LevelSelection") return "music_menu";
+        if (sceneName == "level3" && rooms != null && rooms.rooms != null && rooms.rooms.Length > 0 &&
+            rooms.CurrentRoom == rooms.rooms.Length - 1) return "music_boss";
+        if (sceneName == "level2") return "music_level2";
+        if (sceneName == "level3") return "music_level3";
+        return "music_level1";
+    }
+
+    void StartLoop(AudioSource source, string soundName)
+    {
+        var clip = soundName != null ? Clip(soundName, Settings(soundName)) : null;
+        if (clip == null) { source.Stop(); source.clip = null; return; }
+        if (source.clip == clip && source.isPlaying) return;
+        source.clip = clip;
+        source.volume = 0f;
+        source.Play();
     }
 
     public static void Play(string soundName)
     {
         if (instance == null || string.IsNullOrEmpty(soundName)) return;
-        var settings = instance.library != null ? instance.library.Find(soundName) : null;
+        var settings = Settings(soundName);
         var clip = Clip(soundName, settings);
         if (clip == null) return;
 
@@ -99,13 +144,39 @@ public class GameAudio : MonoBehaviour
     public static void Music(string trackName)
     {
         if (instance == null) return;
-        var settings = instance.library != null ? instance.library.Find(trackName) : null;
+        var settings = Settings(trackName);
         var clip = Clip(trackName, settings);
         instance.musicSettings = settings;
         if (clip == null) { instance.music.Stop(); instance.music.clip = null; return; }
         if (instance.music.clip == clip && instance.music.isPlaying) return;
         instance.music.clip = clip;
         instance.music.Play();
+    }
+
+    // Настройки звука из SoundLibrary. В редакторе новый файл из Resources/Audio
+    // сам добавляется в список при первом проигрывании, чтобы его громкость можно было крутить.
+    static SoundLibrary.Sound Settings(string soundName)
+    {
+        var library = instance != null ? instance.library : null;
+        if (library == null) return null;
+        var sound = library.Find(soundName);
+#if UNITY_EDITOR
+        if (sound == null && Clip(soundName, null) != null)
+        {
+            float volume = soundName.StartsWith("music") ? .5f : soundName.StartsWith("tank_") ? .3f : .8f;
+            sound = new SoundLibrary.Sound { name = soundName, volume = volume };
+            var list = new List<SoundLibrary.Sound>(library.sounds) { sound };
+            library.sounds = list.ToArray();
+            UnityEditor.EditorUtility.SetDirty(library);
+        }
+#endif
+        return sound;
+    }
+
+    static float Volume(string soundName)
+    {
+        var settings = Settings(soundName);
+        return settings != null ? settings.volume : 1f;
     }
 
     static AudioClip Clip(string soundName, SoundLibrary.Sound settings)
@@ -121,8 +192,29 @@ public class GameAudio : MonoBehaviour
 
     void Update()
     {
+        Music(LevelTrack());
         music.volume = (musicSettings != null ? musicSettings.volume : 1f) * MusicVolume;
+        UpdateEngine();
         UpdateInterfaceSounds();
+    }
+
+    // Мотор: на месте — tank_idle, в движении — tank_move, с плавным переходом.
+    // Молчит в паузе, во время перехода между комнатами и после победы.
+    void UpdateEngine()
+    {
+        bool active = tank != null && tank.gameObject.activeInHierarchy && Time.timeScale > 0f &&
+                      (rooms == null || rooms.CanPlay);
+        bool moving = false;
+        if (tank != null)
+        {
+            moving = active && (tank.position - lastTankPosition).sqrMagnitude > 1e-6f;
+            lastTankPosition = tank.position;
+        }
+        engineBlend = Mathf.MoveTowards(engineBlend, moving ? 1f : 0f, Time.unscaledDeltaTime * 5f);
+        engineLevel = Mathf.MoveTowards(engineLevel, active ? 1f : 0f, Time.unscaledDeltaTime * 3f);
+        float volume = engineLevel * SoundVolume;
+        if (engineIdle.clip != null) engineIdle.volume = (1f - engineBlend) * Volume("tank_idle") * volume;
+        if (engineMove.clip != null) engineMove.volume = engineBlend * Volume("tank_move") * volume;
     }
 
     // Наведение и клик по любой интерактивной кнопке UI, без правки самих кнопок.
