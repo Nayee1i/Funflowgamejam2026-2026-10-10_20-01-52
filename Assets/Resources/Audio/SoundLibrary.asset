@@ -31,11 +31,6 @@ MonoBehaviour:
     volume: 0.45
     pitchVariation: 0.08
     cooldown: 0.05
-  - name: boss_shot
-    clip: {fileID: 0}
-    volume: 0.7
-    pitchVariation: 0.05
-    cooldown: 0.05
   - name: reload
     clip: {fileID: 0}
     volume: 0.6
