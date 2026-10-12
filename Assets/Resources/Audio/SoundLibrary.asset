@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   effectsVolume:
     low: 0.1
-    medium: 0.5
+    medium: 0.45
     high: 1
   musicVolume:
     low: 0.3
-    medium: 0.6
+    medium: 0.45
     high: 1
   sounds:
   - name: shot
@@ -33,7 +33,7 @@ MonoBehaviour:
     cooldown: 0.05
   - name: reload
     clip: {fileID: 0}
-    volume: 0.4
+    volume: 0.5
     pitchVariation: 0
     cooldown: 0.2
   - name: bounce
@@ -48,7 +48,7 @@ MonoBehaviour:
     cooldown: 0.03
   - name: wall_hit
     clip: {fileID: 0}
-    volume: 0.1
+    volume: 0.2
     pitchVariation: 0.1
     cooldown: 0.03
   - name: enemy_hit
@@ -58,12 +58,12 @@ MonoBehaviour:
     cooldown: 0.03
   - name: shield_break
     clip: {fileID: 0}
-    volume: 0.9
+    volume: 0.5
     pitchVariation: 0
     cooldown: 0.05
   - name: enemy_die
     clip: {fileID: 0}
-    volume: 0.9
+    volume: 0.3
     pitchVariation: 0.05
     cooldown: 0.05
   - name: player_hit
@@ -128,12 +128,12 @@ MonoBehaviour:
     cooldown: 0.03
   - name: tank_idle
     clip: {fileID: 0}
-    volume: 0.05
+    volume: 0.08
     pitchVariation: 0
     cooldown: 0.03
   - name: tank_move
     clip: {fileID: 0}
-    volume: 0.06
+    volume: 0.08
     pitchVariation: 0
     cooldown: 0.03
   - name: music_level3
