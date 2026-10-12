@@ -4,7 +4,7 @@ using UnityEngine;
 
 public static class FigmaLevelObstacles
 {
-    [MenuItem("Bounce Club/Place Figma Level Obstacles")]
+    [MenuItem("Bounce Club/Place Layout Level Obstacles")] 
     public static void Install()
     {
         AssetDatabase.ImportAsset("Assets/UI/Level1/RedMirrorGame.png");
@@ -29,19 +29,19 @@ public static class FigmaLevelObstacles
     }
     public static void Add(Transform room,int index)
     {
-        var previous=room.Find("Figma Obstacles");
+        var previous=room.Find("Obstacles");
         if(previous!=null) Object.DestroyImmediate(previous.gameObject);
-        var root=new GameObject("Figma Obstacles").transform; root.SetParent(room,false);
+        var root=new GameObject("Obstacles").transform; root.SetParent(room,false);
         if(index==0)
         {
-            Create(root,"Pyramid — 56:3042","56_3042",614.822f,720.190f,
+            Create(root,"Pyramid 1","56_3042",614.822f,720.190f,
                 new[]{new Vector2(118,5),new Vector2(234,182),new Vector2(5,182)});
             Blocks(root,"56_3045",843.505f,342.469f);
         }
         if(index==1)
         {
             // Center the chest and scale its graphic and collider together for two routes.
-            var chest=Create(root,"Toy Chest — 56:3064","56_3064",852.5f,421,
+            var chest=Create(root,"Toy Chest 1","56_3064",852.5f,421,
                 new[]{new Vector2(5,16),new Vector2(192,16),new Vector2(192,42),new Vector2(226,42),new Vector2(226,278),new Vector2(191,278),new Vector2(191,286),new Vector2(7,286)});
             chest.localPosition=new Vector3(0,-.76f,0);
             chest.localScale=Vector3.one*.7f;
@@ -88,7 +88,7 @@ public static class FigmaLevelObstacles
         if(material==null){material=new Material(Shader.Find("Bounce Club/Room Edge Blend"));AssetDatabase.CreateAsset(material,path);}
         material.SetColor("_BackgroundColor",Object.FindAnyObjectByType<Camera>().backgroundColor);
         EditorUtility.SetDirty(material);
-        foreach(var room in level.rooms) room.transform.Find("Figma — Empty Room Background").GetComponent<SpriteRenderer>().sharedMaterial=material;
+        foreach(var room in level.rooms) room.transform.Find("Empty Room Background").GetComponent<SpriteRenderer>().sharedMaterial=material;
         AssetDatabase.SaveAssets();
     }
     public static void VerifyRicochet()
@@ -146,7 +146,7 @@ public static class FigmaLevelObstacles
     {
         var sprite=AssetDatabase.LoadAssetAtPath<Sprite>("Assets/UI/Level1/"+id+".png");
         if(sprite==null) sprite=AssetDatabase.LoadAssetAtPath<Sprite>("Assets/UI/Level1/"+id+".asset");
-        var graphic=new GameObject(name,typeof(SpriteRenderer),typeof(PolygonCollider2D));
+        var graphic=new GameObject(ProjectHierarchyNames.Clean(name),typeof(SpriteRenderer),typeof(PolygonCollider2D));
         graphic.transform.SetParent(root,false);
         float width=sprite.rect.width/sprite.pixelsPerUnit*100,height=sprite.rect.height/sprite.pixelsPerUnit*100;
         graphic.transform.localPosition=new Vector3((x+width*.5f-960)/100,(540-y-height*.5f)/100,0);

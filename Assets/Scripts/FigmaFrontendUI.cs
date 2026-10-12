@@ -39,15 +39,29 @@ public static class FigmaFrontendUI
             if(panel.name=="Settings")
             {
                 windows.filledBar=Resources.Load<Sprite>("FirstLevelFX/MenuBarFull");windows.emptyBar=Resources.Load<Sprite>("FirstLevelFX/MenuBarEmpty");
-                windows.soundBars=Bars(parent,"Sound",new Vector2(905,616),new Vector2(986,620),new Vector2(1073,620));
-                windows.musicBars=Bars(parent,"Music",new Vector2(906,729),new Vector2(992,729),new Vector2(1075,733));
-                windows.sensitivityBars=Bars(parent,"Sensitivity",new Vector2(835,484.09f),new Vector2(919.74f,484),new Vector2(1003.74f,484));
+                windows.soundBars=Bars(parent,"Sound",new Vector2(919,536.455f),new Vector2(1003,536.455f),new Vector2(1087,536.455f));
+                windows.musicBars=Bars(parent,"Music",new Vector2(919,656.455f),new Vector2(1003,656.455f),new Vector2(1087,656.455f));
+                windows.sensitivityBars=new Image[0];
             }
+            else if(panel.name=="Modes")ConfigurePeacefulInfo(parent);
         }
         windows.unlockedLevelArtwork=Resources.Load<Sprite>("FirstLevelFX/LevelUnlocked");
         RefreshResults(windows);
         RefreshPeacefulMode(windows);
         return true;
+    }
+    static void ConfigurePeacefulInfo(Transform parent)
+    {
+        var icon=FirstLevelPresentation.Picture("Peaceful Mode Info",parent,"PeacefulInfoIcon",1397,580,48,48);
+        icon.raycastTarget=true;
+        var tooltip=new GameObject("Peaceful Mode Tooltip",typeof(RectTransform));
+        tooltip.transform.SetParent(parent,false);
+        var rect=tooltip.GetComponent<RectTransform>();
+        rect.anchorMin=Vector2.zero;rect.anchorMax=Vector2.one;rect.sizeDelta=Vector2.zero;
+        FirstLevelPresentation.Picture("Peaceful Info Panel",rect,"PeacefulInfoPanel",1460,529,336,168).raycastTarget=false;
+        FirstLevelPresentation.Picture("Peaceful Info Text",rect,"PeacefulInfoText",1564,583,163,54).raycastTarget=false;
+        tooltip.SetActive(false);
+        icon.gameObject.AddComponent<PeacefulModeInfo>().tooltip=tooltip;
     }
     public static void RefreshPeacefulMode(MainMenuWindows windows)
     {
@@ -67,7 +81,6 @@ public static class FigmaFrontendUI
             case "close":w.Close();break;
             case "soundUp":w.SoundUp();break;case "soundDown":w.SoundDown();break;
             case "musicUp":w.MusicUp();break;case "musicDown":w.MusicDown();break;
-            case "sensitivityUp":w.SensitivityUp();break;case "sensitivityDown":w.SensitivityDown();break;
             case "level1":w.Level1();break;case "level2":w.Level2();break;case "level3":w.Level3();break;
             case "arena":w.Arena();break;
             case "peaceful":PeacefulModeSettings.SetEnabled(!PeacefulModeSettings.Enabled);RefreshPeacefulMode(w);break;

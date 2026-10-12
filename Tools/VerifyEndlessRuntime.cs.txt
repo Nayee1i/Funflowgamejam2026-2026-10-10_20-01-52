@@ -1,0 +1,144 @@
+#if UNITY_EDITOR
+using System;
+using System.IO;
+using System.Collections;
+using System.Reflection;
+using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
+using UnityEditor;
+using UnityEditor.SceneManagement;
+using Object=UnityEngine.Object;
+
+public static class VerifyEndlessRuntime
+{
+    const string Key="EndlessTest.Running";
+    static double deadline;
+    [InitializeOnLoadMethod] static void Hook()=>EditorApplication.update+=Tick;
+    public static void Run()
+    {
+        File.WriteAllText("Tools/endless-runtime-result.txt","Endless arena Play Mode integration\n");
+        Application.runInBackground=true;PlayerSettings.runInBackground=true;EditorApplication.isPaused=false;SessionState.SetBool(Key,true);SessionState.SetFloat("EndlessTest.Deadline",(float)(EditorApplication.timeSinceStartup+240));
+        if(Keyboard.current==null)InputSystem.AddDevice<Keyboard>();
+        SessionState.SetBool("EndlessTest.StartPending",true);SessionState.SetFloat("EndlessTest.StartAfter",(float)(EditorApplication.timeSinceStartup+8));
+    }
+    static void Tick()
+    {
+        if(!SessionState.GetBool(Key,false))return;
+        if(EditorApplication.timeSinceStartup>SessionState.GetFloat("EndlessTest.Deadline",0)){Fail(new Exception("Runtime verification timed out"));return;}
+        if(EditorApplication.isCompiling || EditorApplication.isUpdating){SessionState.SetFloat("EndlessTest.StartAfter",(float)(EditorApplication.timeSinceStartup+3));return;}
+        if(!EditorApplication.isPlaying){if(SessionState.GetBool("EndlessTest.StartPending",false) && EditorApplication.timeSinceStartup>=SessionState.GetFloat("EndlessTest.StartAfter",0)){SessionState.SetBool("EndlessTest.StartPending",false);EditorSceneManager.OpenScene("Assets/Scenes/EndlessArena.unity");EditorSceneManager.playModeStartScene=null;EditorApplication.isPlaying=true;}return;}
+        EditorApplication.QueuePlayerLoopUpdate(); var debugLevel=Object.FindAnyObjectByType<FirstLevelRooms>();var debugArena=Object.FindAnyObjectByType<EndlessArena>();if(Time.frameCount%120==0)File.WriteAllText("Tools/endless-state.txt","frame="+Time.frameCount+" canPlay="+(debugLevel!=null?debugLevel.CanPlay:false)+" enabled="+(debugLevel!=null?debugLevel.enabled:false)+" finished="+(debugLevel!=null?debugLevel.Finished:false)+" defeat="+(debugLevel!=null?debugLevel.Defeated:false)+" transition="+(debugLevel!=null?typeof(FirstLevelRooms).GetField("transitioning",BindingFlags.Instance|BindingFlags.NonPublic).GetValue(debugLevel):null)+" blackout="+(debugLevel!=null?debugLevel.blackout.color.a:0)+" title="+(debugArena!=null?debugArena.ShowingWaveTitle:false)+" titleAge="+(debugArena!=null?typeof(EndlessArena).GetField("titleAge",BindingFlags.Instance|BindingFlags.NonPublic).GetValue(debugArena):null));
+        // Deterministic combat test: enemy AI has already been reviewed separately.
+        foreach(var brain in Object.FindObjectsByType<TutorialRobot>(FindObjectsInactive.Include))brain.enabled=false;
+        foreach(var patrol in Object.FindObjectsByType<RobotCoverPatrol>(FindObjectsInactive.Include))patrol.enabled=false;
+        if(Object.FindAnyObjectByType<EndlessRuntimeCase>()==null && SceneManager.GetActiveScene().name=="EndlessArena")new GameObject("Endless integration test").AddComponent<EndlessRuntimeCase>();
+    }
+    public static void Pass(){SessionState.SetBool(Key,false);File.AppendAllText("Tools/endless-runtime-result.txt","PASSED\n");EditorApplication.Exit(0);}
+    public static void Fail(Exception e){SessionState.SetBool(Key,false);File.AppendAllText("Tools/endless-runtime-result.txt","FAILED: "+e+"\n");EditorApplication.Exit(1);}
+}
+public class EndlessRuntimeCase : MonoBehaviour
+{
+    IEnumerator test;
+    void Awake(){DontDestroyOnLoad(gameObject);test=Test();}
+    void Update(){try{if(test!=null && !test.MoveNext())test=null;}catch(Exception e){VerifyEndlessRuntime.Fail(e);test=null;}}
+    static void Capture(string path){foreach(var assembly in AppDomain.CurrentDomain.GetAssemblies()){var type=assembly.GetType("BuildFullSecondLevel");if(type!=null){type.GetMethod("Capture").Invoke(null,new object[]{path});return;}}throw new Exception("Capture helper not found");}
+    static void Check(bool good,string message){if(!good)throw new Exception(message);}
+    static void Log(string message)=>File.AppendAllText("Tools/endless-runtime-result.txt",message+"\n");
+    static void Charged(FirstLevelShot shot)=>typeof(FirstLevelShot).GetField("<Charged>k__BackingField",BindingFlags.Instance|BindingFlags.NonPublic).SetValue(shot,true);
+    static FirstLevelShot NearShot(FirstLevelRooms level,TutorialTarget target,bool charged=false)
+    {
+        var collider=target.IsShielded ? target.ShieldCollider : target.GetComponent<CircleCollider2D>();
+        var bounds=collider.bounds;Vector2 centre=bounds.center;
+        var shot=FirstLevelShot.Create(centre+Vector2.right*(bounds.extents.x+.08f),Vector2.left,level.player.GetComponent<FirstLevelTankAim>().projectileSprite,level);
+        if(charged)Charged(shot);shot.Step(.35f);return shot;
+    }
+    IEnumerator Test()
+    {
+        if(Keyboard.current==null)InputSystem.AddDevice<Keyboard>();
+        FirstLevelRooms level=null;EndlessArena arena=null;
+        while(level==null || !level.CanPlay){level=Object.FindAnyObjectByType<FirstLevelRooms>();yield return null;}
+        arena=level.GetComponent<EndlessArena>();
+        Check(arena.CompletedWaves==0 && level.CurrentRoom==0,"First wave startup.");
+        Check(level.player.GetComponent<TutorialPlayer>().HealthHalves==6,"Initial full health.");
+        level.TogglePause();Check(!level.CanPlay && level.player.GetComponent<FirstLevelTankAim>().Fire()==null,"Pause must block firing.");level.TogglePause();
+        level.player.GetComponent<TutorialPlayer>().Hit(1);
+        Log("Entry fade / wave banner / pause / three hearts initialized.");
+        for(int wave=0;wave<3;wave++)
+        {
+            Check(level.CurrentRoom==wave && arena.CompletedWaves==wave,"Wave/count mismatch.");
+            Check(level.player.GetComponent<TutorialPlayer>().HealthHalves==5,"Health must carry across waves.");
+            yield return null;
+            Capture("Tools/Endless-play-wave"+(wave+1)+".png");
+            var targets=level.rooms[wave].GetComponentsInChildren<TutorialTarget>();
+            foreach(var target in targets)
+            {
+                if(target.IsShielded)
+                {
+                    NearShot(level,target);Check(target.IsShielded,"Normal shot must not break shield.");
+                    FirstLevelShot.ClearAll();NearShot(level,target,true);
+                    Check(!target.IsShielded && target.Health==2,"Charged contact must pop shield without damaging the body.");
+                    FirstLevelShot.ClearAll();
+                }
+                int hp=target.MaxHealth;
+                for(int hit=0;hit<hp;hit++)
+                {
+                    NearShot(level,target);FirstLevelShot.ClearAll();
+                    Check(target.Health==hp-hit-1,"Actual projectile hit did not subtract one HP.");
+                }
+                Check(target.IsDestroyed,"Robot must die at configured hit count.");
+            }
+            Check(!level.Finished && level.CurrentRoom==wave,"Wave must wait for final impact animation.");
+            yield return null;
+            Check(level.CurrentRoom==wave,"Impact still pending, wave advanced early.");
+            while(level.CurrentRoom==wave && !level.Finished)yield return null;
+            if(wave<2)
+            {
+                Check(!level.CanPlay,"Wave transition must block combat.");
+                while(!arena.ShowingWaveTitle)yield return null;
+                var group=GameObject.Find("Wave "+(wave+2)+" Announcement").GetComponent<CanvasGroup>();
+                Check(group.alpha<.2f,"Banner appears abruptly.");
+                float age=0;while(age<.35f){age+=Time.unscaledDeltaTime;yield return null;}
+                Check(group.alpha>0 && group.alpha<1,"Banner must fade in.");
+                while(!level.CanPlay)yield return null;
+            }
+            Log("Wave "+(wave+1)+" actual projectile damage, shields and automatic transition passed.");
+        }
+        Check(level.Finished && arena.CompletedWaves==3,"Third wave must stop the run.");
+        while(GameObject.Find("Figma ArenaResult").GetComponent<CanvasGroup>().alpha<.99f)yield return null;
+        Check(GameObject.Find("Completed Waves Label").GetComponent<Text>().text.EndsWith("3"),"Final count must be three.");
+        Capture("Tools/Endless-result-three.png");
+        Check(level.player.GetComponent<FirstLevelTankAim>().Fire()==null,"Run ended, shot was permitted.");
+        GameObject.Find("Endless/Art_164_178").GetComponent<Button>().onClick.Invoke();
+        while(level!=null)yield return null;
+        for(int completed=0;completed<3;completed++)
+        {
+            level=null;while(level==null || !level.CanPlay){level=Object.FindAnyObjectByType<FirstLevelRooms>();yield return null;}
+            arena=level.GetComponent<EndlessArena>();Check(arena.CompletedWaves==0 && level.player.GetComponent<TutorialPlayer>().HealthHalves==6,"Restart must reset run.");
+            for(int n=0;n<completed;n++)
+            {
+                foreach(var target in level.rooms[n].GetComponentsInChildren<TutorialTarget>())target.Complete();
+                while(level.CurrentRoom==n)yield return null;
+                while(!level.CanPlay)yield return null;
+            }
+            level.player.GetComponent<TutorialPlayer>().Hit(6);
+            Check(level.Defeated && level.player.GetComponent<TutorialPlayer>().HealthHalves==0,"Death must remove last life.");
+            while(GameObject.Find("Figma ArenaResult")==null)yield return null;
+            Check(GameObject.Find("Figma ArenaResult").GetComponent<CanvasGroup>().alpha<.2f,"Defeat result appears abruptly.");
+            while(GameObject.Find("Figma ArenaResult").GetComponent<CanvasGroup>().alpha<.99f)yield return null;
+            Check(GameObject.Find("Completed Waves Label").GetComponent<Text>().text.EndsWith(completed.ToString()),"Defeat must count completed waves only.");
+            Log("Defeat after "+completed+" completed waves: fire, fade and correct result passed.");
+            GameObject.Find(completed<2?"Endless/Art_164_178":"Endless/Art_164_179").GetComponent<Button>().onClick.Invoke();
+            while(level!=null)yield return null;
+        }
+        while(SceneManager.GetActiveScene().name!="MainMenu")yield return null;
+        yield return null;
+        var menu=Object.FindAnyObjectByType<MainMenuWindows>();menu.Play();
+        GameObject.Find("arena Hit Area").GetComponent<Button>().onClick.Invoke();
+        while(SceneManager.GetActiveScene().name!="EndlessArena")yield return null;
+        Log("Result home button and real menu Endless button load the new scene.");
+        VerifyEndlessRuntime.Pass();
+    }
+}
+#endif

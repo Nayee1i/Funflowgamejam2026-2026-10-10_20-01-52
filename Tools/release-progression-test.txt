@@ -1,0 +1,1 @@
+PASSED: actual release progression code ignores old editor/test keys; fresh state opens only level 1; completing 1 unlocks 2; completing 2 unlocks 3; new times and unlocks stored. PlayerPrefs API simulated in memory.

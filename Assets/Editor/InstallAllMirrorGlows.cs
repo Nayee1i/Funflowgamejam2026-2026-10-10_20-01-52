@@ -29,7 +29,7 @@ public static class InstallAllMirrorGlows
     {
         var mirror = room.GetComponentsInChildren<MirrorRicochetSurface>(true).First(m => m.chargesShot == red);
         return room.GetComponentsInChildren<SpriteRenderer>(true)
-            .Where(s => (s.name.StartsWith("Figma Mirror Glow") || s.name.StartsWith("Native Mirror Glow")) && Vector2.Distance(s.transform.position, mirror.transform.position) < .5f)
+            .Where(s => (s.name.StartsWith("Mirror Glow") || s.name.StartsWith("Native Mirror Glow")) && Vector2.Distance(s.transform.position, mirror.transform.position) < .5f)
             .Select(s => new Template {
                 sprite = s.sprite, material = s.sharedMaterial, color = OriginalColor(s),
                 offset = mirror.transform.InverseTransformPoint(s.transform.position),
@@ -61,7 +61,7 @@ public static class InstallAllMirrorGlows
             var level = Object.FindAnyObjectByType<FirstLevelRooms>(); int count = 0;
             foreach (var room in level.rooms)
             {
-                foreach (var old in room.GetComponentsInChildren<SpriteRenderer>(true).Where(s => s.name.StartsWith("Figma Mirror Glow") || s.name.StartsWith("Native Mirror Glow")).ToArray()) Object.DestroyImmediate(old.gameObject);
+                foreach (var old in room.GetComponentsInChildren<SpriteRenderer>(true).Where(s => s.name.StartsWith("Mirror Glow") || s.name.StartsWith("Native Mirror Glow")).ToArray()) Object.DestroyImmediate(old.gameObject);
                 foreach (var mirror in room.GetComponentsInChildren<MirrorRicochetSurface>(true))
                 {
                     var picture = mirror.GetComponent<SpriteRenderer>();

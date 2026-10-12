@@ -1,0 +1,6 @@
+Result: Succeeded
+Errors: 0
+Warnings: 6
+Size bytes: 1369077545
+Time: 00:00:23.8037879
+Folder: C:/Users/user/Desktop/!gamejam/Funflowgamejam2026\Builds/BounceClub-Windows-20261013-025646

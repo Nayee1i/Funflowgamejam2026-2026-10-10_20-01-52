@@ -1,0 +1,8 @@
+Castle boss Play Mode
+All library clips import; single audio manager; boss music selected
+Vertical movement only; span=2,685355
+3.5 second vulnerability, paused timer, health retained; ordinary/reflected damage 1/2
+Three authored barrels produce three actual projectiles
+Second shield cycle and lethal damage passed
+Menu and endless music switch; audio persists once across scenes
+PASSED

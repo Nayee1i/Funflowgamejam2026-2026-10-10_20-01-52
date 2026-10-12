@@ -1,1 +1,1 @@
-AIM_PREVIEW_VERIFIED: red-to-blue-to-robot prediction, wall stop, no target damage, actual projectile integration tests passed.
+PASSED: 26 authored mirror edges across three levels; preview/projectile endpoints and red charge agree.

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2983}
   - component: {fileID: 519420152}
   m_Layer: 0
-  m_Name: PromotedEnemy
+  m_Name: "PromotedEnemy"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -93,11 +93,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7a802bcc963f457780e06f2426203481, type: 3}
-  m_Name: 
+  m_Name: ""
   m_EditorClassIdentifier: 
   shielded: 0
   shieldVisual: {fileID: 3000}
-  maxHealth: 5
+  maxHealth: 4
+  isBoss: 0
+  redRobot: 1
 --- !u!114 &519420152
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -108,7 +110,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fcf27d96eb0d402a940c50eecc6c0479, type: 3}
-  m_Name: 
+  m_Name: ""
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   turret: {fileID: 3081}
@@ -135,7 +137,7 @@ GameObject:
   - component: {fileID: 3002}
   - component: {fileID: 3003}
   m_Layer: 0
-  m_Name: Red Shield
+  m_Name: "Red Shield"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -263,7 +265,7 @@ GameObject:
   - component: {fileID: 3061}
   - component: {fileID: 3062}
   m_Layer: 0
-  m_Name: Hull
+  m_Name: "Hull"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -354,7 +356,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3081}
   m_Layer: 0
-  m_Name: Turret
+  m_Name: "Turret"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -389,7 +391,7 @@ GameObject:
   - component: {fileID: 3101}
   - component: {fileID: 3102}
   m_Layer: 0
-  m_Name: Turret
+  m_Name: "Turret"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -481,7 +483,7 @@ GameObject:
   - component: {fileID: 3121}
   - component: {fileID: 3122}
   m_Layer: 0
-  m_Name: Barrel
+  m_Name: "Barrel"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -572,7 +574,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3141}
   m_Layer: 0
-  m_Name: Muzzle
+  m_Name: "Muzzle"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

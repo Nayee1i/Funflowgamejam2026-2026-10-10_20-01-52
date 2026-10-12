@@ -27,7 +27,7 @@ public class FirstLevelHealthHud : MonoBehaviour
         Refresh();
     }
     void Update(){if(player!=null && displayed!=player.HealthHalves)Refresh();}
-    void Refresh()
+    public void Refresh()
     {
         if(player==null)return;
         displayed=player.HealthHalves;

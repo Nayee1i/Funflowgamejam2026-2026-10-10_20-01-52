@@ -1,0 +1,1458 @@
+fileFormatVersion: 2
+guid: 5e22fea488461e74fae55144ff7c70a9
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -7550071511410118666
+    second: VictoryAtlas_0
+  - first:
+      213: 7413199017691015798
+    second: VictoryAtlas_1
+  - first:
+      213: -8649940478692653789
+    second: VictoryAtlas_2
+  - first:
+      213: -7711148779617889938
+    second: VictoryAtlas_3
+  - first:
+      213: -1115286139920956128
+    second: VictoryAtlas_4
+  - first:
+      213: -4061548734134047487
+    second: VictoryAtlas_5
+  - first:
+      213: -8141729628159746544
+    second: VictoryAtlas_6
+  - first:
+      213: 6893902437204597531
+    second: VictoryAtlas_7
+  - first:
+      213: 3997417534794252685
+    second: VictoryAtlas_8
+  - first:
+      213: 2222608432986967110
+    second: VictoryAtlas_9
+  - first:
+      213: -7599457258127802047
+    second: VictoryAtlas_10
+  - first:
+      213: 5829209316289284755
+    second: VictoryAtlas_11
+  - first:
+      213: 6170754405144261983
+    second: VictoryAtlas_12
+  - first:
+      213: 7576837029649247822
+    second: VictoryAtlas_13
+  - first:
+      213: 7716563402046831702
+    second: VictoryAtlas_14
+  - first:
+      213: 5453489211722101904
+    second: VictoryAtlas_15
+  - first:
+      213: 3270210373511969173
+    second: VictoryAtlas_16
+  - first:
+      213: 2035273439598484089
+    second: VictoryAtlas_17
+  - first:
+      213: 2713408224149592753
+    second: VictoryAtlas_18
+  - first:
+      213: -6732318095791975103
+    second: VictoryAtlas_19
+  - first:
+      213: 8162833714978231174
+    second: VictoryAtlas_20
+  - first:
+      213: 4814680626257198897
+    second: VictoryAtlas_21
+  - first:
+      213: 9024998453312112745
+    second: VictoryAtlas_22
+  - first:
+      213: -8399957382922471893
+    second: VictoryAtlas_23
+  - first:
+      213: -2644768174239598360
+    second: VictoryAtlas_24
+  - first:
+      213: -4222303972399225773
+    second: VictoryAtlas_25
+  - first:
+      213: -4210340300511702467
+    second: VictoryAtlas_26
+  - first:
+      213: -5569802343273975530
+    second: VictoryAtlas_27
+  - first:
+      213: 3352682692549404443
+    second: VictoryAtlas_28
+  - first:
+      213: 2197695102761134592
+    second: VictoryAtlas_29
+  - first:
+      213: 2533482453932646204
+    second: VictoryAtlas_30
+  - first:
+      213: 4024011380583294105
+    second: VictoryAtlas_31
+  - first:
+      213: 7135476681199686283
+    second: VictoryAtlas_32
+  - first:
+      213: -1085554361324235337
+    second: VictoryAtlas_33
+  - first:
+      213: 1395593740716585089
+    second: VictoryAtlas_34
+  - first:
+      213: -1051588604331406315
+    second: VictoryAtlas_35
+  - first:
+      213: -1195508891278901958
+    second: VictoryAtlas_36
+  - first:
+      213: 6458786882434018948
+    second: VictoryAtlas_37
+  - first:
+      213: 971361445522699097
+    second: VictoryAtlas_38
+  - first:
+      213: 6879785229732039013
+    second: VictoryAtlas_39
+  - first:
+      213: -4060145876964482354
+    second: VictoryAtlas_40
+  - first:
+      213: -5609529679816096250
+    second: VictoryAtlas_41
+  - first:
+      213: -9041704410178513215
+    second: VictoryAtlas_42
+  - first:
+      213: -7675402304898957501
+    second: VictoryAtlas_43
+  - first:
+      213: -2208560014822896903
+    second: VictoryAtlas_44
+  - first:
+      213: 2453472424018388014
+    second: VictoryAtlas_45
+  - first:
+      213: 8877965096905074136
+    second: VictoryAtlas_46
+  - first:
+      213: -301367798799250459
+    second: VictoryAtlas_47
+  - first:
+      213: -6295530941865595981
+    second: VictoryAtlas_48
+  - first:
+      213: 2594614240190827338
+    second: VictoryAtlas_49
+  - first:
+      213: -8697245677592243235
+    second: VictoryAtlas_50
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationMethod: 0
+  spriteTessellationDetail: -1
+  spriteGeometrySubdivision: -1
+  textureType: 0
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: VictoryAtlas_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 11
+        width: 1529
+        height: 1001
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6ff6a9d56f1c83790800000000000000
+      internalID: -7550071511410118666
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: VictoryAtlas_1
+      rect:
+        serializedVersion: 2
+        x: 928
+        y: 997
+        width: 7
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 67a6fb2da39f0e660800000000000000
+      internalID: 7413199017691015798
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: VictoryAtlas_2
+      rect:
+        serializedVersion: 2
+        x: 934
+        y: 1006
+        width: 15
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3258047c6fc35f780800000000000000
+      internalID: -8649940478692653789
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: VictoryAtlas_3
+      rect:
+        serializedVersion: 2
+        x: 876
+        y: 947
+        width: 57
+        height: 58
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e6150b45a0f7cf490800000000000000
+      internalID: -7711148779617889938
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: VictoryAtlas_4
+      rect:
+        serializedVersion: 2
+        x: 942
+        y: 989
+        width: 9
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 025481f2a25b580f0800000000000000
+      internalID: -1115286139920956128
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: VictoryAtlas_5
+      rect:
+        serializedVersion: 2
+        x: 592
+        y: 323
+        width: 7
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 10da00002fa72a7c0800000000000000
+      internalID: -4061548734134047487
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: VictoryAtlas_6
+      rect:
+        serializedVersion: 2
+        x: 866
+        y: 319
+        width: 11
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 01ed3483a04c20f80800000000000000
+      internalID: -8141729628159746544
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: VictoryAtlas_7
+      rect:
+        serializedVersion: 2
+        x: 368
+        y: 284
+        width: 19
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b1b97cdbdbf0caf50800000000000000
+      internalID: 6893902437204597531
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: VictoryAtlas_8
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 281
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d814454911ea97730800000000000000
+      internalID: 3997417534794252685
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: VictoryAtlas_9
+      rect:
+        serializedVersion: 2
+        x: 494
+        y: 63
+        width: 243
+        height: 237
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 64cc9fa089a48de10800000000000000
+      internalID: 2222608432986967110
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: VictoryAtlas_10
+      rect:
+        serializedVersion: 2
+        x: 790
+        y: 63
+        width: 249
+        height: 234
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 141478b23ed498690800000000000000
+      internalID: -7599457258127802047
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: VictoryAtlas_11
+      rect:
+        serializedVersion: 2
+        x: 1146
+        y: 243
+        width: 21
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 39a02da1df285e050800000000000000
+      internalID: 5829209316289284755
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: VictoryAtlas_12
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 229
+        width: 10
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f55fccaff6ce2a550800000000000000
+      internalID: 6170754405144261983
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: VictoryAtlas_13
+      rect:
+        serializedVersion: 2
+        x: 360
+        y: 181
+        width: 31
+        height: 63
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e4ee4497225562960800000000000000
+      internalID: 7576837029649247822
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: VictoryAtlas_14
+      rect:
+        serializedVersion: 2
+        x: 1078
+        y: 241
+        width: 9
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 65cf7c1b78db61b60800000000000000
+      internalID: 7716563402046831702
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: VictoryAtlas_15
+      rect:
+        serializedVersion: 2
+        x: 1084
+        y: 241
+        width: 19
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 094fe135b8faeab40800000000000000
+      internalID: 5453489211722101904
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: VictoryAtlas_16
+      rect:
+        serializedVersion: 2
+        x: 1100
+        y: 233
+        width: 47
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5997af5220f126d20800000000000000
+      internalID: 3270210373511969173
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: VictoryAtlas_17
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 229
+        width: 31
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 97a1e04f86ebe3c10800000000000000
+      internalID: 2035273439598484089
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: VictoryAtlas_18
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 165
+        width: 57
+        height: 59
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1ba5f035766f7a520800000000000000
+      internalID: 2713408224149592753
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: VictoryAtlas_19
+      rect:
+        serializedVersion: 2
+        x: 332
+        y: 169
+        width: 33
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 14592697c500292a0800000000000000
+      internalID: -6732318095791975103
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: VictoryAtlas_20
+      rect:
+        serializedVersion: 2
+        x: 446
+        y: 174
+        width: 21
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6831cd5e306384170800000000000000
+      internalID: 8162833714978231174
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: VictoryAtlas_21
+      rect:
+        serializedVersion: 2
+        x: 1494
+        y: 183
+        width: 11
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 13ff303358e21d240800000000000000
+      internalID: 4814680626257198897
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: VictoryAtlas_22
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 139
+        width: 15
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9684e1cd64c3f3d70800000000000000
+      internalID: 9024998453312112745
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: VictoryAtlas_23
+      rect:
+        serializedVersion: 2
+        x: 182
+        y: 149
+        width: 7
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b267c7ed34b5d6b80800000000000000
+      internalID: -8399957382922471893
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: VictoryAtlas_24
+      rect:
+        serializedVersion: 2
+        x: 186
+        y: 157
+        width: 13
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8e8b03dab55eb4bd0800000000000000
+      internalID: -2644768174239598360
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: VictoryAtlas_25
+      rect:
+        serializedVersion: 2
+        x: 302
+        y: 97
+        width: 43
+        height: 65
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3546c6768ec5765c0800000000000000
+      internalID: -4222303972399225773
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: VictoryAtlas_26
+      rect:
+        serializedVersion: 2
+        x: 1243
+        y: 143
+        width: 20
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d321d74ddcdd195c0800000000000000
+      internalID: -4210340300511702467
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: VictoryAtlas_27
+      rect:
+        serializedVersion: 2
+        x: 168
+        y: 139
+        width: 13
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6113404674614b2b0800000000000000
+      internalID: -5569802343273975530
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: VictoryAtlas_28
+      rect:
+        serializedVersion: 2
+        x: 1208
+        y: 145
+        width: 9
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b17e106452f178e20800000000000000
+      internalID: 3352682692549404443
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: VictoryAtlas_29
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 120
+        width: 17
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 00a61b45d08cf7e10800000000000000
+      internalID: 2197695102761134592
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: VictoryAtlas_30
+      rect:
+        serializedVersion: 2
+        x: 1128
+        y: 134
+        width: 7
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c3f175f6edcb82320800000000000000
+      internalID: 2533482453932646204
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: VictoryAtlas_31
+      rect:
+        serializedVersion: 2
+        x: 1230
+        y: 125
+        width: 9
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 994ebcfc70928d730800000000000000
+      internalID: 4024011380583294105
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: VictoryAtlas_32
+      rect:
+        serializedVersion: 2
+        x: 1262
+        y: 124
+        width: 17
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b829df57c3e460360800000000000000
+      internalID: 7135476681199686283
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: VictoryAtlas_33
+      rect:
+        serializedVersion: 2
+        x: 150
+        y: 113
+        width: 16
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7b594e45f065fe0f0800000000000000
+      internalID: -1085554361324235337
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: VictoryAtlas_34
+      rect:
+        serializedVersion: 2
+        x: 162
+        y: 115
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 180bb2eec152e5310800000000000000
+      internalID: 1395593740716585089
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: VictoryAtlas_35
+      rect:
+        serializedVersion: 2
+        x: 165
+        y: 113
+        width: 8
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 51c4af46cb10861f0800000000000000
+      internalID: -1051588604331406315
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: VictoryAtlas_36
+      rect:
+        serializedVersion: 2
+        x: 400
+        y: 113
+        width: 11
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a3dff795ff2b86fe0800000000000000
+      internalID: -1195508891278901958
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: VictoryAtlas_37
+      rect:
+        serializedVersion: 2
+        x: 732
+        y: 113
+        width: 15
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 48eae6f037832a950800000000000000
+      internalID: 6458786882434018948
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: VictoryAtlas_38
+      rect:
+        serializedVersion: 2
+        x: 742
+        y: 112
+        width: 9
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 953f3e49618fa7d00800000000000000
+      internalID: 971361445522699097
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: VictoryAtlas_39
+      rect:
+        serializedVersion: 2
+        x: 1278
+        y: 117
+        width: 7
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 569482d3738e97f50800000000000000
+      internalID: 6879785229732039013
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: VictoryAtlas_40
+      rect:
+        serializedVersion: 2
+        x: 1284
+        y: 101
+        width: 39
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ec2e34326d677a7c0800000000000000
+      internalID: -4060145876964482354
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: VictoryAtlas_41
+      rect:
+        serializedVersion: 2
+        x: 304
+        y: 89
+        width: 11
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6060d8d0a72f622b0800000000000000
+      internalID: -5609529679816096250
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: VictoryAtlas_42
+      rect:
+        serializedVersion: 2
+        x: 329
+        y: 91
+        width: 8
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1c61a337eb9658280800000000000000
+      internalID: -9041704410178513215
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: VictoryAtlas_43
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 87
+        width: 7
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 34f784c054e7b7590800000000000000
+      internalID: -7675402304898957501
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: VictoryAtlas_44
+      rect:
+        serializedVersion: 2
+        x: 1157
+        y: 87
+        width: 6
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9fa89533e5e9951e0800000000000000
+      internalID: -2208560014822896903
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: VictoryAtlas_45
+      rect:
+        serializedVersion: 2
+        x: 164
+        y: 43
+        width: 11
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e2425dbab2c7c0220800000000000000
+      internalID: 2453472424018388014
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: VictoryAtlas_46
+      rect:
+        serializedVersion: 2
+        x: 368
+        y: 53
+        width: 23
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8d5e759d73ed43b70800000000000000
+      internalID: 8877965096905074136
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: VictoryAtlas_47
+      rect:
+        serializedVersion: 2
+        x: 368
+        y: 49
+        width: 7
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5eb44dd659351dbf0800000000000000
+      internalID: -301367798799250459
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: VictoryAtlas_48
+      rect:
+        serializedVersion: 2
+        x: 1439
+        y: 53
+        width: 16
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3bbee99a6f7c1a8a0800000000000000
+      internalID: -6295530941865595981
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: VictoryAtlas_49
+      rect:
+        serializedVersion: 2
+        x: 1510
+        y: 15
+        width: 11
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a4b8eb397ebe10420800000000000000
+      internalID: 2594614240190827338
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: VictoryAtlas_50
+      rect:
+        serializedVersion: 2
+        x: 1520
+        y: 23
+        width: 7
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dd310ded22d2d4780800000000000000
+      internalID: -8697245677592243235
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      VictoryAtlas_0: -7550071511410118666
+      VictoryAtlas_1: 7413199017691015798
+      VictoryAtlas_10: -7599457258127802047
+      VictoryAtlas_11: 5829209316289284755
+      VictoryAtlas_12: 6170754405144261983
+      VictoryAtlas_13: 7576837029649247822
+      VictoryAtlas_14: 7716563402046831702
+      VictoryAtlas_15: 5453489211722101904
+      VictoryAtlas_16: 3270210373511969173
+      VictoryAtlas_17: 2035273439598484089
+      VictoryAtlas_18: 2713408224149592753
+      VictoryAtlas_19: -6732318095791975103
+      VictoryAtlas_2: -8649940478692653789
+      VictoryAtlas_20: 8162833714978231174
+      VictoryAtlas_21: 4814680626257198897
+      VictoryAtlas_22: 9024998453312112745
+      VictoryAtlas_23: -8399957382922471893
+      VictoryAtlas_24: -2644768174239598360
+      VictoryAtlas_25: -4222303972399225773
+      VictoryAtlas_26: -4210340300511702467
+      VictoryAtlas_27: -5569802343273975530
+      VictoryAtlas_28: 3352682692549404443
+      VictoryAtlas_29: 2197695102761134592
+      VictoryAtlas_3: -7711148779617889938
+      VictoryAtlas_30: 2533482453932646204
+      VictoryAtlas_31: 4024011380583294105
+      VictoryAtlas_32: 7135476681199686283
+      VictoryAtlas_33: -1085554361324235337
+      VictoryAtlas_34: 1395593740716585089
+      VictoryAtlas_35: -1051588604331406315
+      VictoryAtlas_36: -1195508891278901958
+      VictoryAtlas_37: 6458786882434018948
+      VictoryAtlas_38: 971361445522699097
+      VictoryAtlas_39: 6879785229732039013
+      VictoryAtlas_4: -1115286139920956128
+      VictoryAtlas_40: -4060145876964482354
+      VictoryAtlas_41: -5609529679816096250
+      VictoryAtlas_42: -9041704410178513215
+      VictoryAtlas_43: -7675402304898957501
+      VictoryAtlas_44: -2208560014822896903
+      VictoryAtlas_45: 2453472424018388014
+      VictoryAtlas_46: 8877965096905074136
+      VictoryAtlas_47: -301367798799250459
+      VictoryAtlas_48: -6295530941865595981
+      VictoryAtlas_49: 2594614240190827338
+      VictoryAtlas_5: -4061548734134047487
+      VictoryAtlas_50: -8697245677592243235
+      VictoryAtlas_6: -8141729628159746544
+      VictoryAtlas_7: 6893902437204597531
+      VictoryAtlas_8: 3997417534794252685
+      VictoryAtlas_9: 2222608432986967110
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

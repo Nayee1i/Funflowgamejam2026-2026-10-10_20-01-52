@@ -23,7 +23,7 @@ public static class BuildFullThirdLevel
         try{Run();}catch(Exception e){File.AppendAllText("Tools/full-third-level-result.txt","\nFAILED: "+e);Debug.LogException(e);}
     }
     static Vector2 Point(float x,float y)=>new Vector2((x-960)*.012488189f,(592-y)*.012488189f);
-    [MenuItem("Bounce Club/Build Full Third Level From Figma")]
+    [MenuItem("Bounce Club/Build Full Third Level From Layout")] 
     public static void Run()
     {
         File.WriteAllText("Tools/full-third-level-result.txt","Building castle from Figma...\n");
@@ -44,7 +44,7 @@ public static class BuildFullThirdLevel
         var level=Object.FindAnyObjectByType<FirstLevelRooms>();
         foreach(var room in level.rooms)Object.DestroyImmediate(room);
         foreach(var wiring in level.GetComponents<SecondLevelWorkshop>())Object.DestroyImmediate(wiring);
-        level.gameObject.AddComponent<ThirdLevelCastle>();level.name="Third Level РІР‚вЂќ Figma Castle";level.emptySandbox=false;
+        level.gameObject.AddComponent<ThirdLevelCastle>();level.name="Third Level Castle";level.emptySandbox=false;
         level.doorwayY=Point(960,567).y;level.doorwayHalfHeight=.48f;level.spawnX=6.25f;level.exitX=8.05f;
         level.playerRadius=.54f;level.player.localScale=Vector3.one*.7f;
         var fit=Camera.main.GetComponent<FirstLevelCameraFit>();fit.verticalOffset=.65f;fit.minimumHalfHeight=6.746f;fit.horizontalHalfWidth=12;fit.Apply();
@@ -56,7 +56,7 @@ public static class BuildFullThirdLevel
         Vector2[] perimeter={Point(365,493),Point(365,397),Point(425,397),Point(425,324),Point(804,324),Point(804,350),Point(865,350),Point(865,324),Point(1054,324),Point(1054,350),Point(1115,350),Point(1115,324),Point(1495,324),Point(1495,397),Point(1555,397),Point(1555,493),Point(1680,493),Point(1680,633),Point(1555,633),Point(1555,751),Point(1495,751),Point(1495,836),Point(1115,836),Point(1115,815),Point(1054,815),Point(1054,836),Point(865,836),Point(865,815),Point(804,815),Point(804,836),Point(425,836),Point(425,751),Point(365,751),Point(365,633),Point(240,633),Point(240,493),Point(365,493)};
         for(int i=0;i<layout.rooms.Length;i++)
         {
-            var data=layout.rooms[i];var room=new GameObject("Room 3."+(i+1)+" РІР‚вЂќ Figma "+data.frame);level.rooms[i]=room;
+            var data=layout.rooms[i];var room=new GameObject("Room 3."+(i+1));level.rooms[i]=room;
             BuildFullSecondLevel.Draw(data.background,room.transform,0,"Castle Background","ThirdLevel");
             var boundary=new GameObject("Castle Floor Boundary").AddComponent<EdgeCollider2D>();boundary.transform.SetParent(room.transform,false);boundary.points=perimeter;
             foreach(var art in data.obstacles)BuildFullSecondLevel.Draw(art,room.transform,4,"Castle Obstacle РІР‚вЂќ "+art.node,"ThirdLevel").gameObject.AddComponent<PolygonCollider2D>().points=art.outline;
@@ -79,7 +79,7 @@ public static class BuildFullThirdLevel
                 }
                 cover.ShowDamage(0);
             }
-            foreach(var glow in data.glows)BuildFullSecondLevel.Draw(glow,room.transform,6,"Figma Mirror Glow вЂ” "+glow.node,"ThirdLevel");
+            foreach(var glow in data.glows)BuildFullSecondLevel.Draw(glow,room.transform,6,"Mirror Glow "+glow.node,"ThirdLevel");
             foreach(var mirror in data.mirrors)
             {
                 var image=BuildFullSecondLevel.Draw(mirror.art,room.transform,7,(mirror.red?"Red":"Blue")+" Mirror РІР‚вЂќ "+mirror.art.node,"ThirdLevel");
@@ -88,12 +88,12 @@ public static class BuildFullThirdLevel
             }
             foreach(var enemy in data.enemies)
             {
-                var brain=BuildFullSecondLevel.BuildEnemy(enemy,room.transform,i,level,"ThirdLevel",enemy.boss?10:0);
+                var brain=BuildFullSecondLevel.BuildEnemy(enemy,room.transform,i,level,"ThirdLevel",enemy.boss?8:0);
                 if(!enemy.boss)continue;
-                brain.name="Castle Boss РІР‚вЂќ Three Cannons";
+                brain.name="Castle Boss";
                 var turret=brain.transform.Find("Turret");var muzzle=turret.Find("Muzzle");
                 // Native boss artwork has one forward barrel and two barrels at 120 degrees.
-                turret.rotation=Quaternion.Euler(0,0,enemy.head.angle);turret.Find("Figma Turret").localRotation=Quaternion.identity;
+                turret.rotation=Quaternion.Euler(0,0,enemy.head.angle);turret.Find("Turret Artwork").localRotation=Quaternion.identity;
                 var extras=new Transform[2];
                 for(int k=0;k<2;k++)
                 {
@@ -119,7 +119,7 @@ public static class BuildFullThirdLevel
         level.GetComponent<ThirdLevelCastle>().ConfigureCombat(level);presentation.EnsureUI();level.blackout.color=Color.clear;
         for(int i=0;i<5;i++){for(int j=0;j<5;j++)level.rooms[j].SetActive(i==j);BuildFullSecondLevel.Capture("Tools/Level3-room"+(i+1)+"-preview.png");}
         EditorSceneManager.OpenScene(Path);
-        File.AppendAllText("Tools/full-third-level-result.txt","CASTLE_CREATED: 5 rooms, 17 enemies, 14 destructible blocks, 8 obstacles; boss 10 HP and three cannons.\n");
+        File.AppendAllText("Tools/full-third-level-result.txt","CASTLE_CREATED: 5 rooms, 17 enemies, 14 destructible blocks, 8 obstacles; boss 8 HP and three cannons.\n");
     }
 }
 

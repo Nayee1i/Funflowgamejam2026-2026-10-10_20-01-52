@@ -2,17 +2,31 @@ using UnityEngine;
 
 public static class LevelProgression
 {
-    private const string UnlockedLevelKey = "Progress.UnlockedLevel";
+    // Release progress is separate from editor and older test builds.
+    // Keep this prefix stable across updates so earned unlocks are retained.
+#if UNITY_EDITOR
+    private const string UnlockedLevelKey = "Campaign.Submission.v1.Editor.UnlockedLevel";
+    private const string BestTimePrefix = "Campaign.Submission.v1.Editor.Time.";
+#else
+    private const string UnlockedLevelKey = "Campaign.Submission.v1.Player.UnlockedLevel";
+    private const string BestTimePrefix = "Campaign.Submission.v1.Player.Time.";
+#endif
     public const int LevelCount = 3;
     public static int LevelNumber(string sceneName) => sceneName == "Level1Rooms" ? 1 :
         sceneName == "level1" ? 1 : sceneName == "level2" ? 2 : sceneName == "level3" ? 3 : 0;
-    public static float BestTime(int level) => PlayerPrefs.GetFloat("Progress.Time." + level, -1);
+    public static float BestTime(int level) => PlayerPrefs.GetFloat(BestTimePrefix + level, -1);
     public static int Stars(int level)
     {
         float time = BestTime(level);
+        return StarsForTime(level,time);
+    }
+    public static int StarsForTime(int level,float time)
+    {
         if (time < 0) return 0;
-        return time <= PlayerPrefs.GetFloat("Progress.ThreeStars." + level, 60) ? 3 :
-            time <= PlayerPrefs.GetFloat("Progress.TwoStars." + level, 120) ? 2 : 1;
+        float threeStarTime = level == 3 ? 180f : PlayerPrefs.GetFloat("Progress.ThreeStars." + level, 60);
+        float twoStarTime = level == 3 ? 240f : PlayerPrefs.GetFloat("Progress.TwoStars." + level, 120);
+        return time <= threeStarTime ? 3 :
+            time <= twoStarTime ? 2 : 1;
     }
     public static void SetStarThresholds(int level, float threeStars, float twoStars)
     {
@@ -27,12 +41,19 @@ public static class LevelProgression
         int level = LevelNumber(sceneName);
         if (level == 0 || seconds < 0 || float.IsNaN(seconds) || float.IsInfinity(seconds)) return;
         float best = BestTime(level);
-        if (best < 0 || seconds < best) PlayerPrefs.SetFloat("Progress.Time." + level, seconds);
+        if (best < 0 || seconds < best) PlayerPrefs.SetFloat(BestTimePrefix + level, seconds);
         Complete(sceneName);
     }
 
     public static bool IsUnlocked(int level) => level >= 1 && level <= LevelCount &&
         level <= Mathf.Clamp(PlayerPrefs.GetInt(UnlockedLevelKey, 1), 1, LevelCount);
+
+    public static void ResetCampaign()
+    {
+        PlayerPrefs.DeleteKey(UnlockedLevelKey);
+        for (int level = 1; level <= LevelCount; level++) PlayerPrefs.DeleteKey(BestTimePrefix + level);
+        PlayerPrefs.Save();
+    }
 
     public static void Complete(string sceneName)
     {

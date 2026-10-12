@@ -17,7 +17,7 @@ public static class InstallFigmaRobotShield
         if(EditorApplication.timeSinceStartup<readyAt)return;
         EditorApplication.update-=Pending;File.Delete(Request);Install();
     }
-    [MenuItem("Bounce Club/Install Figma Robot Shield")]
+    [MenuItem("Bounce Club/Install Layout Robot Shield")] 
     public static void Install()
     {
         const string asset="Assets/Resources/FirstLevelEnemies/Shield.png";
@@ -38,10 +38,10 @@ public static class InstallFigmaRobotShield
         var level=UnityEngine.Object.FindAnyObjectByType<FirstLevelRooms>();
         foreach(var room in level.rooms)
         {
-            var robot=room.transform.Find("Figma Robot");
+            var robot=room.transform.Find("Robot");
             if(robot!=null)FirstLevelEnemies.ConfigureShield(robot.Find("Shield").GetComponent<SpriteRenderer>());
         }
-        var shield=level.rooms[2].transform.Find("Figma Robot/Shield").GetComponent<SpriteRenderer>();
+        var shield=level.rooms[2].transform.Find("Robot/Shield").GetComponent<SpriteRenderer>();
         if(shield.sprite==null || shield.sprite.texture.width<1000 || shield.sharedMaterial.shader!=shader)
             throw new Exception("Original Figma shield was not assigned.");
         EditorSceneManager.SaveScene(scene);

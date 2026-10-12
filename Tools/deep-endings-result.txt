@@ -1,0 +1,1 @@
+PASSED: lethal hit removes last heart without restart; six Figma fire frames; delayed smooth defeat alpha/scale; home/restart callbacks; all three level victory panels animate exactly 1/2/3 earned stars with fade and scale settling; normal Play scene restored.

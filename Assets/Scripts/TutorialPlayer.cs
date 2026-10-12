@@ -24,6 +24,8 @@ public class TutorialPlayer : MonoBehaviour
         HealthHalves=Mathf.Max(0,HealthHalves-Mathf.Max(0,damageHalves));
         GameAudio.Play(Health > 0 ? "player_hit" : "lose");
         if (Health > 0) return;
+        var rooms=FindAnyObjectByType<FirstLevelRooms>();
+        if(rooms!=null && rooms.player==transform){rooms.Defeat();return;}
         if (level != null) level.Restart();
         else SceneManager.LoadScene(SceneManager.GetActiveScene().path);
     }

@@ -30,7 +30,7 @@ public static class BuildFullSecondLevel
         try{Run();}catch(Exception e){File.AppendAllText("Tools/full-second-level-result.txt","\nFAILED: "+e);Debug.LogException(e);}
     }
     static string Hash(string path)=>Convert.ToBase64String(SHA256.Create().ComputeHash(File.ReadAllBytes(path)));
-    [MenuItem("Bounce Club/Build Full Second Level From Figma")]
+    [MenuItem("Bounce Club/Build Full Second Level From Layout")] 
     public static void Run()
     {
         File.WriteAllText("Tools/full-second-level-result.txt","Building second level...\n");
@@ -63,13 +63,13 @@ public static class BuildFullSecondLevel
         var scene=EditorSceneManager.OpenScene(BuildFirstLevelRooms.ScenePath);
         EditorSceneManager.SaveScene(scene,ScenePath,true);scene=EditorSceneManager.OpenScene(ScenePath);
         var level=Object.FindAnyObjectByType<FirstLevelRooms>();
-        level.name="Second Level — Figma Workshop";level.emptySandbox=false;
+        level.name="Second Level Workshop";level.emptySandbox=false;
         level.doorwayY=.31f;level.doorwayHalfHeight=.35f;level.exitX=7.25f;level.spawnX=5.25f;
         level.speed=speed;
         // The empty sandbox had no HUD. Restore the gameplay composition from the 1920x1080 frames.
         level.playerRadius=radius;level.player.localScale=tankScale;
         var fit=Camera.main.GetComponent<FirstLevelCameraFit>();fit.minimumHalfHeight=6.746f;fit.horizontalHalfWidth=12;
-        fit.verticalOffset=1.0615f;fit.Apply();
+        fit.verticalOffset=.65f;fit.transform.position=new Vector3(0,.65f,-10);fit.Apply();
         foreach(var old in level.rooms)Object.DestroyImmediate(old);
         foreach(var route in Object.FindObjectsByType<FirstLevelRicochetRoute>(FindObjectsInactive.Include,FindObjectsSortMode.None))Object.DestroyImmediate(route);
         level.gameObject.AddComponent<SecondLevelWorkshop>();
@@ -82,15 +82,15 @@ public static class BuildFullSecondLevel
         level.rooms=new GameObject[layout.rooms.Length];
         for(int i=0;i<level.rooms.Length;i++)
         {
-            var data=layout.rooms[i];var room=new GameObject("Room 2."+(i+1)+" — Figma "+data.frame);level.rooms[i]=room;
-            var floor=new GameObject("Figma Workshop Background").AddComponent<SpriteRenderer>();floor.transform.SetParent(room.transform,false);
+            var data=layout.rooms[i];var room=new GameObject("Room 2."+(i+1));level.rooms[i]=room;
+            var floor=new GameObject("Workshop Background").AddComponent<SpriteRenderer>();floor.transform.SetParent(room.transform,false);
             floor.sprite=AssetDatabase.LoadAssetAtPath<Sprite>("Assets/UI/Level2/RoomBackground.png");floor.sortingOrder=0;
             floor.sharedMaterial=AssetDatabase.LoadAssetAtPath<Material>("Assets/UI/Level1/RoomEdgeBlend.mat");
             var edge=new GameObject("Workshop Floor Boundary").AddComponent<EdgeCollider2D>();edge.transform.SetParent(room.transform,false);
             edge.points=OpenDoorways(perimeter);
             foreach(var art in data.obstacles)
             {
-                var picture=Draw(art,room.transform,4,"Figma Obstacle "+art.node);
+                var picture=Draw(art,room.transform,4,"Obstacle "+art.node);
                 // Approved adjustment: the upper conveyor in 2.2 is 5% smaller so the hero fits.
                 if(art.node=="71:3602" || art.node=="71:3652")picture.transform.localScale*=.95f;
                 if(art.node=="71:3652")picture.transform.position+=Vector3.up*(44f*1586f/1270f/100f);
@@ -146,7 +146,7 @@ public static class BuildFullSecondLevel
     }
     public static SpriteRenderer Draw(Art art,Transform parent,int order,string name,string resource="SecondLevel")
     {
-        var renderer=new GameObject(name).AddComponent<SpriteRenderer>();renderer.transform.SetParent(parent,false);
+        var renderer=new GameObject(ProjectHierarchyNames.Clean(name)).AddComponent<SpriteRenderer>();renderer.transform.SetParent(parent,false);
         renderer.sprite=Resources.Load<Sprite>(resource+"/"+art.asset);renderer.sortingOrder=order;
         renderer.transform.position=new Vector3(art.x,art.y,0);renderer.transform.rotation=Quaternion.Euler(0,0,art.angle);
         renderer.transform.localScale=new Vector3(art.sx,art.sy,1);return renderer;
@@ -163,7 +163,7 @@ public static class BuildFullSecondLevel
         collider.radius=data.body.radius*Mathf.Min(Mathf.Abs(data.body.sx),Mathf.Abs(data.body.sy))*.88f;
         var turret=new GameObject("Turret").transform;turret.SetParent(robot.transform,false);
         turret.position=robot.transform.TransformPoint(collider.offset);turret.rotation=Quaternion.Euler(0,0,data.head.angle+180);
-        var head=Draw(data.head,turret,11,"Figma Turret",resource);
+        var head=Draw(data.head,turret,11,"Turret Artwork",resource);
         // Preserve world transform from Figma despite the aiming rig's rotated parent.
         head.transform.localScale=new Vector3(data.head.sx,data.head.sy,1);
         var muzzle=new GameObject("Muzzle").transform;muzzle.SetParent(turret,false);muzzle.localPosition=new Vector3(0,collider.radius+.1f,0);
@@ -174,7 +174,7 @@ public static class BuildFullSecondLevel
             // Ordinary alpha blending respects the native glow's transparency and the Figma opacity.
             // The first level's lighten material is left untouched.
         }
-        var target=robot.AddComponent<TutorialTarget>();target.Configure(shield!=null,shield,health>0 ? health : data.promoted ? 2 : 5);
+        var target=robot.AddComponent<TutorialTarget>();target.Configure(shield!=null,shield,health>0 ? health : data.promoted ? 4 : 2,health>0,data.promoted);
         var brain=robot.AddComponent<TutorialRobot>();brain.ConfigureFirstLevel(level,turret,muzzle,level.player.GetComponent<FirstLevelTankAim>().projectileSprite,index);
         var config=new SerializedObject(brain);config.FindProperty("shotsPerBurst").intValue=data.promoted ? 2 : 1;
         config.FindProperty("reactionOffset").floatValue=index*.08f;config.ApplyModifiedPropertiesWithoutUndo();
@@ -249,12 +249,12 @@ public static class BuildFullSecondLevel
                         if(shot.Reflections!=reflections){reflections=shot.Reflections;trajectory.Add("Actual bounce "+reflections+" at "+shot.transform.position+" direction "+shot.Direction);}
                     }
                     File.WriteAllText("Tools/FigmaLevel2/last-shot-diagnostics.txt",string.Join("\n",trajectory));
-                    Require(!target.IsShielded && target.Health==5,"Actual charged projectile failed shield path for "+target.name);
+                    Require(!target.IsShielded && target.Health==target.MaxHealth,"Actual charged projectile failed shield path for "+target.name);
                     FirstLevelShot.ClearAll();FirstLevelEffects.Clear();paths++;
                 }
                 else if(target.MaxHealth==2)
                 {
-                    target.Hit(false,false);Require(target.Health==1,"Promoted robot first hit.");target.Hit(false,false);Require(target.IsDestroyed,"Promoted robot must die on two ordinary shots.");
+                    target.Hit(false,false);Require(target.Health==1,"Black robot first hit.");target.Hit(false,false);Require(target.IsDestroyed,"Black robot must die on two ordinary shots.");
                     target.Configure(false,null,2);target.gameObject.SetActive(true);target.Hit(true,false);Require(target.IsDestroyed,"Promoted robot must die on one ricochet.");
                 }
                 targets++;
@@ -399,6 +399,8 @@ public static class BuildFullSecondLevel
     }
     public static void Capture(string path)
     {
+        // Batch checks with -nographics cannot submit a camera to URP.
+        if(SystemInfo.graphicsDeviceType==UnityEngine.Rendering.GraphicsDeviceType.Null)return;
         var camera=Camera.main;
         if(camera==null)throw new InvalidOperationException("A camera is required for capture");
         var canvases=Object.FindObjectsByType<Canvas>(FindObjectsSortMode.None);

@@ -1,0 +1,5 @@
+Endless arena geometry and original Figma sprite references
+Wave 1: 3 enemies, 2 prefab edges, 2460 reachable floor samples.
+Wave 2: 5 enemies, 4 prefab edges, 2767 reachable floor samples.
+Wave 3: 4 enemies, 4 prefab edges, 2548 reachable floor samples.
+PASSED

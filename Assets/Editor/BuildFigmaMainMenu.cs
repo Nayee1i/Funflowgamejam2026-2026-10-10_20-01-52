@@ -1,4 +1,4 @@
-﻿using UnityEditor;
+using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -29,7 +29,7 @@ public static class BuildFigmaMainMenu
         BuildAndPreview();
     }
 
-    [MenuItem("Bounce Club/Rebuild Figma Main Menu")]
+    [MenuItem("Bounce Club/Rebuild Layout Main Menu")] 
     public static void Build()
     {
         AssetDatabase.Refresh();
@@ -66,7 +66,7 @@ public static class BuildFigmaMainMenu
         var surround = Image("Letterbox", root, null);
         Stretch(surround.rectTransform);
         surround.color = Color.black;
-        var composition = new GameObject("Figma Composition 1920x1080", typeof(RectTransform), typeof(AspectRatioFitter));
+        var composition = new GameObject("Composition 1920x1080", typeof(RectTransform), typeof(AspectRatioFitter));
         var comp = composition.GetComponent<RectTransform>();
         comp.SetParent(root, false);
         var fitter = composition.GetComponent<AspectRatioFitter>();

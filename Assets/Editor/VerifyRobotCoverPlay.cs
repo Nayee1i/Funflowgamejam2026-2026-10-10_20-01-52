@@ -43,7 +43,7 @@ public static class VerifyRobotCoverPlay
                 {
                     var patrol = robot.GetComponent<RobotCoverPatrol>();
                     var target = robot.GetComponent<TutorialTarget>();
-                    bool stationary = target.MaxHealth >= 10 || (scene == 2 && room == 0 && target.IsShielded);
+                    bool stationary = target.IsBoss || (scene == 2 && room == 0 && target.IsShielded);
                     Require(stationary == (patrol == null), "Stationary exception/runtime attachment mismatch");
                     if (patrol == null) continue;
                     patrol.enabled = false; patrol.Plan(); moving++;

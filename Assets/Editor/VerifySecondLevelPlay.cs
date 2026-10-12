@@ -20,7 +20,7 @@ public static class VerifySecondLevelPlay
         {
             if(!File.Exists(Request) || EditorApplication.isPlayingOrWillChangePlaymode)return;
             File.Delete(Request);
-            SavePref("Progress.UnlockedLevel",true);SavePref("Progress.Time.1",false);SavePref("Progress.Time.2",false);
+            SavePref("Campaign.Submission.v1.Editor.UnlockedLevel",true);SavePref("Campaign.Submission.v1.Editor.Time.1",false);SavePref("Campaign.Submission.v1.Editor.Time.2",false);
             SessionState.SetBool(Key+"active",true);SessionState.SetInt(Key+"stage",0);
             SessionState.SetFloat(Key+"deadline",(float)EditorApplication.timeSinceStartup+40);
             EditorSceneManager.OpenScene("Assets/Scenes/level2.unity");EditorGameLaunch.PlayCurrentScene();return;
@@ -64,7 +64,7 @@ public static class VerifySecondLevelPlay
                 if(level.ModalOpen)
                 {
                     Require(room==1,"Unexpected workshop tutorial panel.");
-                    var panel=GameObject.Find("Figma NewRobotHint");
+                    var panel=GameObject.Find("NewRobotHint");
                     if(panel!=null && panel.GetComponent<CanvasGroup>().alpha<.95f)return;
                     BuildFullSecondLevel.Capture("Tools/Level2-new-robot-hint-preview.png");hud.CloseModal();return;
                 }
@@ -115,10 +115,10 @@ public static class VerifySecondLevelPlay
     {
         foreach(var mirror in level.rooms[0].GetComponentsInChildren<MirrorRicochetSurface>())
         {
-            if(mirror.chargesShot)continue;var polygon=mirror.GetComponent<PolygonCollider2D>();
-            for(int i=0;i<polygon.points.Length;i++)
+            if(mirror.chargesShot)continue;var polygon=mirror.GetComponent<EdgeCollider2D>();
+            for(int i=0;i<polygon.points.Length-1;i++)
             {
-                Vector2 a=polygon.transform.TransformPoint(polygon.points[i]),b=polygon.transform.TransformPoint(polygon.points[(i+1)%polygon.points.Length]);
+                Vector2 a=polygon.transform.TransformPoint(polygon.points[i]),b=polygon.transform.TransformPoint(polygon.points[i+1]);
                 var tangent=(b-a).normalized;var normal=new Vector2(-tangent.y,tangent.x);
                 foreach(float side in new[]{-1f,1f})
                 {
@@ -140,13 +140,14 @@ public static class VerifySecondLevelPlay
     }
     static void Finish()
     {
-        foreach(string pref in new[]{"Progress.UnlockedLevel","Progress.Time.1","Progress.Time.2"})
+        foreach(string pref in new[]{"Campaign.Submission.v1.Editor.UnlockedLevel","Campaign.Submission.v1.Editor.Time.1","Campaign.Submission.v1.Editor.Time.2"})
         {
             if(!SessionState.GetBool(Key+pref+"exists",false))PlayerPrefs.DeleteKey(pref);
-            else if(pref=="Progress.UnlockedLevel")PlayerPrefs.SetInt(pref,SessionState.GetInt(Key+pref,1));
+            else if(pref=="Campaign.Submission.v1.Editor.UnlockedLevel")PlayerPrefs.SetInt(pref,SessionState.GetInt(Key+pref,1));
             else PlayerPrefs.SetFloat(pref,SessionState.GetFloat(Key+pref,0));
         }
         PlayerPrefs.Save();SessionState.SetBool(Key+"active",false);
         EditorSceneManager.OpenScene("Assets/Scenes/level2.unity");Debug.Log("SECOND_LEVEL_PLAY_VERIFICATION_COMPLETE");
     }
 }
+

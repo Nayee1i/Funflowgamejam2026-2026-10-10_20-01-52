@@ -25,11 +25,11 @@ public static class FirstLevelEffects
     {
         if(!Application.isPlaying)return;
         explosion=explosion ?? Load("Explosion",10);
-        Play(redEffect ? "Figma Red Impact" : "Figma Impact",point,redEffect ? RedFrames : explosion,20,size,level,redEffect ? 31 : 30);
+        Play(redEffect ? "Red Impact" : "Impact",point,redEffect ? RedFrames : explosion,20,size,level,redEffect ? 31 : 30);
     }
     public static bool HasPendingImpacts(FirstLevelRooms owner)
     {
-        foreach(var effect in Object.FindObjectsByType<FirstLevelSpriteAnimation>())
+        foreach(var effect in Object.FindObjectsByType<FirstLevelSpriteAnimation>(FindObjectsSortMode.None))
             if(effect.IsPendingImpact(owner))return true;
         return false;
     }
@@ -42,7 +42,7 @@ public static class FirstLevelEffects
             confetti=new Sprite[64];float tile=atlas.width/8f;
             for(int i=0;i<64;i++)confetti[i]=Sprite.Create(atlas,new Rect(i%8*tile,(7-i/8)*tile,tile,tile),new Vector2(.5f,.5f),100);
         }
-        Play("Figma Victory Confetti",point,confetti,24,7,null);
+        Play("Victory Confetti",point,confetti,24,7,null);
     }
     static void Play(string name,Vector2 point,Sprite[] frames,float fps,float size,FirstLevelRooms owner,int sortingOrder=30)
     {

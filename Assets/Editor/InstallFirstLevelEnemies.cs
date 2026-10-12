@@ -44,8 +44,8 @@ public static class InstallFirstLevelEnemies
             Require(target!=null && target.GetComponent<TutorialRobot>()!=null,"Missing robot in room "+i);
             Require(!FirstLevelEnemies.Cleared(level.rooms[i]),"Room unlocks before target dies.");
             target.Hit(false,false);
-            Require(target.Health==(i==2 ? 5 : 4),"Direct hit/shield rule differs from Vlad mechanics.");
-            if(i==2){target.Hit(true,true);Require(!target.IsShielded && target.Health==5,"Charged hit must remove the shield first.");}
+            Require(target.Health==(i==2 ? 2 : 1),"Direct hit/shield rule differs from Vlad mechanics.");
+            if(i==2){target.Hit(true,true);Require(!target.IsShielded && target.Health==2,"Charged hit must remove the shield first.");}
             target.Hit(true,false);
             Require(target.IsDestroyed && FirstLevelEnemies.Cleared(level.rooms[i]),"Reflected shot must clear the room.");
         }
@@ -58,7 +58,7 @@ public static class InstallFirstLevelEnemies
         var shot=FirstLevelShot.Create(origin,Vector2.right,ball,level);
         shot.Step(1);
         Require(shot==null || shot.Finished,"Projectile must end on enemy.");
-        Require(robot.Health==4,"Player shot passes through robot.");
+        Require(robot.Health==1,"Player shot passes through robot.");
         FirstLevelShot.ClearAll();
         FirstLevelEnemies.Place(level,true);
         foreach(var room in level.rooms)room.SetActive(false);
@@ -89,7 +89,7 @@ public static class InstallFirstLevelEnemies
         level.player.position=launchOrigin;Physics2D.SyncTransforms();
         var charged=FirstLevelShot.Create(launchOrigin,Vector2.down,ball,level);charged.Step(1);
         level.player.position=launchOrigin+Vector2.left;Physics2D.SyncTransforms();charged.Step(19);
-        Require(!boss.IsShielded && boss.Health==5,"Red-blue route misses the shielded robot.");
+        Require(!boss.IsShielded && boss.Health==2,"Red-blue route misses the shielded robot.");
         level.player.position=launchOrigin;Physics2D.SyncTransforms();
         charged=FirstLevelShot.Create(launchOrigin,Vector2.down,ball,level);charged.Step(1);
         level.player.position=launchOrigin+Vector2.left;Physics2D.SyncTransforms();charged.Step(19);

@@ -94,7 +94,7 @@ public class MainMenuWindows : MonoBehaviour
     public void Level1() => OpenLevel(1);
     public void Level2() => OpenLevel(2);
     public void Level3() => OpenLevel(3);
-    public void Arena() => SceneManager.LoadScene("TankArena");
+    public void Arena() => SceneManager.LoadScene("EndlessArena");
     private void OpenLevel(int level)
     {
         if (LevelProgression.IsUnlocked(level)) SceneManager.LoadScene(level == 1 ? "Level1Rooms" : "level" + level);

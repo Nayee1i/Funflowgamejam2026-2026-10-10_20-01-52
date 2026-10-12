@@ -41,7 +41,7 @@ public static class BuildFirstLevelRooms
         {
             var room = new GameObject("Room 1." + (i + 1));
             controller.rooms[i] = room;
-            var floor = new GameObject("Figma — Empty Room Background").AddComponent<SpriteRenderer>();
+            var floor = new GameObject("Empty Room Background").AddComponent<SpriteRenderer>();
             floor.transform.SetParent(room.transform);
             floor.transform.position = new Vector3(0, -.76f, 0);
             floor.sprite = Sprite(backgrounds[i]);
@@ -64,12 +64,12 @@ public static class BuildFirstLevelRooms
         scaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
         scaler.referenceResolution = new Vector2(1920, 1080);
         scaler.screenMatchMode = CanvasScaler.ScreenMatchMode.Expand;
-        var root = new GameObject("Figma 1920 × 1080", typeof(RectTransform), typeof(AspectRatioFitter)).GetComponent<RectTransform>();
+        var root = new GameObject("UI Composition", typeof(RectTransform), typeof(AspectRatioFitter)).GetComponent<RectTransform>();
         root.SetParent(canvas.transform, false);
         root.GetComponent<AspectRatioFitter>().aspectMode = AspectRatioFitter.AspectMode.FitInParent;
         root.GetComponent<AspectRatioFitter>().aspectRatio = 16f / 9f;
         Picture("Health Frame", root, "56_3028", 32, 20, 584, 151);
-        Picture("Timer — Figma Placeholder", root, "56_3029", 823, 43.5f, 274, 104);
+        Picture("Timer Placeholder", root, "56_3029", 823, 43.5f, 274, 104);
         var menu = Picture("Menu", root, "56_3035", 1783, 47.5f, 104, 96);
         var menuButton = menu.gameObject.AddComponent<FigmaMenuButton>();
         menu.raycastTarget = true;

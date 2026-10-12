@@ -3,7 +3,7 @@ using UnityEngine;
 public class TutorialRobot : MonoBehaviour
 {
     // Promoted robots have the red body; ordinary and shielded robots are black.
-    public int DamageHalves => name.StartsWith("Promoted Robot") || GetComponent<TutorialTarget>()?.MaxHealth==2 ? 2 : 1;
+    public int DamageHalves => name.StartsWith("Promoted Robot") || GetComponent<TutorialTarget>()?.IsRedRobot==true ? 2 : 1;
     [SerializeField] private Transform player;
     [SerializeField] private Transform turret;
     [SerializeField] private Transform muzzle;

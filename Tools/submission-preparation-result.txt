@@ -1,0 +1,1 @@
+PASSED: first entry only level 1 in editor menu; old progress ignored; completion unlocks 2 then 3; reset restores first entry; peaceful mode off. Scene/prefab inventory, campaign mirrors and real robot/shield contacts checked.

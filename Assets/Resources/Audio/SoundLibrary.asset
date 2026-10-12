@@ -106,11 +106,6 @@ MonoBehaviour:
     volume: 0.6
     pitchVariation: 0
     cooldown: 0
-  - name: music_level
-    clip: {fileID: 0}
-    volume: 0.45
-    pitchVariation: 0
-    cooldown: 0
   - name: music_boss
     clip: {fileID: 0}
     volume: 0.5

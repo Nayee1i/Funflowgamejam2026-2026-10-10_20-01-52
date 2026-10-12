@@ -6,7 +6,7 @@ public class FirstLevelShot : MonoBehaviour
     public float radius=.035f;
     public float lifetime=8f;
     public bool Charged { get; private set; }
-    public int Damage => Charged ? 2 : 1;
+    public int Damage => Reflections>0 ? 2 : 1;
     public Vector2 Direction { get; private set; }
     public int Reflections { get; private set; }
     public bool Finished { get; private set; }

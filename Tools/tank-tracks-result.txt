@@ -1,0 +1,1 @@
+PASSED: all 12 rooms emit tracks at opacity 0.45; all 19 actual lamps pulse;  original Figma tracks appear on movement only; fade to zero and retire; no collider; floor layering; pause freezes effects; room changes clear trails; 96-object pool cap; all three first-level lamps pulse gently.

@@ -103,6 +103,7 @@ public class GameAudio : MonoBehaviour
         if (sceneName == "level3" && rooms != null && rooms.rooms != null && rooms.rooms.Length > 0 &&
             rooms.CurrentRoom == rooms.rooms.Length - 1) return "music_boss";
         if (sceneName == "level2") return "music_level2";
+        if (sceneName == "EndlessArena") return "music_level2";
         if (sceneName == "level3") return "music_level3";
         return "music_level1";
     }

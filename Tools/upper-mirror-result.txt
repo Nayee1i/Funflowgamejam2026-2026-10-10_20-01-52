@@ -1,0 +1,1 @@
+mirror=Red Mirror — 71:3577 centre=(0.35, 3.19) contact=Red Mirror — 71:3577 distance=5,357694 normal=(0.00, -1.00) reflections=0 finished=False final=(-3.50, -0.60, 0.00) direction=(0.71, 0.70) colliders=Workshop Floor Boundary EdgeCollider2D;Red Mirror — 71:3577 EdgeCollider2D AFTER reflections=1 finished=False direction=(0.71, -0.70)

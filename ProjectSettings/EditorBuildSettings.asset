@@ -9,18 +9,6 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: 81de7e5cf3b7c794d86b1d522c837c2a
   - enabled: 1
-    path: Assets/Scenes/Tutorial.unity
-    guid: 9c6bff0a82cf477f9549a5e342b6ebd2
-  - enabled: 1
-    path: Assets/Scenes/LevelSelection.unity
-    guid: 5b0c4fc1bba648849afce33893b13116
-  - enabled: 1
-    path: Assets/Scenes/TankArena.unity
-    guid: 8d842e8f6a95480b9a4c55c704c1cb17
-  - enabled: 1
-    path: Assets/Scenes/level1.unity
-    guid: e7b7de38460147d5a7ef448b6ca6042c
-  - enabled: 1
     path: Assets/Scenes/level2.unity
     guid: d154e84a5c2542479a370a6aa003ca6d
   - enabled: 1
@@ -29,5 +17,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Level1Rooms.unity
     guid: 04c60364338f9ba4b837bfd986d51be7
+  - enabled: 1
+    path: Assets/Scenes/EndlessArena.unity
+    guid: e7534d8b6bab4994ebfcd7495da0d393
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}

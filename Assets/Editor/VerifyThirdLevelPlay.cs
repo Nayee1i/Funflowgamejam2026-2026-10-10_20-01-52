@@ -23,14 +23,14 @@ public static class VerifyThirdLevelPlay
             if(EditorApplication.isPlayingOrWillChangePlaymode || !File.Exists("Tools/verify-third-level-play.request"))return;
             File.Delete("Tools/verify-third-level-play.request");File.WriteAllText("Tools/third-level-play-result.txt","Starting runtime check...\n");
             // Previous automated runs cannot be legitimate sub-ten-second five-room results.
-            if(File.Exists("Tools/third-level-play-result.txt") && LevelProgression.BestTime(3)>=0 && LevelProgression.BestTime(3)<10)PlayerPrefs.DeleteKey("Progress.Time.3");
-            SessionState.SetFloat(Flag+".Best",LevelProgression.BestTime(3));SessionState.SetInt(Flag+".Unlocked",PlayerPrefs.GetInt("Progress.UnlockedLevel",1));
+            if(File.Exists("Tools/third-level-play-result.txt") && LevelProgression.BestTime(3)>=0 && LevelProgression.BestTime(3)<10)PlayerPrefs.DeleteKey("Campaign.Submission.v1.Editor.Time.3");
+            SessionState.SetFloat(Flag+".Best",LevelProgression.BestTime(3));SessionState.SetInt(Flag+".Unlocked",PlayerPrefs.GetInt("Campaign.Submission.v1.Editor.UnlockedLevel",1));
             EditorSceneManager.OpenScene("Assets/Scenes/level3.unity");SessionState.SetBool(Flag,true);EditorGameLaunch.PlayCurrentScene();return;
         }
         if(!EditorApplication.isPlaying || EditorApplication.isPaused || EditorApplication.timeSinceStartup<next)return;
         try{Advance();}catch(Exception e){File.AppendAllText("Tools/third-level-play-result.txt","FAILED: "+e);Stop();Debug.LogException(e);}
     }
-    static void Stop(){float best=SessionState.GetFloat(Flag+".Best",-1);if(best<0)PlayerPrefs.DeleteKey("Progress.Time.3");else PlayerPrefs.SetFloat("Progress.Time.3",best);PlayerPrefs.SetInt("Progress.UnlockedLevel",SessionState.GetInt(Flag+".Unlocked",1));PlayerPrefs.Save();SessionState.SetBool(Flag,false);phase=0;EditorApplication.isPlaying=false;}
+    static void Stop(){float best=SessionState.GetFloat(Flag+".Best",-1);if(best<0)PlayerPrefs.DeleteKey("Campaign.Submission.v1.Editor.Time.3");else PlayerPrefs.SetFloat("Campaign.Submission.v1.Editor.Time.3",best);PlayerPrefs.SetInt("Campaign.Submission.v1.Editor.UnlockedLevel",SessionState.GetInt(Flag+".Unlocked",1));PlayerPrefs.Save();SessionState.SetBool(Flag,false);phase=0;EditorApplication.isPlaying=false;}
     static void Advance()
     {
         if(phase==0)
@@ -41,7 +41,7 @@ public static class VerifyThirdLevelPlay
         if(phase==1)
         {
             Require(Object.FindAnyObjectByType<ThirdLevelCastle>()!=null,"Third-level runtime wiring");
-            Require(GameObject.Find("Figma DestructibleHint")!=null,"First-room destructible hint");
+            Require(GameObject.Find("DestructibleHint")!=null,"First-room destructible hint");
             BuildFullSecondLevel.Capture("Tools/Level3-hint-runtime.png");ui.CloseModal();
             foreach(var robot in Object.FindObjectsByType<TutorialRobot>(FindObjectsInactive.Include))robot.enabled=false;
             phase=2;next=EditorApplication.timeSinceStartup+.4;return;
@@ -94,12 +94,12 @@ public static class VerifyThirdLevelPlay
         if(phase==8)
         {
             if(FirstLevelEffects.HasPendingImpacts(level))return;
-            level.CompleteLevel();Require(level.Finished && GameObject.Find("Figma Victory")!=null,"Victory after final exit and effects");
+            level.CompleteLevel();Require(level.Finished && GameObject.Find("Victory")!=null,"Victory after final exit and effects");
             phase=9;next=EditorApplication.timeSinceStartup+.6;return;
         }
         if(phase==9)
         {
-            if(GameObject.Find("Figma Victory").GetComponent<CanvasGroup>().alpha<=.95f)return;
+            if(GameObject.Find("Victory").GetComponent<CanvasGroup>().alpha<=.95f)return;
             BuildFullSecondLevel.Capture("Tools/Level3-victory-runtime.png");
             File.AppendAllText("Tools/third-level-play-result.txt","PASSED: native block damage textures and debris from three real shots, startup fade/hint, four shots/reload, four real room transitions, boss 10 HP and three projectiles, finish only at final exit after explosion, victory UI.\n");Stop();
         }

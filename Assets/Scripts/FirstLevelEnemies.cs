@@ -16,7 +16,7 @@ public static class FirstLevelEnemies
         Sprite head=Resources.Load<Sprite>("FirstLevelEnemies/Turret");
         for(int i=0;i<level.rooms.Length;i++)
         {
-            var old=level.rooms[i].transform.Find("Figma Robot");
+            var old=level.rooms[i].transform.Find("Robot");
             if(old!=null && !replace)
             {
                 var rig=old.Find("Turret");
@@ -26,7 +26,7 @@ public static class FirstLevelEnemies
                 continue;
             }
             if(old!=null){old.gameObject.SetActive(false);if(Application.isPlaying)Object.Destroy(old.gameObject);else Object.DestroyImmediate(old.gameObject);}
-            var robot=new GameObject("Figma Robot");
+            var robot=new GameObject("Robot");
             robot.transform.SetParent(level.rooms[i].transform,false);
             robot.transform.localPosition=positions[i];
             var renderer=robot.AddComponent<SpriteRenderer>();renderer.sprite=body;renderer.sortingOrder=10;
@@ -34,7 +34,7 @@ public static class FirstLevelEnemies
             robot.transform.localScale=Vector3.one*(i==0 ? .7f : .76f);
             robot.AddComponent<CircleCollider2D>().radius=.68f;
             var turret=new GameObject("Turret").transform;turret.SetParent(robot.transform,false);
-            var picture=new GameObject("Figma Turret").AddComponent<SpriteRenderer>();
+            var picture=new GameObject("Turret Artwork").AddComponent<SpriteRenderer>();
             picture.transform.SetParent(turret,false);picture.sprite=head;picture.sortingOrder=11;
             picture.transform.localRotation=Quaternion.Euler(0,0,180);
             var muzzle=new GameObject("Muzzle").transform;muzzle.SetParent(turret,false);muzzle.localPosition=new Vector3(0,.76f,0);
@@ -42,7 +42,7 @@ public static class FirstLevelEnemies
             var shield=new GameObject("Shield").AddComponent<SpriteRenderer>();
             shield.transform.SetParent(robot.transform,false);shield.sprite=Resources.Load<Sprite>("FirstLevelEnemies/Shield");shield.sortingOrder=12;
             ConfigureShield(shield);
-            var target=robot.AddComponent<TutorialTarget>();target.Configure(i==2,shield.gameObject);
+            var target=robot.AddComponent<TutorialTarget>();target.Configure(i==2,shield.gameObject,2);
             robot.AddComponent<TutorialRobot>().ConfigureFirstLevel(level,turret,muzzle,aim.projectileSprite,i);
         }
     }

@@ -6,7 +6,7 @@ using UnityEngine;
 
 public static class FinishFirstLevel
 {
-    [MenuItem("Bounce Club/Finish First Level From Figma")]
+    [MenuItem("Bounce Club/Finish First Level From Layout")] 
     public static void Install()
     {
         AssetDatabase.Refresh();

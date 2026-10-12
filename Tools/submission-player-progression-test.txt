@@ -1,0 +1,1 @@
+PASSED: actual standalone C# progression ignores old test and editor saves; starts at 1, unlocks 2 then 3, persists new profile, reset affects campaign only. PlayerPrefs API simulated in memory.

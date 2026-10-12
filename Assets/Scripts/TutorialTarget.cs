@@ -4,9 +4,13 @@ public class TutorialTarget : MonoBehaviour
 {
     [SerializeField] private bool shielded;
     [SerializeField] private GameObject shieldVisual;
-    [SerializeField, Min(1)] private int maxHealth = 5;
+    [SerializeField, Min(1)] private int maxHealth = 2;
+    [SerializeField] private bool isBoss;
+    [SerializeField] private bool redRobot;
+    public bool IsBoss => isBoss;
+    public bool IsRedRobot => redRobot;
     public int MaxHealth => maxHealth;
-    public int Health { get; private set; } = 5;
+    public int Health { get; private set; } = 2;
     public bool IsDestroyed { get; private set; }
     public bool IsShielded => shielded;
     private Transform healthBar;
@@ -14,6 +18,34 @@ public class TutorialTarget : MonoBehaviour
     private Collider2D bodyCollider;
     private Sprite healthSprite;
     public Collider2D ShieldCollider { get; private set; }
+
+    public void AlignBodyHitbox()
+    {
+        var body=transform.Find("Body")?.GetComponent<SpriteRenderer>();
+        var circle=GetComponent<CircleCollider2D>();
+        if(body==null || body.sprite==null || circle==null)return;
+        var bounds=body.sprite.bounds;
+        var points=new System.Collections.Generic.List<Vector2>();bool found=false;
+        for(int i=0;i<body.sprite.GetPhysicsShapeCount();i++)
+        {
+            points.Clear();body.sprite.GetPhysicsShape(i,points);
+            foreach(var p in points){if(!found){bounds=new Bounds(p,Vector3.zero);found=true;}else bounds.Encapsulate(p);}
+        }
+        Vector3 centre=body.transform.TransformPoint(bounds.center);
+        circle.offset=transform.InverseTransformPoint(centre);
+        var turret=transform.Find("Turret");
+        if(turret!=null && Vector2.Distance(turret.position,centre)>.05f)
+        {
+            // Reposition the aiming pivot without moving the authored turret artwork.
+            var head=turret.Find("Turret Artwork");Vector3 headPosition=head!=null ? head.position : Vector3.zero;
+            turret.position=centre;if(head!=null)head.position=headPosition;
+        }
+    }
+
+    public void SetCombatHealth(int health,bool red)
+    {
+        maxHealth=Mathf.Max(1,health);redRobot=red;Health=maxHealth;
+    }
 
     void EnsureShieldHitbox()
     {
@@ -44,11 +76,13 @@ public class TutorialTarget : MonoBehaviour
         hitbox.pathCount=1;hitbox.points=ellipse;ShieldCollider=hitbox;
     }
 
-    public void Configure(bool hasShield, GameObject visual, int health = 5)
+    public void Configure(bool hasShield, GameObject visual, int health = 2, bool boss = false, bool red = false)
     {
         shielded = hasShield;
         shieldVisual = visual;
         maxHealth = Mathf.Max(1, health);
+        isBoss = boss;
+        redRobot = red;
         Health = maxHealth;
         IsDestroyed = false;
         EnsureShieldHitbox();
@@ -80,16 +114,24 @@ public class TutorialTarget : MonoBehaviour
             {
                 shielded = false;
                 if (shieldVisual != null) shieldVisual.SetActive(false);
+                GetComponent<CastleBoss>()?.OnShieldBroken();
             }
             return;
         }
-        Health = Mathf.Max(0, Health - (reflected ? 5 : 1));
+        Health = Mathf.Max(0, Health - (reflected ? 2 : 1));
         if (Health == 0)
         {
             Complete();
             return;
         }
         UpdateHealthBar();
+    }
+
+    public void RestoreShield()
+    {
+        if (IsDestroyed || shieldVisual == null) return;
+        shielded = true;
+        shieldVisual.SetActive(true);
     }
 
     private void UpdateHealthBar()

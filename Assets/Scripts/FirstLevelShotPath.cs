@@ -1,10 +1,12 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 // Both the projectile and the aiming preview use this exact collision query.
 public static class FirstLevelShotPath
 {
     public const int MaxReflections=5;
     public const float Separation=.002f;
+    static readonly List<RaycastHit2D> hits=new List<RaycastHit2D>(32);
     public struct Contact
     {
         public float distance;
@@ -20,7 +22,9 @@ public static class FirstLevelShotPath
         Collider2D solid=null,mirrorCollider=null;
         MirrorRicochetSurface mirror=null;
         Vector2 contactNormal=Vector2.zero;
-        foreach(var hit in Physics2D.CircleCastAll(origin,radius,direction,distance))
+        var filter=new ContactFilter2D();filter.SetLayerMask(Physics2D.DefaultRaycastLayers);filter.useTriggers=Physics2D.queriesHitTriggers;
+        Physics2D.CircleCast(origin,radius,direction,filter,hits,distance);
+        foreach(var hit in hits)
         {
             if(hit.collider==null)continue;
             // Only ignore immediate re-contact, not this mirror for the rest of the flight.

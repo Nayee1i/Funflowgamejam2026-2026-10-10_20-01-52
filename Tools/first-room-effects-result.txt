@@ -1,0 +1,1 @@
+PASSED: room 1.1 ambient dust visible while tank is idle; dust independent of tank movement; particles drift and fade; pause freezes particles; shadow follows tank with visible opacity and native silhouette; exactly 40 dust sprites; other rooms and levels excluded.

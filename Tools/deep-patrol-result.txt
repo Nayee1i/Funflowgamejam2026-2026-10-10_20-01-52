@@ -1,0 +1,3 @@
+Checking runtime patrol integration...
+level2 PASSED: 9 runtime patrols, 7 actual peek volleys; pause and no firing during retreat.
+level3 PASSED: 16 runtime patrols, 10 actual peek volleys; pause and no firing during retreat.

@@ -1,0 +1,27 @@
+using System;
+using System.IO;
+using System.Reflection;
+using System.Text;
+using UnityEditor;
+using UnityEditor.SceneManagement;
+using UnityEngine;
+public static class VerifyAuthoredRobotHits {
+ public static void Run(){int bodies=0,shields=0;var report=new StringBuilder();foreach(string name in new[]{"Level1Rooms","level2","level3"}){
+  EditorSceneManager.OpenScene("Assets/Scenes/"+name+".unity");var level=UnityEngine.Object.FindAnyObjectByType<FirstLevelRooms>();level.player.position=new Vector3(1000,1000,0);var workshop=level.GetComponent<SecondLevelWorkshop>();if(workshop!=null)workshop.ConfigureCombat(level);else FirstLevelEnemies.Place(level);
+  foreach(var room in level.rooms){foreach(var other in level.rooms)other.SetActive(other==room);
+   foreach(var target in room.GetComponentsInChildren<TutorialTarget>()){
+    var visual=(GameObject)typeof(TutorialTarget).GetField("shieldVisual",BindingFlags.NonPublic|BindingFlags.Instance).GetValue(target);bool shield=target.IsShielded;int hp=target.MaxHealth;bool boss=target.IsBoss,red=target.IsRedRobot;
+    target.Configure(shield,visual,hp,boss,red);if(shield){Shoot(target,level,true);Require(!target.IsShielded&&target.Health==hp,"Shield did not break without body damage: "+target.name);shields++;}
+    Shoot(target,level,false);Require(target.Health==hp-1,"Body did not receive direct bullet: "+target.name);bodies++;
+    target.Configure(shield,visual,hp,boss,red);report.AppendLine(name+" "+room.name+" "+target.name+" physical body/"+(shield?"shield":"unshielded")+" PASS");
+   }
+  }
+ }report.AppendLine("PASSED: "+bodies+" authored robots and "+shields+" shields receive actual projectile contacts.");File.WriteAllText("Tools/authored-robot-hits.txt",report.ToString());}
+ static void Shoot(TutorialTarget target,FirstLevelRooms level,bool charged){Physics2D.SyncTransforms();var col=charged?target.ShieldCollider:target.GetComponent<Collider2D>();Vector2 centre=col.bounds.center;bool hit=false;
+  for(int i=0;i<16&&!hit;i++){Vector2 outward=new Vector2(Mathf.Cos(i*Mathf.PI/8),Mathf.Sin(i*Mathf.PI/8));Vector2 start=centre+outward*(Mathf.Max(col.bounds.extents.x,col.bounds.extents.y)+.3f);var contact=FirstLevelShotPath.Cast(start,-outward,.035f,3);if(contact.solid==null||contact.solid.GetComponentInParent<TutorialTarget>()!=target)continue;
+   var shot=FirstLevelShot.Create(start,-outward,null,null);if(charged){typeof(FirstLevelShot).GetField("<Charged>k__BackingField",BindingFlags.NonPublic|BindingFlags.Instance).SetValue(shot,true);typeof(FirstLevelShot).GetField("<Reflections>k__BackingField",BindingFlags.NonPublic|BindingFlags.Instance).SetValue(shot,1);}shot.Step(contact.distance+.03f);if(shot!=null)UnityEngine.Object.DestroyImmediate(shot.gameObject);hit=true;
+  }Require(hit,"No accessible projectile contact: "+target.name);
+ }
+ static void Require(bool value,string message){if(!value)throw new Exception(message);}
+}
+

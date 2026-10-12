@@ -1,0 +1,33 @@
+{
+  "panels": [
+    {
+      "name": "ArenaResult",
+      "parts": [
+        {
+          "asset": "Endless/Art_164_176",
+          "x": 530.0,
+          "y": 280.0,
+          "w": 848.0,
+          "h": 508.0,
+          "action": null
+        },
+        {
+          "asset": "Endless/Art_164_178",
+          "x": 758.0,
+          "y": 514.0,
+          "w": 138.0,
+          "h": 138.0,
+          "action": "restart"
+        },
+        {
+          "asset": "Endless/Art_164_179",
+          "x": 1020.0,
+          "y": 508.0,
+          "w": 131.0,
+          "h": 150.0,
+          "action": "menu"
+        }
+      ]
+    }
+  ]
+}

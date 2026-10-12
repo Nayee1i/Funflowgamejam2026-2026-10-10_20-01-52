@@ -1,0 +1,13 @@
+Real movement through authored rooms, not visual-only checks.
+Level1Rooms room 1: 2110 reachable cells; actual routes and retreat passed.
+Level1Rooms room 2: 2398 reachable cells; actual routes and retreat passed.
+Level1Rooms room 3: 2041 reachable cells; actual routes and retreat passed.
+level2 room 1: 20643 reachable cells; actual routes and retreat passed.
+level2 room 2: 17643 reachable cells; actual routes and retreat passed.
+level2 room 3: 21235 reachable cells; actual routes and retreat passed.
+level2 room 4: 17749 reachable cells; actual routes and retreat passed.
+level3 room 1: 2652 reachable cells; actual routes and retreat passed.
+level3 room 2: 2891 reachable cells; actual routes and retreat passed.
+level3 room 3: 3530 reachable cells; actual routes and retreat passed.
+level3 room 4: 3616 reachable cells; actual routes and retreat passed.
+level3 room 5: 3948 reachable cells; actual routes and retreat passed.

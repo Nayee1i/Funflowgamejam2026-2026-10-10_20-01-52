@@ -16,7 +16,7 @@ public static class InstallFigmaFrontend
         if(EditorApplication.timeSinceStartup<readyAfter || !File.Exists(request))return;
         File.Delete(request);Run();
     }
-    [MenuItem("Bounce Club/Install Updated Figma Frontend")]
+    [MenuItem("Bounce Club/Install Updated Layout Frontend")] 
     public static void Run()
     {
         AssetDatabase.Refresh();
@@ -33,8 +33,7 @@ public static class InstallFigmaFrontend
         var scene=EditorSceneManager.OpenScene("Assets/Scenes/MainMenu.unity");
         var windows=UnityEngine.Object.FindAnyObjectByType<MainMenuWindows>();
         if(!FigmaFrontendUI.Configure(windows))throw new Exception("Missing Figma menu data");
-        if(windows.sensitivityBars.Length!=3 || windows.levelButtons[2]==null)throw new Exception("Missing menu controls");
-        windows.RefreshSensitivity();
+        if(windows.sensitivityBars.Length!=0 || windows.soundBars.Length!=3 || windows.musicBars.Length!=3 || windows.levelButtons[2]==null)throw new Exception("Missing menu controls");
         for(int i=0;i<3;i++)
         {
             windows.soundBars[i].sprite=i<PlayerPrefs.GetInt("Menu.SoundLevel",1) ? windows.filledBar : windows.emptyBar;
@@ -66,7 +65,7 @@ public static class InstallFigmaFrontend
     }
     static void VerifyResults()
     {
-        string[] keys={"Progress.Time.1","Progress.UnlockedLevel","Progress.ThreeStars.1","Progress.TwoStars.1","Controls.MouseSensitivity"};
+        string[] keys={"Campaign.Submission.v1.Editor.Time.1","Campaign.Submission.v1.Editor.UnlockedLevel","Progress.ThreeStars.1","Progress.TwoStars.1","Controls.MouseSensitivity"};
         bool[] exists=new bool[keys.Length];float[] floats=new float[keys.Length];int unlocked=PlayerPrefs.GetInt(keys[1]);
         for(int i=0;i<keys.Length;i++){exists[i]=PlayerPrefs.HasKey(keys[i]);floats[i]=PlayerPrefs.GetFloat(keys[i]);}
         try
@@ -78,8 +77,6 @@ public static class InstallFigmaFrontend
             LevelProgression.RecordResult("Level1Rooms",55);Require(LevelProgression.Stars(1)==3,"Three stars");
             var windows=UnityEngine.Object.FindAnyObjectByType<MainMenuWindows>();
             windows.Play();Capture("Tools/Figma-levels-completed.png");windows.Close();
-            MouseSensitivitySettings.SetNormalized(0);windows.SensitivityUp();Require(MouseSensitivitySettings.NormalizedValue>.3f,"Sensitivity plus");
-            windows.SensitivityDown();Require(MouseSensitivitySettings.Value==MouseSensitivitySettings.Minimum,"Sensitivity minus");
         }
         finally
         {

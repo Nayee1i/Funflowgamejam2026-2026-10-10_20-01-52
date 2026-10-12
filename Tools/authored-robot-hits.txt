@@ -1,0 +1,31 @@
+Level1Rooms Room 1.1 Figma Robot physical body/unshielded PASS
+Level1Rooms Room 1.2 Figma Robot physical body/unshielded PASS
+Level1Rooms Room 1.3 Figma Robot physical body/shield PASS
+level2 Room 2.1 — Figma 57:3427 Shielded Robot — 61:3463 physical body/shield PASS
+level2 Room 2.2 — Figma 65:3495 Promoted Robot — 71:3546 physical body/unshielded PASS
+level2 Room 2.2 — Figma 65:3495 Robot — 71:3555 physical body/unshielded PASS
+level2 Room 2.2 — Figma 65:3495 Robot — 71:3604 physical body/unshielded PASS
+level2 Room 2.3 — Figma 71:3558 Promoted Robot — 71:3580 physical body/unshielded PASS
+level2 Room 2.3 — Figma 71:3558 Shielded Robot — 71:3584 physical body/shield PASS
+level2 Room 2.3 — Figma 71:3558 Shielded Robot — 71:3589 physical body/shield PASS
+level2 Room 2.4 — Figma 71:3608 Robot — 71:3648 physical body/unshielded PASS
+level2 Room 2.4 — Figma 71:3608 Promoted Robot — 71:3659 physical body/unshielded PASS
+level2 Room 2.4 — Figma 71:3608 Shielded Robot — 71:3655 physical body/shield PASS
+level3 Room 3.1 РІР‚вЂќ Figma 73:3784 Shielded Robot — 79:3837 physical body/shield PASS
+level3 Room 3.1 РІР‚вЂќ Figma 73:3784 Promoted Robot — 79:3848 physical body/unshielded PASS
+level3 Room 3.2 РІР‚вЂќ Figma 83:3876 Shielded Robot — 83:3930 physical body/shield PASS
+level3 Room 3.2 РІР‚вЂќ Figma 83:3876 Robot — 83:3944 physical body/unshielded PASS
+level3 Room 3.2 РІР‚вЂќ Figma 83:3876 Promoted Robot — 83:3939 physical body/unshielded PASS
+level3 Room 3.3 РІР‚вЂќ Figma 83:4016 Shielded Robot — 102:4191 physical body/shield PASS
+level3 Room 3.3 РІР‚вЂќ Figma 83:4016 Robot — 102:4196 physical body/unshielded PASS
+level3 Room 3.3 РІР‚вЂќ Figma 83:4016 Robot — 102:4203 physical body/unshielded PASS
+level3 Room 3.3 РІР‚вЂќ Figma 83:4016 Promoted Robot — 102:4199 physical body/unshielded PASS
+level3 Room 3.4 РІР‚вЂќ Figma 98:4105 Robot — 103:4215 physical body/unshielded PASS
+level3 Room 3.4 РІР‚вЂќ Figma 98:4105 Shielded Robot — 103:4230 physical body/shield PASS
+level3 Room 3.4 РІР‚вЂќ Figma 98:4105 Shielded Robot — 103:4235 physical body/shield PASS
+level3 Room 3.4 РІР‚вЂќ Figma 98:4105 Promoted Robot — 103:4241 physical body/unshielded PASS
+level3 Room 3.4 РІР‚вЂќ Figma 98:4105 Promoted Robot — 103:4246 physical body/unshielded PASS
+level3 Room 3.5 РІР‚вЂќ Figma 98:4117 Castle Boss РІР‚вЂќ Three Cannons physical body/shield PASS
+level3 Room 3.5 РІР‚вЂќ Figma 98:4117 Robot — 105:4279 physical body/unshielded PASS
+level3 Room 3.5 РІР‚вЂќ Figma 98:4117 Robot — 105:4283 physical body/unshielded PASS
+PASSED: 30 authored robots and 11 shields receive actual projectile contacts.

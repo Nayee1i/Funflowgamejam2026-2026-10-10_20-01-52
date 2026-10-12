@@ -81,9 +81,9 @@ public class FirstLevelTankAim : MonoBehaviour
     {
         if(level==null || !level.CanPlay || IsReloading || BulletsRemaining<=0 || shotCooldown>0)return null;
         BulletsRemaining--;shotCooldown=shotInterval;
-        if(BulletsRemaining==0)reloadRemaining=Mathf.Max(.01f,reloadDuration);
         GameAudio.Play("shot");
         if(BulletsRemaining==0)GameAudio.Play("reload");
+        if(BulletsRemaining==0)reloadRemaining=Mathf.Max(.01f,reloadDuration);
         Vector2 origin=turret.position;
         // Sweep from the turret to the muzzle too, so firing beside a wall cannot skip it.
         var shot=FirstLevelShot.Create(origin,AimDirection,projectileSprite,level,projectileSpeed,projectileRadius);

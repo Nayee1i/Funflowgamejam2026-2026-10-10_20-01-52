@@ -1,0 +1,938 @@
+fileFormatVersion: 2
+guid: 97cbe98e4b14d8645b89dd08c379a46e
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -1783528157099732966
+    second: PeacefulInfoText_0
+  - first:
+      213: -2598743774448356062
+    second: PeacefulInfoText_1
+  - first:
+      213: 7316567138699035901
+    second: PeacefulInfoText_2
+  - first:
+      213: 2100399579988639659
+    second: PeacefulInfoText_3
+  - first:
+      213: -4017082448278503112
+    second: PeacefulInfoText_4
+  - first:
+      213: -3149071682458831731
+    second: PeacefulInfoText_5
+  - first:
+      213: -784069713803102750
+    second: PeacefulInfoText_6
+  - first:
+      213: 7193544868870694521
+    second: PeacefulInfoText_7
+  - first:
+      213: -7834818085705456334
+    second: PeacefulInfoText_8
+  - first:
+      213: 3719859655241526106
+    second: PeacefulInfoText_9
+  - first:
+      213: -9129608590893875081
+    second: PeacefulInfoText_10
+  - first:
+      213: -405814925214352392
+    second: PeacefulInfoText_11
+  - first:
+      213: 4744197298125475286
+    second: PeacefulInfoText_12
+  - first:
+      213: -2230575166398209749
+    second: PeacefulInfoText_13
+  - first:
+      213: -426813535541945143
+    second: PeacefulInfoText_14
+  - first:
+      213: -69231796716985311
+    second: PeacefulInfoText_15
+  - first:
+      213: -6599744619802833833
+    second: PeacefulInfoText_16
+  - first:
+      213: -6703763884637266170
+    second: PeacefulInfoText_17
+  - first:
+      213: 1328956790478439286
+    second: PeacefulInfoText_18
+  - first:
+      213: -6406463884535717773
+    second: PeacefulInfoText_19
+  - first:
+      213: -3717607025124515598
+    second: PeacefulInfoText_20
+  - first:
+      213: 6027599870866533943
+    second: PeacefulInfoText_21
+  - first:
+      213: -7872563442385166211
+    second: PeacefulInfoText_22
+  - first:
+      213: -7609719146246682831
+    second: PeacefulInfoText_23
+  - first:
+      213: -1500309017557610575
+    second: PeacefulInfoText_24
+  - first:
+      213: 1906152319640466377
+    second: PeacefulInfoText_25
+  - first:
+      213: -6443448795990145116
+    second: PeacefulInfoText_26
+  - first:
+      213: -2379985842485663813
+    second: PeacefulInfoText_27
+  - first:
+      213: -6168033730131248778
+    second: PeacefulInfoText_28
+  - first:
+      213: 9126950270725747417
+    second: PeacefulInfoText_29
+  - first:
+      213: -7367282590149655717
+    second: PeacefulInfoText_30
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationMethod: 0
+  spriteTessellationDetail: -1
+  spriteGeometrySubdivision: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: PeacefulInfoText_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 83
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a10d9253792af37e0800000000000000
+      internalID: -1783528157099732966
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PeacefulInfoText_1
+      rect:
+        serializedVersion: 2
+        x: 35
+        y: 84
+        width: 21
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2257fbd4e486febd0800000000000000
+      internalID: -2598743774448356062
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PeacefulInfoText_2
+      rect:
+        serializedVersion: 2
+        x: 55
+        y: 84
+        width: 19
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: df4c37d3c0ba98560800000000000000
+      internalID: 7316567138699035901
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PeacefulInfoText_3
+      rect:
+        serializedVersion: 2
+        x: 74
+        y: 84
+        width: 18
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: baf3a932a4e162d10800000000000000
+      internalID: 2100399579988639659
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PeacefulInfoText_4
+      rect:
+        serializedVersion: 2
+        x: 92
+        y: 84
+        width: 23
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 83147e4fbc47048c0800000000000000
+      internalID: -4017082448278503112
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PeacefulInfoText_5
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 83
+        width: 18
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d84bcc24dff3c44d0800000000000000
+      internalID: -3149071682458831731
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PeacefulInfoText_6
+      rect:
+        serializedVersion: 2
+        x: 130
+        y: 84
+        width: 21
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2e5bf9ddfbc6e15f0800000000000000
+      internalID: -784069713803102750
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PeacefulInfoText_7
+      rect:
+        serializedVersion: 2
+        x: 167
+        y: 84
+        width: 18
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9762fd8f1fa94d360800000000000000
+      internalID: 7193544868870694521
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PeacefulInfoText_8
+      rect:
+        serializedVersion: 2
+        x: 185
+        y: 83
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 23568b13672254390800000000000000
+      internalID: -7834818085705456334
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PeacefulInfoText_9
+      rect:
+        serializedVersion: 2
+        x: 203
+        y: 83
+        width: 22
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a5b6af4d5a89f9330800000000000000
+      internalID: 3719859655241526106
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PeacefulInfoText_10
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 83
+        width: 55
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7708a697b5d1d4180800000000000000
+      internalID: -9129608590893875081
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PeacefulInfoText_11
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 49
+        width: 18
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8fbfb02c9714e5af0800000000000000
+      internalID: -405814925214352392
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PeacefulInfoText_12
+      rect:
+        serializedVersion: 2
+        x: 19
+        y: 48
+        width: 18
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6dd032b8e46c6d140800000000000000
+      internalID: 4744197298125475286
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PeacefulInfoText_13
+      rect:
+        serializedVersion: 2
+        x: 38
+        y: 49
+        width: 18
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b21e60a44b76b01e0800000000000000
+      internalID: -2230575166398209749
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PeacefulInfoText_14
+      rect:
+        serializedVersion: 2
+        x: 57
+        y: 48
+        width: 18
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9cc91bcc957a31af0800000000000000
+      internalID: -426813535541945143
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PeacefulInfoText_15
+      rect:
+        serializedVersion: 2
+        x: 76
+        y: 48
+        width: 17
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 124a5853c0a0a0ff0800000000000000
+      internalID: -69231796716985311
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PeacefulInfoText_16
+      rect:
+        serializedVersion: 2
+        x: 94
+        y: 49
+        width: 22
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 75c4b583c3ff864a0800000000000000
+      internalID: -6599744619802833833
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PeacefulInfoText_17
+      rect:
+        serializedVersion: 2
+        x: 130
+        y: 48
+        width: 38
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 60f5a16d34277f2a0800000000000000
+      internalID: -6703763884637266170
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PeacefulInfoText_18
+      rect:
+        serializedVersion: 2
+        x: 186
+        y: 49
+        width: 18
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6738f4ae827617210800000000000000
+      internalID: 1328956790478439286
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PeacefulInfoText_19
+      rect:
+        serializedVersion: 2
+        x: 205
+        y: 48
+        width: 17
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 37021e73a0ba717a0800000000000000
+      internalID: -6406463884535717773
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PeacefulInfoText_20
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 49
+        width: 18
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2f0e4fc7b18686cc0800000000000000
+      internalID: -3717607025124515598
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PeacefulInfoText_21
+      rect:
+        serializedVersion: 2
+        x: 241
+        y: 48
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 73ea03f952656a350800000000000000
+      internalID: 6027599870866533943
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PeacefulInfoText_22
+      rect:
+        serializedVersion: 2
+        x: 261
+        y: 48
+        width: 18
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d70e7e082490fb290800000000000000
+      internalID: -7872563442385166211
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PeacefulInfoText_23
+      rect:
+        serializedVersion: 2
+        x: 279
+        y: 48
+        width: 39
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1374a7721c8d46690800000000000000
+      internalID: -7609719146246682831
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PeacefulInfoText_24
+      rect:
+        serializedVersion: 2
+        x: 318
+        y: 48
+        width: 8
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1bfc923c5e4dd2be0800000000000000
+      internalID: -1500309017557610575
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PeacefulInfoText_25
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 13
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9c3f4fb7f63047a10800000000000000
+      internalID: 1906152319640466377
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PeacefulInfoText_26
+      rect:
+        serializedVersion: 2
+        x: 36
+        y: 13
+        width: 17
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4a7c69a75754496a0800000000000000
+      internalID: -6443448795990145116
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PeacefulInfoText_27
+      rect:
+        serializedVersion: 2
+        x: 54
+        y: 13
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bb7ee286c7798fed0800000000000000
+      internalID: -2379985842485663813
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PeacefulInfoText_28
+      rect:
+        serializedVersion: 2
+        x: 74
+        y: 14
+        width: 18
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 67936e8800eb66aa0800000000000000
+      internalID: -6168033730131248778
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PeacefulInfoText_29
+      rect:
+        serializedVersion: 2
+        x: 92
+        y: 14
+        width: 21
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9d273412ae079ae70800000000000000
+      internalID: 9126950270725747417
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PeacefulInfoText_30
+      rect:
+        serializedVersion: 2
+        x: 115
+        y: 25
+        width: 11
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b53c53e848722c990800000000000000
+      internalID: -7367282590149655717
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      PeacefulInfoText_0: -1783528157099732966
+      PeacefulInfoText_1: -2598743774448356062
+      PeacefulInfoText_10: -9129608590893875081
+      PeacefulInfoText_11: -405814925214352392
+      PeacefulInfoText_12: 4744197298125475286
+      PeacefulInfoText_13: -2230575166398209749
+      PeacefulInfoText_14: -426813535541945143
+      PeacefulInfoText_15: -69231796716985311
+      PeacefulInfoText_16: -6599744619802833833
+      PeacefulInfoText_17: -6703763884637266170
+      PeacefulInfoText_18: 1328956790478439286
+      PeacefulInfoText_19: -6406463884535717773
+      PeacefulInfoText_2: 7316567138699035901
+      PeacefulInfoText_20: -3717607025124515598
+      PeacefulInfoText_21: 6027599870866533943
+      PeacefulInfoText_22: -7872563442385166211
+      PeacefulInfoText_23: -7609719146246682831
+      PeacefulInfoText_24: -1500309017557610575
+      PeacefulInfoText_25: 1906152319640466377
+      PeacefulInfoText_26: -6443448795990145116
+      PeacefulInfoText_27: -2379985842485663813
+      PeacefulInfoText_28: -6168033730131248778
+      PeacefulInfoText_29: 9126950270725747417
+      PeacefulInfoText_3: 2100399579988639659
+      PeacefulInfoText_30: -7367282590149655717
+      PeacefulInfoText_4: -4017082448278503112
+      PeacefulInfoText_5: -3149071682458831731
+      PeacefulInfoText_6: -784069713803102750
+      PeacefulInfoText_7: 7193544868870694521
+      PeacefulInfoText_8: -7834818085705456334
+      PeacefulInfoText_9: 3719859655241526106
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

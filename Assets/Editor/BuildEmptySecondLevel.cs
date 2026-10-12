@@ -58,7 +58,7 @@ public static class BuildEmptySecondLevel
         foreach(var room in level.rooms)UnityEngine.Object.DestroyImmediate(room);
         var workshop=new GameObject("Room 2.1 — Empty Workshop");
         level.rooms=new[]{workshop};
-        var floor=new GameObject("Figma Second Level Background").AddComponent<SpriteRenderer>();
+        var floor=new GameObject("Second Level Background").AddComponent<SpriteRenderer>();
         floor.transform.SetParent(workshop.transform,false);
         floor.sprite=AssetDatabase.LoadAssetAtPath<Sprite>(BackgroundPath);
         floor.sortingOrder=0;

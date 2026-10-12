@@ -1,0 +1,1 @@
+PASSED: collider contact, angled reflection, no phantom face, repeated mirror hit, projectile/preview agreement and red charge.

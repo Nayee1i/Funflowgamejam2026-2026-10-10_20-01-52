@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1003}
   - component: {fileID: 1005}
   m_Layer: 0
-  m_Name: BlueMirror
+  m_Name: "BlueMirror"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -166,7 +166,7 @@ GameObject:
   - component: {fileID: 1009}
   - component: {fileID: 1008}
   m_Layer: 0
-  m_Name: Native Mirror Glow 0
+  m_Name: "Native Mirror Glow 0"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

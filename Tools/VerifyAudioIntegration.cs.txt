@@ -1,0 +1,37 @@
+#if UNITY_EDITOR
+using System;using System.Collections;using System.IO;using System.Linq;using System.Reflection;using UnityEngine;using UnityEditor;using UnityEditor.SceneManagement;
+public static class VerifyCastleBoss
+{
+ const string K="BossCheck.Active";
+ [InitializeOnLoadMethod]static void Init(){EditorApplication.update+=Tick;}
+ public static void Run(){File.WriteAllText("Tools/boss-check.txt","Castle boss Play Mode\n");SessionState.SetBool(K,true);SessionState.SetFloat(K+"Start",(float)EditorApplication.timeSinceStartup+8);SessionState.SetFloat(K+"Timeout",(float)EditorApplication.timeSinceStartup+120);PlayerSettings.runInBackground=true;EditorApplication.isPaused=false;}
+ static void Tick(){if(!SessionState.GetBool(K,false))return;if(EditorApplication.timeSinceStartup>SessionState.GetFloat(K+"Timeout",0)){Finish("FAILED timeout",1);return;}if(EditorApplication.isCompiling||EditorApplication.isUpdating){SessionState.SetFloat(K+"Start",(float)EditorApplication.timeSinceStartup+3);return;}if(!EditorApplication.isPlaying){if(EditorApplication.timeSinceStartup>=SessionState.GetFloat(K+"Start",0)){EditorSceneManager.OpenScene("Assets/Scenes/level3.unity");EditorSceneManager.playModeStartScene=null;EditorApplication.isPlaying=true;}return;}EditorApplication.QueuePlayerLoopUpdate();if(UnityEngine.Object.FindAnyObjectByType<BossCheckCase>()==null)new GameObject("Boss Check").AddComponent<BossCheckCase>();}
+ public static void Finish(string message,int code){File.AppendAllText("Tools/boss-check.txt",message+"\n");SessionState.SetBool(K,false);EditorApplication.Exit(code);}
+}
+public class BossCheckCase:MonoBehaviour
+{
+ IEnumerator test;const BindingFlags F=BindingFlags.Instance|BindingFlags.NonPublic;
+ void Awake(){DontDestroyOnLoad(gameObject);test=Test();}void Update(){try{test?.MoveNext();}catch(Exception e){test=null;VerifyCastleBoss.Finish("FAILED "+e,1);}}
+ void Check(bool ok,string reason){if(!ok)throw new Exception(reason);}void Log(string m){File.AppendAllText("Tools/boss-check.txt",m+"\n");}
+ IEnumerator Test()
+ {
+  var level=UnityEngine.Object.FindAnyObjectByType<FirstLevelRooms>();while(level==null||!level.CanPlay){yield return null;level=UnityEngine.Object.FindAnyObjectByType<FirstLevelRooms>();if(level!=null&&level.ModalOpen)level.GetComponent<FirstLevelPresentation>().CloseModal();}
+  typeof(FirstLevelRooms).GetMethod("ShowRoom",F).Invoke(level,new object[]{4});yield return null;
+  var target=level.rooms[4].GetComponentsInChildren<TutorialTarget>().Single(t=>t.IsBoss);var boss=target.GetComponent<CastleBoss>();
+  Check(boss!=null&&target.Health==8&&target.IsShielded,"Boss starts with 8 HP and shield"); var audio=UnityEngine.Object.FindAnyObjectByType<GameAudio>();Check(audio!=null,"Audio manager missing");var library=Resources.Load<SoundLibrary>("Audio/SoundLibrary");Check(library!=null,"Sound library missing");foreach(var sound in library.sounds){var clip=Resources.Load<AudioClip>("Audio/"+sound.name);Check(clip!=null&&clip.length>0,"Missing audio: "+sound.name);GameAudio.Play(sound.name);}Check(UnityEngine.Object.FindObjectsByType<GameAudio>().Length==1,"Duplicate audio manager");yield return null;var music=(AudioSource)typeof(GameAudio).GetField("music",F).GetValue(audio);Check(music.clip!=null&&music.clip.name=="music_boss","Boss music did not switch");Log("All library clips import; single audio manager; boss music selected");
+  Check(level.rooms[4].GetComponentsInChildren<TutorialTarget>().Count(t=>!t.IsBoss)>0,"Black supporting robots retained");
+  foreach(var r in UnityEngine.Object.FindObjectsByType<TutorialRobot>(FindObjectsInactive.Include))r.enabled=false;foreach(var p in UnityEngine.Object.FindObjectsByType<RobotCoverPatrol>(FindObjectsInactive.Include))p.enabled=false;
+  var initial=target.transform.position;float min=initial.y,max=initial.y;float end=Time.time+7;
+  while(Time.time<end){Check(Mathf.Abs(target.transform.position.x-initial.x)<.0001f,"Boss moved horizontally");min=Mathf.Min(min,target.transform.position.y);max=Mathf.Max(max,target.transform.position.y);yield return null;}
+  Check(max-min>.5f,"Vertical route did not move");Log("Vertical movement only; span="+(max-min));
+  target.Hit(false,false);Check(target.Health==8&&target.IsShielded,"Ordinary bullet penetrated shield");target.Hit(true,true);Check(!target.IsShielded&&target.Health==8,"Shield-break shot damaged body");
+  target.Hit(false,false);target.Hit(true,false);Check(target.Health==5,"Boss damage must be 1/2");
+  Time.timeScale=0;float before=boss.ShieldRecoveryRemaining;var pos=target.transform.position;float pauseEnd=Time.realtimeSinceStartup+.4f;while(Time.realtimeSinceStartup<pauseEnd)yield return null;Check(Mathf.Abs(before-boss.ShieldRecoveryRemaining)<.001f&&Vector3.Distance(pos,target.transform.position)<.001f,"Pause did not freeze boss");Time.timeScale=1;
+  float broken=Time.time;while(!target.IsShielded){Check(Time.time-broken<4,"Shield never recovered");yield return null;}Check(Time.time-broken>3.3f,"Shield returned too early");Check(target.Health==5,"Recovery reset health");Log("3.5 second vulnerability, paused timer, health retained; ordinary/reflected damage 1/2");
+  target.Hit(true,true);Check(!target.IsShielded,"Second shield break failed");
+  target.transform.position=initial;Physics2D.SyncTransforms();var brain=target.GetComponent<TutorialRobot>();var primary=(Transform)typeof(TutorialRobot).GetField("muzzle",F).GetValue(brain);var extra=(Transform[])typeof(TutorialRobot).GetField("additionalMuzzles",F).GetValue(brain);Check(extra.Length==2,"Expected three barrels");level.player.position=new Vector3(-6,0,0);FirstLevelShot.ClearAll();foreach(var muzzle in new[]{primary,extra[0],extra[1]})typeof(TutorialRobot).GetMethod("Fire",F).Invoke(brain,new object[]{muzzle});Check(UnityEngine.Object.FindObjectsByType<FirstLevelShot>().Count(s=>s.name=="Enemy Ball")==3,"Triple volley did not produce three shots");FirstLevelShot.ClearAll();Log("Three authored barrels produce three actual projectiles");
+  target.Hit(true,false);target.Hit(true,false);Check(target.Health==1&&!target.IsDestroyed,"Wrong reflected damage");target.Hit(false,false);Check(target.IsDestroyed,"Boss did not die at 8 damage");
+  Log("Second shield cycle and lethal damage passed");UnityEngine.SceneManagement.SceneManager.LoadScene("MainMenu");yield return null;yield return null;Check(music.clip.name=="music_menu","Menu music missing");UnityEngine.SceneManagement.SceneManager.LoadScene("EndlessArena");yield return null;yield return null;Check(music.clip.name=="music_level2","Endless music missing");Check(UnityEngine.Object.FindObjectsByType<GameAudio>().Length==1,"Audio duplicated after scene changes");Log("Menu and endless music switch; audio persists once across scenes");VerifyCastleBoss.Finish("PASSED",0);yield break;
+ }
+}
+#endif

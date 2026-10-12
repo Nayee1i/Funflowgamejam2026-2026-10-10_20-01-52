@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -22,11 +23,31 @@ public class FirstLevelRooms : MonoBehaviour
     public int CurrentRoom { get; private set; }
     private bool transitioning;
     private bool paused;
+    private EndlessArena arenaMode;
+    readonly List<RaycastHit2D> movementHits=new List<RaycastHit2D>(32);
+    readonly List<Collider2D> overlapHits=new List<Collider2D>(32);
+    static ContactFilter2D MovementFilter()
+    {
+        var filter=new ContactFilter2D();filter.SetLayerMask(Physics2D.DefaultRaycastLayers);filter.useTriggers=false;
+        return filter;
+    }
+    private void OnApplicationFocus(bool focused)
+    {
+        if(!focused && Application.isPlaying && CanPlay)TogglePause();
+    }
     public bool ModalOpen { get; private set; }
     public bool Finished { get; private set; }
+    public bool Defeated { get; private set; }
     int modalClosedFrame=-1;
     public bool AllowMouseShotThisFrame => Time.frameCount!=modalClosedFrame;
-    public bool CanPlay => !paused && !transitioning && !ModalOpen && !Finished;
+    public bool CanPlay => !paused && !transitioning && !ModalOpen && !Finished && !Defeated &&
+        (arenaMode==null || !arenaMode.ShowingWaveTitle);
+    public void Defeat()
+    {
+        if(Defeated || Finished)return;
+        Defeated=true;FirstLevelShot.ClearAll();
+        GetComponent<FirstLevelPresentation>().ShowDefeat();
+    }
     public void SetModal(bool open){ModalOpen=open;if(!open)modalClosedFrame=Time.frameCount;}
     public void CompleteLevel()
     {
@@ -41,6 +62,7 @@ public class FirstLevelRooms : MonoBehaviour
 
     private void Awake()
     {
+        arenaMode=GetComponent<EndlessArena>();
         FigmaPauseMenu.Configure(this);
         transitioning = true;
         SetFade(1);
@@ -51,23 +73,35 @@ public class FirstLevelRooms : MonoBehaviour
         {
             var workshop=GetComponent<SecondLevelWorkshop>();
             if(workshop!=null)workshop.ConfigureCombat(this);
-            else FirstLevelEnemies.Place(this);
+            else
+            {
+                FirstLevelEnemies.Place(this);
+                var trialEffects=GetComponent<FirstRoomTankEffects>();
+                if(trialEffects==null)trialEffects=gameObject.AddComponent<FirstRoomTankEffects>();
+                trialEffects.Initialize(this);
+            }
+            var atmosphere=GetComponent<FirstLevelAtmosphere>();
+            if(atmosphere==null)atmosphere=gameObject.AddComponent<FirstLevelAtmosphere>();
+            atmosphere.Initialize(this);
         }
         ShowRoom(0);
         var presentation = emptySandbox ? null : GetComponent<FirstLevelPresentation>();
         if(presentation!=null)presentation.EnsureUI();
         int blackoutOrder = blackout.transform.GetSiblingIndex();
         blackout.transform.SetAsLastSibling();
+        var arena=GetComponent<EndlessArena>();
+        if(arena!=null)arena.ShowWaveTitle(0);
         yield return Fade(1, 0, .5f);
         blackout.transform.SetSiblingIndex(blackoutOrder);
-        if(presentation!=null)presentation.ShowHint(0);
+        if(arena==null && presentation!=null)presentation.ShowHint(0);
         transitioning = false;
     }
     private void Update()
     {
         var keyboard = Keyboard.current;
         if (keyboard == null) return;
-        if (keyboard.escapeKey.wasPressedThisFrame && !transitioning && !ModalOpen && !Finished) TogglePause();
+        if (keyboard.escapeKey.wasPressedThisFrame && !transitioning && !ModalOpen && !Finished &&
+            (arenaMode==null || !arenaMode.ShowingWaveTitle)) TogglePause();
         if (!CanPlay) return;
         ResolveBoundaryOverlap();
         Vector2 direction = Vector2.zero;
@@ -89,7 +123,8 @@ public class FirstLevelRooms : MonoBehaviour
         float distance = step.magnitude;
         if (distance < .00001f) return;
         Vector2 origin = player.position;
-        foreach (var hit in Physics2D.CircleCastAll(origin, playerRadius, step / distance, distance + .002f))
+        Physics2D.CircleCast(origin,playerRadius,step/distance,MovementFilter(),movementHits,distance+.002f);
+        foreach (var hit in movementHits)
         {
             if (hit.collider == null || hit.collider.isTrigger) continue;
             // A contact at the start must not prevent moving away from that wall.
@@ -106,7 +141,8 @@ public class FirstLevelRooms : MonoBehaviour
         for (int pass = 0; pass < 8; pass++)
         {
             bool corrected = false;
-            foreach (var boundary in Physics2D.OverlapCircleAll(player.position, playerRadius))
+            Physics2D.OverlapCircle(player.position,playerRadius,MovementFilter(),overlapHits);
+            foreach (var boundary in overlapHits)
             {
                 if (boundary.isTrigger) continue;
                 Vector2 position = player.position;
@@ -115,7 +151,7 @@ public class FirstLevelRooms : MonoBehaviour
                 if (separation >= playerRadius) continue;
                 if (separation < .0001f)
                 {
-                    player.position = Spawn;
+                    player.position = arenaMode!=null ? arenaMode.SpawnFor(CurrentRoom) : Spawn;
                     return;
                 }
                 player.position += (Vector3)(outward / separation * (playerRadius - separation + .003f));
@@ -126,6 +162,7 @@ public class FirstLevelRooms : MonoBehaviour
     }
     public void TryRoomExit()
     {
+        if(GetComponent<EndlessArena>()!=null)return;
         if(emptySandbox)return;
         if (transitioning || paused) return;
         var next = player.position;
@@ -144,7 +181,24 @@ public class FirstLevelRooms : MonoBehaviour
         FirstLevelEffects.Clear();
         CurrentRoom = index;
         for (int i = 0; i < rooms.Length; i++) rooms[i].SetActive(i == index);
-        player.position = Spawn;
+        var arena=GetComponent<EndlessArena>();
+        player.position = arena!=null ? arena.SpawnFor(index) : Spawn;
+    }
+    public IEnumerator AdvanceArenaWave(int index)
+    {
+        var arena=GetComponent<EndlessArena>();
+        if(arena==null || index<0 || index>=rooms.Length || !CanPlay)yield break;
+        transitioning=true;
+        yield return Fade(0,1,.35f);
+        ShowRoom(index);
+        arena.ShowWaveTitle(index);
+        yield return Fade(1,0,.5f);
+        transitioning=false;
+    }
+    public void FinishArena()
+    {
+        if(GetComponent<EndlessArena>()==null || Finished || Defeated)return;
+        Finished=true;FirstLevelShot.ClearAll();
     }
     private IEnumerator Transition(int index, Vector3 spawn)
     {
@@ -170,6 +224,6 @@ public class FirstLevelRooms : MonoBehaviour
         SetFade(to);
     }
     private void SetFade(float alpha) { blackout.color = new Color(0, 0, 0, alpha); blackout.raycastTarget = alpha > 0; }
-    public void TogglePause() { if (transitioning) return; paused = !paused; pausePanel.SetActive(paused); }
+    public void TogglePause() { if (transitioning || (arenaMode!=null && arenaMode.ShowingWaveTitle)) return; paused = !paused; pausePanel.SetActive(paused); }
     public void OpenMainMenu() { SceneManager.LoadScene("MainMenu"); }
 }

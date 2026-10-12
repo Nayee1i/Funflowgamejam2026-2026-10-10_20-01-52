@@ -63,7 +63,7 @@ public class FirstLevelAimPreview : MonoBehaviour
         }
         if(index>=dashes.Count)
         {
-            var dash=new GameObject("Figma Aim Dash").AddComponent<SpriteRenderer>();
+            var dash=new GameObject("Aim Dash").AddComponent<SpriteRenderer>();
             dash.transform.SetParent(transform,false);dash.sprite=dashSprite;dash.sharedMaterial=dashMaterial;dash.sortingOrder=18;dashes.Add(dash);
         }
         return dashes[index];
