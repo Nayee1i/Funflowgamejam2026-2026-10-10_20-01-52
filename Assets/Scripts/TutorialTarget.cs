@@ -13,6 +13,36 @@ public class TutorialTarget : MonoBehaviour
     private Transform healthFill;
     private Collider2D bodyCollider;
     private Sprite healthSprite;
+    public Collider2D ShieldCollider { get; private set; }
+
+    void EnsureShieldHitbox()
+    {
+        if(shieldVisual==null)return;
+        var visual=shieldVisual.GetComponentInChildren<SpriteRenderer>();
+        if(visual==null || visual.sprite==null)return;
+        var hitbox=visual.GetComponent<PolygonCollider2D>();
+        if(hitbox==null)hitbox=visual.gameObject.AddComponent<PolygonCollider2D>();
+        hitbox.isTrigger=true;
+        var bounds=visual.sprite.bounds;
+        var points=new System.Collections.Generic.List<Vector2>();
+        bool found=false;
+        for(int shape=0;shape<visual.sprite.GetPhysicsShapeCount();shape++)
+        {
+            points.Clear();visual.sprite.GetPhysicsShape(shape,points);
+            foreach(var point in points)
+            {
+                if(!found){bounds=new Bounds(point,Vector3.zero);found=true;}
+                else bounds.Encapsulate(point);
+            }
+        }
+        var ellipse=new Vector2[48];
+        for(int i=0;i<ellipse.Length;i++)
+        {
+            float angle=i*Mathf.PI*2/ellipse.Length;
+            ellipse[i]=(Vector2)bounds.center+new Vector2(Mathf.Cos(angle)*bounds.extents.x,Mathf.Sin(angle)*bounds.extents.y);
+        }
+        hitbox.pathCount=1;hitbox.points=ellipse;ShieldCollider=hitbox;
+    }
 
     public void Configure(bool hasShield, GameObject visual, int health = 5)
     {
@@ -21,6 +51,7 @@ public class TutorialTarget : MonoBehaviour
         maxHealth = Mathf.Max(1, health);
         Health = maxHealth;
         IsDestroyed = false;
+        EnsureShieldHitbox();
         if (shieldVisual != null) shieldVisual.SetActive(shielded);
     }
 
@@ -28,6 +59,7 @@ public class TutorialTarget : MonoBehaviour
     {
         maxHealth = Mathf.Max(1, maxHealth);
         Health = maxHealth;
+        EnsureShieldHitbox();
         if (shieldVisual != null) shieldVisual.SetActive(shielded);
     }
 

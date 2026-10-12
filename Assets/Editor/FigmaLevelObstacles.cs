@@ -137,6 +137,7 @@ public static class FigmaLevelObstacles
         var mirror=Create(root,"Blue Mirror — "+id,id,x,y,points);
         var surface=mirror.gameObject.AddComponent<MirrorRicochetSurface>();
         surface.localReflectionPoint=new Vector2(0,(id=="56_3085"?164:161.5f)-cy)/100f;
+        if(id=="56_3067")surface.localReflectionPoint=new Vector2(0,-.08f); // Keep the glass reflection in front of the top wall.
         surface.chargesShot=false;
         surface.reflectFromCollider=false;
         return mirror;

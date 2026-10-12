@@ -37,13 +37,24 @@ public static class ReviewGameGeometry
                 {
                     var glow = mirror.GetComponentsInChildren<SpriteRenderer>().Where(s => s.name.StartsWith("Native Mirror Glow")).ToArray();
                     Require(glow.Length > 0 && glow.All(g => g.sprite != null && g.sortingOrder < mirror.GetComponent<SpriteRenderer>().sortingOrder), "Missing/invalid glow: " + mirror.name); mirrors++;
+                    foreach(var visual in glow)
+                    {
+                        var pulse=visual.GetComponent<MirrorGlowPulse>();
+                        Require(pulse!=null && Mathf.Approximately(pulse.opacity,.75f),"Missing subdued animated glow");
+                        var apply=typeof(MirrorGlowPulse).GetMethod("Apply",BindingFlags.NonPublic|BindingFlags.Instance);
+                        typeof(MirrorGlowPulse).GetMethod("OnEnable",BindingFlags.NonPublic|BindingFlags.Instance).Invoke(pulse,null);
+                        apply.Invoke(pulse,new object[]{pulse.period*.25f});float bright=visual.color.a;
+                        apply.Invoke(pulse,new object[]{pulse.period*.75f});float dim=visual.color.a;
+                        Require(bright>dim && bright<=pulse.originalAlpha*.826f && dim>=pulse.originalAlpha*.674f,"Glow pulse exceeds gentle brightness range");
+                        apply.Invoke(pulse,new object[]{0f});
+                    }
                 }
                 foreach (var target in room.GetComponentsInChildren<TutorialTarget>()) target.Complete();
                 foreach (var cover in room.GetComponentsInChildren<DestructibleCover>()) cover.Hit(5);
                 foreach (var door in room.GetComponentsInChildren<WorkshopDoor>()) door.Refresh();
                 Physics2D.SyncTransforms();
                 Vector2 spawn = new Vector2(-level.spawnX, level.doorwayY);
-                const float grid = .12f;
+                float grid = sceneName=="level2" ? .04f : .12f;
                 var parent = new Dictionary<Vector2Int, Vector2Int>();
                 var queue = new Queue<Vector2Int>(); queue.Enqueue(Vector2Int.zero); parent[Vector2Int.zero] = Vector2Int.zero;
                 var directions = new[] { Vector2Int.up, Vector2Int.down, Vector2Int.left, Vector2Int.right };
@@ -65,7 +76,8 @@ public static class ReviewGameGeometry
                     foreach (var collider in room.GetComponentsInChildren<Collider2D>()) File.AppendAllText("Tools/game-review-geometry.txt", collider.name + " " + collider.bounds + "\n");
                     throw new Exception("Blocked exit " + sceneName + " room " + roomIndex);
                 }
-                var goals = ids.Where((id, n) => n % 300 == 0).Concat(new[] { ids.OrderBy(id => id.x).Last(), ids.OrderBy(id => id.y).First(), ids.OrderBy(id => id.y).Last() }).Distinct();
+                int sampleStride=Mathf.Max(300,ids.Length/12);
+                var goals = ids.Where((id, n) => n % sampleStride == 0).Concat(new[] { ids.OrderBy(id => id.x).Last(), ids.OrderBy(id => id.y).First(), ids.OrderBy(id => id.y).Last() }).Distinct();
                 foreach (var goal in goals)
                 {
                     var path = new List<Vector2Int>(); var id = goal;

@@ -1,36 +1,36 @@
 Proportions relative to Level1Rooms.
 Level1Rooms hero scale=(0.70, 0.70, 0.70) radius=0,54 camera halfHeight=5,15
-Figma Robot radius=0,476 ratio=0,8814815 bodySize=1,37375
-Figma Robot radius=0,5168 ratio=0,957037 bodySize=1,4915
-Figma Robot radius=0,5168 ratio=0,957037 bodySize=1,4915
+Figma Robot radius=0,476 ratio=0,8814815 bodySize=1,30725
+Figma Robot radius=0,5168 ratio=0,957037 bodySize=1,4193
+Figma Robot radius=0,5168 ratio=0,957037 bodySize=1,4193
 level2 hero scale=(0.92, 0.92, 0.92) radius=0,7073476 camera halfHeight=6,746
-Shielded Robot — 61:3463 radius=0,5287358 ratio=0,7474908 bodySize=1,799479
-Promoted Robot — 71:3546 radius=0,6338733 ratio=0,8961271 bodySize=1,954234
-Robot — 71:3555 radius=0,5287358 ratio=0,7474908 bodySize=1,799479
-Robot — 71:3604 radius=0,5287358 ratio=0,7474908 bodySize=1,799479
-Promoted Robot — 71:3580 radius=0,6338733 ratio=0,896127 bodySize=1,954234
-Shielded Robot — 71:3584 radius=0,5287358 ratio=0,7474908 bodySize=1,799479
-Shielded Robot — 71:3589 radius=0,5287358 ratio=0,7474908 bodySize=1,799479
-Robot — 71:3648 radius=0,5287358 ratio=0,7474908 bodySize=1,799479
-Promoted Robot — 71:3659 radius=0,6338734 ratio=0,8961272 bodySize=1,954234
-Shielded Robot — 71:3655 radius=0,5287358 ratio=0,7474908 bodySize=1,799479
+Shielded Robot — 61:3463 radius=0,4884608 ratio=0,6905528 bodySize=1,393737
+Promoted Robot — 71:3546 radius=0,5216203 ratio=0,7374314 bodySize=1,393737
+Robot — 71:3555 radius=0,4884608 ratio=0,6905528 bodySize=1,393737
+Robot — 71:3604 radius=0,4884608 ratio=0,6905528 bodySize=1,393737
+Promoted Robot — 71:3580 radius=0,5216203 ratio=0,7374313 bodySize=1,393737
+Shielded Robot — 71:3584 radius=0,4884608 ratio=0,6905528 bodySize=1,393737
+Shielded Robot — 71:3589 radius=0,4884608 ratio=0,6905528 bodySize=1,393737
+Robot — 71:3648 radius=0,4884608 ratio=0,6905528 bodySize=1,393737
+Promoted Robot — 71:3659 radius=0,5216203 ratio=0,7374314 bodySize=1,393737
+Shielded Robot — 71:3655 radius=0,4884609 ratio=0,6905528 bodySize=1,393737
 APPLIED hero scale=(0.92, 0.92, 0.92) radius=0,7073476
 level3 hero scale=(0.92, 0.92, 0.92) radius=0,7073476 camera halfHeight=6,746
-Shielded Robot — 79:3837 radius=0,5287358 ratio=0,7474908 bodySize=1,799479
-Promoted Robot — 79:3848 radius=0,6338735 ratio=0,8961273 bodySize=1,954234
-Shielded Robot — 83:3930 radius=0,5287359 ratio=0,7474909 bodySize=1,799479
-Robot — 83:3944 radius=0,5287357 ratio=0,7474906 bodySize=1,799479
-Promoted Robot — 83:3939 radius=0,6338733 ratio=0,8961271 bodySize=1,954234
-Shielded Robot — 102:4191 radius=0,5287359 ratio=0,7474909 bodySize=1,799479
-Robot — 102:4196 radius=0,5287357 ratio=0,7474906 bodySize=1,799479
-Robot — 102:4203 radius=0,5287359 ratio=0,7474909 bodySize=1,799479
-Promoted Robot — 102:4199 radius=0,6338733 ratio=0,8961271 bodySize=1,954234
-Robot — 103:4215 radius=0,5287359 ratio=0,7474909 bodySize=1,799479
-Shielded Robot — 103:4230 radius=0,5287357 ratio=0,7474906 bodySize=1,799479
-Shielded Robot — 103:4235 radius=0,5287358 ratio=0,7474908 bodySize=1,799479
-Promoted Robot — 103:4241 radius=0,6338733 ratio=0,896127 bodySize=1,954234
-Promoted Robot — 103:4246 radius=0,6338733 ratio=0,896127 bodySize=1,954234
-Castle Boss РІР‚вЂќ Three Cannons radius=1,212627 ratio=1,71433 bodySize=2,969141
-Robot — 105:4279 radius=0,5287359 ratio=0,7474909 bodySize=1,799479
-Robot — 105:4283 radius=0,5287359 ratio=0,7474909 bodySize=1,799479
+Shielded Robot — 79:3837 radius=0,4884608 ratio=0,6905528 bodySize=1,393737
+Promoted Robot — 79:3848 radius=0,5216204 ratio=0,7374315 bodySize=1,393737
+Shielded Robot — 83:3930 radius=0,4884609 ratio=0,6905529 bodySize=1,393737
+Robot — 83:3944 radius=0,4884608 ratio=0,6905527 bodySize=1,393737
+Promoted Robot — 83:3939 radius=0,5216203 ratio=0,7374314 bodySize=1,393737
+Shielded Robot — 102:4191 radius=0,4884609 ratio=0,6905529 bodySize=1,393737
+Robot — 102:4196 radius=0,4884608 ratio=0,6905527 bodySize=1,393737
+Robot — 102:4203 radius=0,488461 ratio=0,6905529 bodySize=1,393737
+Promoted Robot — 102:4199 radius=0,5216203 ratio=0,7374314 bodySize=1,393737
+Robot — 103:4215 radius=0,4884609 ratio=0,6905529 bodySize=1,393737
+Shielded Robot — 103:4230 radius=0,4884608 ratio=0,6905528 bodySize=1,393737
+Shielded Robot — 103:4235 radius=0,4884608 ratio=0,6905528 bodySize=1,393737
+Promoted Robot — 103:4241 radius=0,5216202 ratio=0,7374313 bodySize=1,393737
+Promoted Robot — 103:4246 radius=0,5216203 ratio=0,7374313 bodySize=1,393737
+Castle Boss РІР‚вЂќ Three Cannons radius=0,5791158 ratio=0,8187146 bodySize=1,393737
+Robot — 105:4279 radius=0,4884609 ratio=0,6905529 bodySize=1,393737
+Robot — 105:4283 radius=0,4884609 ratio=0,6905529 bodySize=1,393737
 APPLIED hero scale=(0.92, 0.92, 0.92) radius=0,7073476

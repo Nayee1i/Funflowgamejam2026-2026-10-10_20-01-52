@@ -21,6 +21,7 @@ public static class FigmaFrontendUI
             foreach(var part in panel.parts)
             {
                 var image=FirstLevelPresentation.Picture(part.asset,parent,part.asset,part.x,part.y,part.w,part.h);
+                if(part.action=="peaceful")image.name="Peaceful Mode Artwork";
                 if(string.IsNullOrEmpty(part.action))continue;
                 string action=part.action;
                 var hit=FirstLevelPresentation.Picture(action+" Hit Area",parent,null,part.x-12,part.y-10,part.w+24,part.h+20);
@@ -45,7 +46,13 @@ public static class FigmaFrontendUI
         }
         windows.unlockedLevelArtwork=Resources.Load<Sprite>("FirstLevelFX/LevelUnlocked");
         RefreshResults(windows);
+        RefreshPeacefulMode(windows);
         return true;
+    }
+    public static void RefreshPeacefulMode(MainMenuWindows windows)
+    {
+        var artwork=windows.modesWindow.transform.Find("Peaceful Mode Artwork");
+        if(artwork!=null)artwork.GetComponent<Image>().sprite=Resources.Load<Sprite>("FirstLevelFX/"+(PeacefulModeSettings.Enabled ? "UI_139_8" : "UI_139_7"));
     }
     static Image[] Bars(Transform parent,string name,params Vector2[] points)
     {
@@ -63,6 +70,7 @@ public static class FigmaFrontendUI
             case "sensitivityUp":w.SensitivityUp();break;case "sensitivityDown":w.SensitivityDown();break;
             case "level1":w.Level1();break;case "level2":w.Level2();break;case "level3":w.Level3();break;
             case "arena":w.Arena();break;
+            case "peaceful":PeacefulModeSettings.SetEnabled(!PeacefulModeSettings.Enabled);RefreshPeacefulMode(w);break;
         }
     }
     public static void RefreshResults(MainMenuWindows w)

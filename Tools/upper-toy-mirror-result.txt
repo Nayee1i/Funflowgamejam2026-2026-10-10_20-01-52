@@ -1,0 +1,1 @@
+PASSED: 13 incoming angles (-60 to +60), actual projectiles and aim preview reflect inside glass before the top wall. Mirror artwork transform unchanged.

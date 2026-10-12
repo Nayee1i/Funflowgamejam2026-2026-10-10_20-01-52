@@ -3,6 +3,7 @@ using UnityEngine;
 // Sweeping the whole travel distance prevents fast shots from crossing thin walls.
 public class Bullet : MonoBehaviour
 {
+    public int DamageHalves { get; set; }=2;
     [SerializeField] private float speed = 10f;
     [SerializeField] private float radius = 0.15f;
     [SerializeField] private float lifetime = 8f;
@@ -44,6 +45,7 @@ public class Bullet : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if(hostile && PeacefulModeSettings.Enabled){Destroy(gameObject);return;}
         age += Time.fixedDeltaTime;
         if (age >= lifetime)
         {
@@ -66,7 +68,7 @@ public class Bullet : MonoBehaviour
             TutorialPlayer player = hit.collider.GetComponentInParent<TutorialPlayer>();
             if (hostile && player != null)
             {
-                player.Hit();
+                player.Hit(DamageHalves);
                 Destroy(gameObject);
                 return;
             }

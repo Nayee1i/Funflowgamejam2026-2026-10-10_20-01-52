@@ -31,12 +31,19 @@ public static class InstallAllMirrorGlows
         return room.GetComponentsInChildren<SpriteRenderer>(true)
             .Where(s => (s.name.StartsWith("Figma Mirror Glow") || s.name.StartsWith("Native Mirror Glow")) && Vector2.Distance(s.transform.position, mirror.transform.position) < .5f)
             .Select(s => new Template {
-                sprite = s.sprite, material = s.sharedMaterial, color = s.color,
+                sprite = s.sprite, material = s.sharedMaterial, color = OriginalColor(s),
                 offset = mirror.transform.InverseTransformPoint(s.transform.position),
                 rotation = Quaternion.Inverse(mirror.transform.rotation) * s.transform.rotation,
                 scale = new Vector3(s.transform.lossyScale.x / mirror.transform.lossyScale.x, s.transform.lossyScale.y / mirror.transform.lossyScale.y, 1),
                 mirrorSize = mirror.GetComponent<SpriteRenderer>().sprite.bounds.size
             }).ToArray();
+    }
+    static Color OriginalColor(SpriteRenderer visual)
+    {
+        var color = visual.color;
+        var pulse = visual.GetComponent<MirrorGlowPulse>();
+        if(pulse != null)color.a = pulse.originalAlpha;
+        return color;
     }
     static void Run()
     {
@@ -70,6 +77,8 @@ public static class InstallAllMirrorGlows
                         glow.transform.localScale = Vector3.Scale(template.scale, ratio);
                         var visual = glow.AddComponent<SpriteRenderer>(); visual.sprite = template.sprite; visual.sharedMaterial = template.material;
                         visual.color = template.color; visual.sortingLayerID = picture.sortingLayerID; visual.sortingOrder = picture.sortingOrder - 1;
+                        var pulse = glow.AddComponent<MirrorGlowPulse>();pulse.originalAlpha = template.color.a;
+                        var dimmed = template.color;dimmed.a *= pulse.opacity;visual.color = dimmed;
                     }
                     count++;
                 }

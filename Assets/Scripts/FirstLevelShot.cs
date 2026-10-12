@@ -15,9 +15,11 @@ public class FirstLevelShot : MonoBehaviour
     Collider2D lastMirrorCollider;
     TutorialTarget shooter;
     bool hostile;
+    int damageHalves=2;
     public void SetEnemyShooter(TutorialTarget enemy)
     {
         shooter=enemy;hostile=true;name="Enemy Ball";
+        damageHalves=enemy!=null && enemy.TryGetComponent<TutorialRobot>(out var robot) ? robot.DamageHalves : 2;
         FirstLevelEffects.ProjectileVisual(gameObject,true,level);OrientVisual();
     }
     const int MaxReflections=FirstLevelShotPath.MaxReflections;
@@ -44,6 +46,7 @@ public class FirstLevelShot : MonoBehaviour
     public void Step(float distance)
     {
         if(Finished)return;
+        if(hostile && PeacefulModeSettings.Enabled){Finish();return;}
         Physics2D.SyncTransforms();
         for(int pass=0;pass<MaxReflections+2 && distance>0;pass++)
         {
@@ -77,7 +80,7 @@ public class FirstLevelShot : MonoBehaviour
             distance-=nearest;
             if(hitPlayer)
             {
-                level.player.GetComponent<TutorialPlayer>().Hit();
+                level.player.GetComponent<TutorialPlayer>().Hit(damageHalves);
                 FirstLevelEffects.Impact(transform.position,.8f,level,hostile || Charged);
                 Finish();return;
             }

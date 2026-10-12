@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class TutorialRobot : MonoBehaviour
 {
+    // Promoted robots have the red body; ordinary and shielded robots are black.
+    public int DamageHalves => name.StartsWith("Promoted Robot") || GetComponent<TutorialTarget>()?.MaxHealth==2 ? 2 : 1;
     [SerializeField] private Transform player;
     [SerializeField] private Transform turret;
     [SerializeField] private Transform muzzle;
@@ -104,7 +106,7 @@ public class TutorialRobot : MonoBehaviour
         }
         // Test visibility before aiming, including while the weapon is on cooldown.
         var patrol = GetComponent<RobotCoverPatrol>();
-        if (patrol != null && !patrol.CanAttack)
+        if (patrol != null && !patrol.CanAttack && !PeacefulModeSettings.Enabled)
         {
             LoseVisualContact();
             return;
@@ -123,6 +125,12 @@ public class TutorialRobot : MonoBehaviour
         }
         Vector2 aim = visibleAim - (Vector2)turret.position;
         turret.rotation = Quaternion.Euler(0, 0, Mathf.Atan2(aim.y, aim.x) * Mathf.Rad2Deg - 90f);
+        if (PeacefulModeSettings.Enabled)
+        {
+            // Keep sight and aiming live, but cancel bursts and grant a new reaction delay on resume.
+            LoseVisualContact();
+            return;
+        }
         if (Time.timeScale <= 0f) return;
         if (burstShotsRemaining > 0)
         {
@@ -145,6 +153,7 @@ public class TutorialRobot : MonoBehaviour
 
     private void Fire(Transform barrelMuzzle)
     {
+        if(PeacefulModeSettings.Enabled)return;
         if(firstLevel!=null)
         {
             Vector2 origin=turret.position;
@@ -156,5 +165,6 @@ public class TutorialRobot : MonoBehaviour
         Bullet ball = Instantiate(bulletPrefab, barrelMuzzle.position, barrelMuzzle.rotation);
         ball.gameObject.SetActive(true);
         ball.Launch(barrelMuzzle.up, ownCollider, true);
+        ball.DamageHalves=DamageHalves;
     }
 }

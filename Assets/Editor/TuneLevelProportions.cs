@@ -8,6 +8,19 @@ using Object = UnityEngine.Object;
 
 public static class TuneLevelProportions
 {
+    static readonly System.Collections.Generic.Dictionary<Sprite,Vector2> opaqueSizes = new System.Collections.Generic.Dictionary<Sprite,Vector2>();
+    static Vector2 OpaqueSize(Sprite sprite)
+    {
+        if(opaqueSizes.TryGetValue(sprite,out var size))return size;
+        var path=AssetDatabase.GetAssetPath(sprite);
+        if(!path.EndsWith(".png",StringComparison.OrdinalIgnoreCase))return sprite.bounds.size;
+        var texture=new Texture2D(2,2);ImageConversion.LoadImage(texture,File.ReadAllBytes(path));
+        var pixels=texture.GetPixels32();int minX=texture.width,minY=texture.height,maxX=-1,maxY=-1;
+        for(int y=0;y<texture.height;y++)for(int x=0;x<texture.width;x++)
+            if(pixels[y*texture.width+x].a>32){minX=Mathf.Min(minX,x);minY=Mathf.Min(minY,y);maxX=Mathf.Max(maxX,x);maxY=Mathf.Max(maxY,y);}
+        size=maxX<0 ? (Vector2)sprite.bounds.size : new Vector2(maxX-minX+1,maxY-minY+1)/sprite.pixelsPerUnit;
+        Object.DestroyImmediate(texture);opaqueSizes[sprite]=size;return size;
+    }
     [InitializeOnLoadMethod] static void Initialize() => EditorApplication.update += Check;
     static void Check()
     {
@@ -51,34 +64,12 @@ public static class TuneLevelProportions
             foreach (var robot in level.rooms.SelectMany(r => r.GetComponentsInChildren<TutorialRobot>(true)))
             {
                 var circle = robot.GetComponent<CircleCollider2D>();
-                bool boss = robot.GetComponent<TutorialTarget>().MaxHealth >= 10;
-                float desired = referenceEnemySize * multiplier * (boss ? 1.65f : robot.name.StartsWith("Promoted") ? 1.086f : 1f);
+                var heroBody = level.player.GetComponent<SpriteRenderer>();
+                Vector3 heroSize = Vector3.Scale(OpaqueSize(heroBody.sprite), heroBody.transform.lossyScale);
+                float desired = Mathf.Max(Mathf.Abs(heroSize.x), Mathf.Abs(heroSize.y));
                 robot.transform.localScale *= desired / BodySize(robot);
             }
-            foreach (var room in level.rooms)
-            foreach (var polygon in room.GetComponentsInChildren<PolygonCollider2D>(true))
-            {
-                if (polygon.GetComponent<MirrorRicochetSurface>() != null) continue;
-                if (!polygon.name.Contains("Obstacle") && polygon.GetComponent<DestructibleCover>() == null) continue;
-                string marker = "Proportion Scale Applied";
-                if (polygon.transform.Find(marker) != null)
-                {
-                    if (name == "level2" && room == level.rooms[3] && polygon.transform.Find("Wider Tank Passage Applied") == null)
-                    {
-                        polygon.transform.localScale *= .70f / .86f;
-                        new GameObject("Wider Tank Passage Applied").transform.SetParent(polygon.transform, false);
-                    }
-                    if (name == "level3" && room == level.rooms[3] && polygon.transform.Find("Wider Tank Passage Applied") == null)
-                    {
-                        polygon.transform.localScale *= .60f / .72f;
-                        new GameObject("Wider Tank Passage Applied").transform.SetParent(polygon.transform, false);
-                    }
-                    continue;
-                }
-                // Scale visual and collider together, preserving the obstacle's centre and rotation.
-                polygon.transform.localScale *= name == "level3" ? .72f : .86f;
-                new GameObject(marker).transform.SetParent(polygon.transform, false);
-            }
+            // Preserve obstacle sizes authored from Figma; only character proportions are tuned.
             for (int r = 0; r < level.rooms.Length; r++)
             {
                 for (int j = 0; j < level.rooms.Length; j++) level.rooms[j].SetActive(j == r);
@@ -118,7 +109,7 @@ public static class TuneLevelProportions
     {
         var body = robot.GetComponent<SpriteRenderer>();
         if (body == null) body = robot.transform.Find("Body").GetComponent<SpriteRenderer>();
-        Vector3 size = Vector3.Scale(body.sprite.bounds.size, body.transform.lossyScale);
+        Vector3 size = Vector3.Scale(OpaqueSize(body.sprite), body.transform.lossyScale);
         return Mathf.Max(Mathf.Abs(size.x), Mathf.Abs(size.y));
     }
 }

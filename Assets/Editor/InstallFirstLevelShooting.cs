@@ -28,9 +28,9 @@ public static class InstallFirstLevelShooting
         {
             if(!renderer.name.StartsWith("Blue Mirror"))continue;
             var surface=renderer.GetComponent<MirrorRicochetSurface>();
-            if(surface!=null){if(renderer.name.Contains("3067") || renderer.name.Contains("3068"))surface.reflectFromCollider=false;continue;}
+            if(surface!=null){if(renderer.name.Contains("3067") || renderer.name.Contains("3068")){surface.reflectFromCollider=false;if(renderer.name.Contains("3067"))surface.localReflectionPoint=new Vector2(0,-.08f);}continue;}
             surface=renderer.gameObject.AddComponent<MirrorRicochetSurface>();
-            surface.localReflectionPoint=new Vector2(0,renderer.name.Contains("56:3068") || renderer.name.Contains("56_3068") ? -.125f : .045f);
+            surface.localReflectionPoint=new Vector2(0,renderer.name.Contains("3068") ? -.125f : renderer.name.Contains("3067") ? -.08f : .045f);
             surface.chargesShot=false;
             surface.reflectFromCollider=false;
         }

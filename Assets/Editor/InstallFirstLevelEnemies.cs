@@ -65,10 +65,10 @@ public static class InstallFirstLevelEnemies
         level.rooms[0].SetActive(true);
         var shooter=level.rooms[0].GetComponentInChildren<TutorialTarget>();
         level.player.position=shooter.transform.position+Vector3.left*2;
-        int hp=level.player.GetComponent<TutorialPlayer>().Health;
+        int hp=level.player.GetComponent<TutorialPlayer>().HealthHalves;
         var hostile=FirstLevelShot.Create(shooter.transform.position,Vector2.left,ball,level);
         hostile.SetEnemyShooter(shooter);hostile.Step(2);
-        Require(level.player.GetComponent<TutorialPlayer>().Health==hp-1,"Enemy ball must damage the player.");
+        Require(level.player.GetComponent<TutorialPlayer>().HealthHalves==hp-1,"Black enemy ball must take half a heart.");
         FirstLevelShot.ClearAll();
         var vision=typeof(TutorialRobot).GetMethod("CanSeePlayer",System.Reflection.BindingFlags.Instance|System.Reflection.BindingFlags.NonPublic);
         level.player.position=shooter.transform.position+Vector3.down*1.5f;

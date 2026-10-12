@@ -22,8 +22,9 @@ public static class FirstLevelShotPath
         Vector2 contactNormal=Vector2.zero;
             foreach(var hit in Physics2D.CircleCastAll(origin,radius,direction,distance))
             {
-                if(hit.collider==null || hit.collider.isTrigger || hit.collider==lastMirrorCollider)continue;
+                if(hit.collider==null || hit.collider==lastMirrorCollider)continue;
                 var enemy=hit.collider.GetComponentInParent<TutorialTarget>();
+                if(hit.collider.isTrigger && (enemy==null || !enemy.IsShielded || enemy.ShieldCollider!=hit.collider))continue;
                 if(enemy!=null && (hostile || enemy==shooter))continue;
                 var surface=hit.collider.GetComponentInParent<MirrorRicochetSurface>();
                 if(surface!=null && !surface.reflectFromCollider)continue;

@@ -98,7 +98,11 @@ public class PlayerAmmoHud : MonoBehaviour
         if (!visible) return;
 
         for (int i = 0; i < hearts.Length; i++)
-            hearts[i].gameObject.SetActive(health != null && i < health.Health);
+        {
+            hearts[i].gameObject.SetActive(health != null && health.HealthHalves>i*2);
+            if(health!=null)hearts[i].sprite=FirstLevelHealthHud.HeartSprite(health.HealthHalves,i,health.HeartIcon,
+                Resources.Load<Sprite>("FirstLevelEnemies/HeartHalfAligned"),null);
+        }
 
         for (int i = 0; i < icons.Length; i++)
             icons[i].gameObject.SetActive(!player.IsReloading && i < player.BulletsRemaining);

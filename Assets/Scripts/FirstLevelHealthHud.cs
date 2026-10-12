@@ -5,12 +5,15 @@ public class FirstLevelHealthHud : MonoBehaviour
 {
     public TutorialPlayer player;
     readonly Image[] hearts=new Image[3];
-    Sprite full,empty;
+    Sprite full,empty,half;
+    public static Sprite HeartSprite(int halves,int index,Sprite full,Sprite half,Sprite empty)
+        => halves-index*2>=2 ? full : halves-index*2==1 ? half : empty;
     int displayed=-1;
     void Start()
     {
         full=Resources.Load<Sprite>("FirstLevelEnemies/HeartFull");
         empty=Resources.Load<Sprite>("FirstLevelEnemies/HeartEmpty");
+        half=Resources.Load<Sprite>("FirstLevelEnemies/HeartHalfAligned");
         var frame=GameObject.Find("Health Frame");
         if(frame==null)return;
         for(int i=0;i<3;i++)
@@ -23,11 +26,11 @@ public class FirstLevelHealthHud : MonoBehaviour
         }
         Refresh();
     }
-    void Update(){if(player!=null && displayed!=player.Health)Refresh();}
+    void Update(){if(player!=null && displayed!=player.HealthHalves)Refresh();}
     void Refresh()
     {
         if(player==null)return;
-        displayed=player.Health;
-        for(int i=0;i<hearts.Length;i++)if(hearts[i]!=null)hearts[i].sprite=i<displayed ? full : empty;
+        displayed=player.HealthHalves;
+        for(int i=0;i<hearts.Length;i++)if(hearts[i]!=null)hearts[i].sprite=HeartSprite(displayed,i,full,half,empty);
     }
 }

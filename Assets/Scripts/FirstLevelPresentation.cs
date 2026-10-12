@@ -96,6 +96,8 @@ public class FirstLevelPresentation : MonoBehaviour
     public void ShowVictory()
     {
         EnsureUI();LevelProgression.RecordResult(SceneManager.GetActiveScene().name, elapsed);ShowPanel("Victory");
+        if(modalContent.Find("UI_115_4")==null)
+            Picture("Victory Time Frame",modalContent,"UI_115_4",victoryTimePosition.x-189,victoryTimePosition.y-62,493,164);
         FigmaFrontendUI.DrawTime(modalContent, elapsed, victoryTimePosition.x, victoryTimePosition.y, 1);
         FirstLevelEffects.Celebrate(new Vector2(-3,1),level);FirstLevelEffects.Celebrate(new Vector2(3,1),level);
     }

@@ -178,6 +178,22 @@
           "h": 26.0,
           "close": false,
           "action": null
+        },
+        {
+          "asset": "UI_139_7",
+          "x": 1314,
+          "y": 604,
+          "w": 144,
+          "h": 97,
+          "action": "peaceful"
+        },
+        {
+          "asset": "UI_139_3",
+          "x": 1307,
+          "y": 701,
+          "w": 169,
+          "h": 26,
+          "action": null
         }
       ]
     }

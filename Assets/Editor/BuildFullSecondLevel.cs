@@ -113,7 +113,6 @@ public static class BuildFullSecondLevel
                 var surface=picture.gameObject.AddComponent<MirrorRicochetSurface>();surface.chargesShot=mirror.red;surface.reflectFromCollider=false;
             }
             foreach(var enemy in data.enemies)BuildEnemy(enemy,room.transform,i,level);
-            if(i==0)AddWorkshopChainMirror.Restore(room);
             AddDoor(level,room,true);AddDoor(level,room,false);room.SetActive(i==0);
         }
         level.player.position=new Vector3(-level.spawnX,level.doorwayY,0);level.pausePanel.SetActive(false);
@@ -295,6 +294,18 @@ public static class BuildFullSecondLevel
     {
         // Search actual reflective polygon normals, then verify with the shared projectile cast.
         var targetCollider=target.GetComponent<Collider2D>();Vector2 goalCenter=targetCollider.bounds.center;
+        // Reflect the target across the visible face to solve the new planar mirrors.
+        foreach(var face in Object.FindObjectsByType<MirrorRicochetSurface>(FindObjectsSortMode.None).Where(s=>s.chargesShot && !s.reflectFromCollider))
+        foreach(var p in accessible)
+        {
+            Vector2 normal=face.ReflectionNormal;
+            Vector2 virtualGoal=goalCenter-2*normal*Vector2.Dot(goalCenter-face.ReflectionPoint,normal);
+            Vector2 ray=(virtualGoal-p).normalized;
+            var contact=FirstLevelShotPath.Cast(p,ray,.055f,30);
+            if(contact.mirror!=face)continue;
+            if(TraceCharged(p,ray,target,.055f) && TraceChargedStepped(p,ray,target))
+            {origin=p;direction=ray;return true;}
+        }
         foreach(Vector2 aimOffset in new[]{Vector2.zero,Vector2.left,Vector2.right,Vector2.up,Vector2.down,new Vector2(.7f,.7f),new Vector2(-.7f,.7f),new Vector2(.7f,-.7f),new Vector2(-.7f,-.7f)})
         {
         Vector2 goal=goalCenter+aimOffset*targetCollider.bounds.extents.x*.7f;
