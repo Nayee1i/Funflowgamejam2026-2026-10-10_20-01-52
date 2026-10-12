@@ -13,19 +13,62 @@ public class FirstLevelRooms : MonoBehaviour
     public float speed = 3.5f;
     public float fadeDuration = .45f;
     public float playerRadius = .54f;
+    public bool emptySandbox;
+    [Tooltip("Existing levels retain their original doorway and spawn defaults.")]
+    public float doorwayY = -.55f;
+    public float exitX = 6.1f;
+    public float doorwayHalfHeight = .48f;
+    public float spawnX = 4.45f;
     public int CurrentRoom { get; private set; }
     private bool transitioning;
     private bool paused;
-    public bool CanPlay => !paused && !transitioning;
-    private static readonly Vector3 Spawn = new Vector3(-4.45f, -.55f, 0);
+    public bool ModalOpen { get; private set; }
+    public bool Finished { get; private set; }
+    int modalClosedFrame=-1;
+    public bool AllowMouseShotThisFrame => Time.frameCount!=modalClosedFrame;
+    public bool CanPlay => !paused && !transitioning && !ModalOpen && !Finished;
+    public void SetModal(bool open){ModalOpen=open;if(!open)modalClosedFrame=Time.frameCount;}
+    public void CompleteLevel()
+    {
+        if(Finished || emptySandbox || !CanPlay || CurrentRoom!=rooms.Length-1 ||
+            !FirstLevelEnemies.Cleared(rooms[CurrentRoom]) ||
+            player.position.x<=exitX || Mathf.Abs(player.position.y-doorwayY)>=doorwayHalfHeight ||
+            FirstLevelEffects.HasPendingImpacts(this))return;
+        Finished=true;LevelProgression.Complete(SceneManager.GetActiveScene().name);FirstLevelShot.ClearAll();
+        GetComponent<FirstLevelPresentation>().ShowVictory();
+    }
+    private Vector3 Spawn => new Vector3(-spawnX, doorwayY, 0);
 
-    private void Start() { ShowRoom(0); SetFade(0); }
+    private void Awake()
+    {
+        FigmaPauseMenu.Configure(this);
+        transitioning = true;
+        SetFade(1);
+    }
+    private IEnumerator Start()
+    {
+        if(!emptySandbox)
+        {
+            var workshop=GetComponent<SecondLevelWorkshop>();
+            if(workshop!=null)workshop.ConfigureCombat(this);
+            else FirstLevelEnemies.Place(this);
+        }
+        ShowRoom(0);
+        var presentation = emptySandbox ? null : GetComponent<FirstLevelPresentation>();
+        if(presentation!=null)presentation.EnsureUI();
+        int blackoutOrder = blackout.transform.GetSiblingIndex();
+        blackout.transform.SetAsLastSibling();
+        yield return Fade(1, 0, .5f);
+        blackout.transform.SetSiblingIndex(blackoutOrder);
+        if(presentation!=null)presentation.ShowHint(0);
+        transitioning = false;
+    }
     private void Update()
     {
         var keyboard = Keyboard.current;
         if (keyboard == null) return;
-        if (keyboard.escapeKey.wasPressedThisFrame && !transitioning) TogglePause();
-        if (paused || transitioning) return;
+        if (keyboard.escapeKey.wasPressedThisFrame && !transitioning && !ModalOpen && !Finished) TogglePause();
+        if (!CanPlay) return;
         ResolveBoundaryOverlap();
         Vector2 direction = Vector2.zero;
         if (keyboard.wKey.isPressed || keyboard.upArrowKey.isPressed) direction.y++;
@@ -83,17 +126,22 @@ public class FirstLevelRooms : MonoBehaviour
     }
     public void TryRoomExit()
     {
+        if(emptySandbox)return;
         if (transitioning || paused) return;
         var next = player.position;
-        bool doorway = Mathf.Abs(next.y + .55f) < .48f;
-        if (doorway && next.x > 6.1f && CurrentRoom < rooms.Length - 1)
-            StartCoroutine(Transition(CurrentRoom + 1, Spawn));
-        else if (doorway && next.x < -6.1f && CurrentRoom > 0)
-            StartCoroutine(Transition(CurrentRoom - 1, new Vector3(4.45f, -.55f, 0)));
+        bool doorway = Mathf.Abs(next.y - doorwayY) < doorwayHalfHeight;
+        if (doorway && next.x > exitX && FirstLevelEnemies.Cleared(rooms[CurrentRoom]))
+        {
+            if(CurrentRoom < rooms.Length-1)StartCoroutine(Transition(CurrentRoom + 1, Spawn));
+            else CompleteLevel();
+        }
+        else if (doorway && next.x < -exitX && CurrentRoom > 0)
+            StartCoroutine(Transition(CurrentRoom - 1, new Vector3(spawnX, doorwayY, 0)));
     }
     private void ShowRoom(int index)
     {
         FirstLevelShot.ClearAll();
+        FirstLevelEffects.Clear();
         CurrentRoom = index;
         for (int i = 0; i < rooms.Length; i++) rooms[i].SetActive(i == index);
         player.position = Spawn;
@@ -106,14 +154,17 @@ public class FirstLevelRooms : MonoBehaviour
         player.position = spawn;
         yield return Fade(1, 0);
         transitioning = false;
+        GetComponent<FirstLevelPresentation>().ShowHint(index);
     }
-    private IEnumerator Fade(float from, float to)
+    private IEnumerator Fade(float from, float to, float duration = -1)
     {
+        if(duration < 0)duration = fadeDuration;
+        duration = Mathf.Max(.001f, duration);
         float elapsed = 0;
-        while (elapsed < fadeDuration)
+        while (elapsed < duration)
         {
             elapsed += Time.unscaledDeltaTime;
-            SetFade(Mathf.Lerp(from, to, Mathf.SmoothStep(0, 1, elapsed / fadeDuration)));
+            SetFade(Mathf.Lerp(from, to, Mathf.SmoothStep(0, 1, elapsed / duration)));
             yield return null;
         }
         SetFade(to);

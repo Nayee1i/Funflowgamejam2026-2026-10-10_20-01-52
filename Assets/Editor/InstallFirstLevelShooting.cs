@@ -73,6 +73,9 @@ public static class InstallFirstLevelShooting
     {
         if(EditorApplication.isPlayingOrWillChangePlaymode){Debug.LogWarning("Stop Play Mode before verifying shooting.");return;}
         var scene=EditorSceneManager.OpenScene(BuildFirstLevelRooms.ScenePath);
+        // This isolated projectile check supplies its own target at the future boss point.
+        foreach(var enemy in UnityEngine.Object.FindObjectsByType<TutorialTarget>(FindObjectsInactive.Include,FindObjectsSortMode.None))
+            enemy.gameObject.SetActive(false);
         var level=UnityEngine.Object.FindAnyObjectByType<FirstLevelRooms>();
         var aim=level.player.GetComponent<FirstLevelTankAim>();
         Quaternion bodyRotation=level.player.rotation;

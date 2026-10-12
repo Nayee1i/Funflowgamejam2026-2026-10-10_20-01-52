@@ -148,6 +148,8 @@ public static class BuildFigmaMainMenu
         var layout = JsonUtility.FromJson<Layout>("{\"layers\":" + json + "}");
         var soundBars = new System.Collections.Generic.List<Image>();
         var musicBars = new System.Collections.Generic.List<Image>();
+        var levelButtons = new System.Collections.Generic.List<UnityEngine.UI.Button>();
+        var levelArtwork = new System.Collections.Generic.List<Image>();
         foreach (var layer in layout.layers)
         {
             if (layer.modal != name) continue;
@@ -165,11 +167,16 @@ public static class BuildFigmaMainMenu
             if (layer.id == "48:2675") action = windows.Quit;
             if (layer.id == "48:2676" || layer.id == "48:2677" || layer.id == "48:2822" || layer.id == "48:2695") action = windows.Close;
             bool modeButton = layer.id == "48:2691" || layer.id == "48:2692" || layer.id == "48:2693" || layer.id == "48:2694";
+            if (layer.id == "48:2691") action = windows.Level1;
+            if (layer.id == "48:2692") action = windows.Level2;
+            if (layer.id == "48:2693") action = windows.Level3;
+            if (layer.id == "48:2694") action = windows.Arena;
             if (action != null || modeButton)
             {
                 var hit = Image(layer.name + " Hit Area", overlay.transform, null);
                 Place(hit.rectTransform, layer.x - 20, layer.y - 14, layer.w + 40, layer.h + 28);
                 hit.color = Color.clear;
+                hit.canvasRenderer.cullTransparentMesh = false;
                 hit.raycastTarget = true;
                 var button = (layer.id == "48:2691" || layer.id == "48:2694" || layer.id == "48:2677" || layer.id == "48:2822" || layer.id == "48:2695")
                     ? hit.gameObject.AddComponent<FigmaMenuButton>()
@@ -178,8 +185,19 @@ public static class BuildFigmaMainMenu
                 button.targetGraphic = hit;
                 button.transition = Selectable.Transition.None;
                 button.interactable = layer.id != "48:2692" && layer.id != "48:2693";
+                if (modeButton && layer.id != "48:2694")
+                {
+                    levelButtons.Add(button);
+                    levelArtwork.Add(graphic);
+                }
                 if (action != null) UnityEditor.Events.UnityEventTools.AddPersistentListener(button.onClick, action);
             }
+        }
+        if (name == "Modes")
+        {
+            windows.levelButtons = levelButtons.ToArray();
+            windows.levelButtonArtwork = levelArtwork.ToArray();
+            windows.unlockedLevelArtwork = Sprite("Modal_48_2691");
         }
         if (name == "Settings")
         {
@@ -219,6 +237,7 @@ public static class BuildFigmaMainMenu
         var button = image.gameObject.AddComponent<FigmaMenuButton>();
         button.targetGraphic = image;
         image.color = Color.clear;
+        image.canvasRenderer.cullTransparentMesh = false;
         button.transition = UnityEngine.UI.Selectable.Transition.None;
         // Exported text preserves the exact Figma typography without an external font dependency.
         var text = Image(name + " Label (Figma)", image.transform, Sprite(label));

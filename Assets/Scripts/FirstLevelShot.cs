@@ -13,8 +13,15 @@ public class FirstLevelShot : MonoBehaviour
     FirstLevelRooms level;
     float age;
     Collider2D lastMirrorCollider;
-    const int MaxReflections=5;
-    const float Separation=.002f;
+    TutorialTarget shooter;
+    bool hostile;
+    public void SetEnemyShooter(TutorialTarget enemy)
+    {
+        shooter=enemy;hostile=true;name="Enemy Ball";
+        FirstLevelEffects.ProjectileVisual(gameObject,true,level);OrientVisual();
+    }
+    const int MaxReflections=FirstLevelShotPath.MaxReflections;
+    const float Separation=FirstLevelShotPath.Separation;
 
     public static FirstLevelShot Create(Vector2 position,Vector2 direction,Sprite sprite,FirstLevelRooms owner,float speed=10f,float radius=.035f)
     {
@@ -23,8 +30,10 @@ public class FirstLevelShot : MonoBehaviour
         var render=go.AddComponent<SpriteRenderer>();render.sprite=sprite;render.sortingOrder=20;
         if(sprite!=null)go.transform.localScale=Vector3.one*(radius*2/Mathf.Max(.001f,sprite.bounds.size.x));
         var shot=go.AddComponent<FirstLevelShot>();shot.Direction=direction.normalized;shot.level=owner;shot.speed=speed;shot.radius=radius;
+        FirstLevelEffects.ProjectileVisual(go,false,owner);shot.OrientVisual();
         return shot;
     }
+    void OrientVisual(){transform.rotation=Quaternion.Euler(0,0,Mathf.Atan2(Direction.y,Direction.x)*Mathf.Rad2Deg+180);}
     void Update()
     {
         if(Finished || (level!=null && !level.CanPlay))return;
@@ -44,47 +53,58 @@ public class FirstLevelShot : MonoBehaviour
             MirrorRicochetSurface mirror=null;
             Vector2 contactNormal=Vector2.zero;
             Collider2D mirrorCollider=null;
-            foreach(var hit in Physics2D.CircleCastAll(origin,radius,Direction,distance))
+            bool hitPlayer=false;
+            if((hostile || Reflections>0) && level!=null)
             {
-                if(hit.collider==null || hit.collider.isTrigger || hit.collider==lastMirrorCollider)continue;
-                var surface=hit.collider.GetComponentInParent<MirrorRicochetSurface>();
-                if(surface!=null && !surface.reflectFromCollider)continue;
-                if(hit.distance<=nearest)
+                Vector2 offset=origin-(Vector2)level.player.position;
+                float combined=radius+level.playerRadius;
+                float b=Vector2.Dot(offset,Direction);
+                float c=offset.sqrMagnitude-combined*combined;
+                float discriminant=b*b-c;
+                if(discriminant>=0)
                 {
-                    nearest=hit.distance;solid=surface==null ? hit.collider : null;
-                    mirror=surface;contactNormal=hit.normal;mirrorCollider=hit.collider;
+                    float t=c<=0 ? 0 : -b-Mathf.Sqrt(discriminant);
+                    if(t>=0 && t<=nearest){nearest=t;hitPlayer=true;}
                 }
             }
-            foreach(var surface in FindObjectsByType<MirrorRicochetSurface>(FindObjectsSortMode.None))
+            var contact=FirstLevelShotPath.Cast(origin,Direction,radius,nearest,lastMirrorCollider,hostile,shooter);
+            if(contact.Hit)
             {
-                if(surface.reflectFromCollider)continue;
-                Vector2 normal=surface.ReflectionNormal;
-                float dot=Vector2.Dot(Direction,normal);
-                if(Mathf.Abs(dot)<.0001f)continue;
-                float t=Vector2.Dot(surface.ReflectionPoint-origin,normal)/dot;
-                if(t<Separation*.5f || t>nearest)continue;
-                Vector2 tangent=new Vector2(-normal.y,normal.x);
-                var renderer=surface.GetComponent<SpriteRenderer>();
-                float halfWidth=renderer!=null && renderer.sprite!=null ? renderer.sprite.bounds.size.x*Mathf.Abs(surface.transform.lossyScale.x)*.28f : .5f;
-                if(Mathf.Abs(Vector2.Dot(origin+Direction*t-surface.ReflectionPoint,tangent))>halfWidth+radius)continue;
-                nearest=t;mirror=surface;solid=null;mirrorCollider=null;
+                nearest=contact.distance;solid=contact.solid;mirror=contact.mirror;
+                contactNormal=contact.normal;mirrorCollider=contact.mirrorCollider;hitPlayer=false;
             }
             transform.position=origin+Direction*nearest;
             distance-=nearest;
+            if(hitPlayer)
+            {
+                level.player.GetComponent<TutorialPlayer>().Hit();
+                FirstLevelEffects.Impact(transform.position,.8f,level,hostile || Charged);
+                Finish();return;
+            }
             if(mirror!=null)
             {
                 if(Reflections>=MaxReflections){Finish();return;}
                 Direction=mirror.reflectFromCollider ? Vector2.Reflect(Direction,contactNormal).normalized : mirror.Reflect(Direction);
                 lastMirrorCollider=mirrorCollider;Reflections++;
                 Charged|=mirror.chargesShot;
-                GetComponent<SpriteRenderer>().color=Charged ? new Color(1,.2f,.15f) : Color.white;
+                if(Charged)FirstLevelEffects.ProjectileVisual(gameObject,hostile,level,true);
+                OrientVisual();
                 transform.position+=(Vector3)(Direction*Separation);
                 distance=Mathf.Max(0,distance-Separation);
             }
             else if(solid!=null)
             {
+                var robot=solid.GetComponentInParent<TutorialTarget>();
+                bool hadShield=robot!=null && robot.IsShielded;
+                if(robot!=null && !hostile)robot.Hit(Reflections>0,Charged);
+                bool shieldBroken=hadShield && !robot.IsShielded;
+                if(shieldBroken)FirstLevelEffects.Impact(transform.position,1.7f,level);
+                float effectSize=robot!=null && robot.IsDestroyed ? 2.2f : .7f;
+                FirstLevelEffects.Impact(transform.position,effectSize,level,Charged || hostile);
                 var target=solid.GetComponentInParent<FirstLevelShotTarget>();
                 if(target!=null)target.Hit(Damage,Charged);
+                var cover=solid.GetComponentInParent<DestructibleCover>();
+                if(cover!=null && !hostile)cover.Hit(Reflections>0 ? 5 : 1);
                 Finish();return;
             }
             else return;

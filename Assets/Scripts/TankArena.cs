@@ -7,6 +7,8 @@ public class TankArena : MonoBehaviour
     public const float HalfHeight = 4.5f;
     [SerializeField] private Shader spriteShader;
     [SerializeField] private bool generateOnPlay = true;
+    [SerializeField] private Sprite ammoIcon;
+    [SerializeField] private Sprite heartIcon;
     private Sprite square;
     private Sprite circle;
     private Texture2D squareTexture;
@@ -74,6 +76,7 @@ public class TankArena : MonoBehaviour
         BoxCollider2D collider = tank.AddComponent<BoxCollider2D>();
         collider.size = new Vector2(0.95f, 1.1f);
         tank.AddComponent<Rigidbody2D>();
+        tank.AddComponent<TutorialPlayer>().ConfigureHeartIcon(heartIcon);
         Shape("Left Track", tank.transform, new Vector2(-0.36f, 0), new Vector2(0.23f, 1.1f),
             new Color(0.19f, 0.25f, 0.31f), false, 2);
         Shape("Right Track", tank.transform, new Vector2(0.36f, 0), new Vector2(0.23f, 1.1f),
@@ -94,7 +97,7 @@ public class TankArena : MonoBehaviour
             new Color(1f, 0.86f, 0.35f), true, 6);
         Bullet bullet = projectile.AddComponent<Bullet>();
         projectile.SetActive(false);
-        tank.AddComponent<TankMovement>().Configure(turret.transform, muzzle, bullet, camera);
+        tank.AddComponent<TankMovement>().Configure(turret.transform, muzzle, bullet, camera, ammoIcon);
     }
 
     private void Wall(string wallName, Vector2 position, Vector2 size)

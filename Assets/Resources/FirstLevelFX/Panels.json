@@ -1,0 +1,276 @@
+{
+  "panels": [
+    {
+      "name": "StartHint",
+      "parts": [
+        {
+          "asset": "UI_56_3203",
+          "x": 509.0,
+          "y": 89.0,
+          "w": 901.0,
+          "h": 901.0,
+          "close": false,
+          "action": null
+        },
+        {
+          "asset": "UI_56_3204",
+          "x": 1225.0,
+          "y": 355.0,
+          "w": 82.0,
+          "h": 68.6090316772461,
+          "close": true,
+          "action": null
+        },
+        {
+          "asset": "UI_56_3207",
+          "x": 781.0,
+          "y": 362.0,
+          "w": 358.0,
+          "h": 80.0,
+          "close": false,
+          "action": null
+        },
+        {
+          "asset": "UI_56_3208",
+          "x": 657.0,
+          "y": 719.0,
+          "w": 606.0,
+          "h": 80.0,
+          "close": false,
+          "action": null
+        },
+        {
+          "asset": "UI_56_3210",
+          "x": 713.0,
+          "y": 508.0,
+          "w": 91.0,
+          "h": 22.0,
+          "close": false,
+          "action": null
+        },
+        {
+          "asset": "UI_119_79",
+          "x": 1108.0,
+          "y": 508.0,
+          "w": 68.0,
+          "h": 22.0,
+          "close": false,
+          "action": null
+        },
+        {
+          "asset": "UI_119_77",
+          "x": 939.0,
+          "y": 508.0,
+          "w": 79.0,
+          "h": 22.0,
+          "close": false,
+          "action": null
+        },
+        {
+          "asset": "UI_119_75",
+          "x": 667.0,
+          "y": 537.0,
+          "w": 184.0,
+          "h": 119.0,
+          "close": false,
+          "action": null
+        },
+        {
+          "asset": "UI_119_76",
+          "x": 913.0,
+          "y": 537.0,
+          "w": 109.0,
+          "h": 116.0,
+          "close": false,
+          "action": null
+        },
+        {
+          "asset": "UI_119_78",
+          "x": 1094.0,
+          "y": 537.0,
+          "w": 109.0,
+          "h": 116.0,
+          "close": false,
+          "action": null
+        }
+      ]
+    },
+    {
+      "name": "BlueHint",
+      "parts": [
+        {
+          "asset": "UI_56_3138",
+          "x": 509.0,
+          "y": 89.0,
+          "w": 901.0,
+          "h": 901.0,
+          "close": false,
+          "action": null
+        },
+        {
+          "asset": "UI_56_3139",
+          "x": 1225.0,
+          "y": 355.0,
+          "w": 82.0,
+          "h": 68.6090316772461,
+          "close": true,
+          "action": null
+        },
+        {
+          "asset": "UI_56_3142",
+          "x": 847.0,
+          "y": 598.0,
+          "w": 226.0,
+          "h": 217.0,
+          "close": false,
+          "action": null
+        },
+        {
+          "asset": "UI_56_3143",
+          "x": 758.0,
+          "y": 369.0,
+          "w": 404.0,
+          "h": 40.0,
+          "close": false,
+          "action": null
+        },
+        {
+          "asset": "UI_56_3144",
+          "x": 758.0,
+          "y": 445.0,
+          "w": 404.0,
+          "h": 44.0,
+          "close": false,
+          "action": null
+        },
+        {
+          "asset": "UI_56_3145",
+          "x": 796.0,
+          "y": 521.0,
+          "w": 329.0,
+          "h": 44.0,
+          "close": false,
+          "action": null
+        }
+      ]
+    },
+    {
+      "name": "RedHint",
+      "parts": [
+        {
+          "asset": "UI_56_3166",
+          "x": 509.0,
+          "y": 89.0,
+          "w": 901.0,
+          "h": 901.0,
+          "close": false,
+          "action": null
+        },
+        {
+          "asset": "UI_56_3167",
+          "x": 1225.0,
+          "y": 355.0,
+          "w": 82.0,
+          "h": 68.6090316772461,
+          "close": true,
+          "action": null
+        },
+        {
+          "asset": "UI_56_3170",
+          "x": 736.0,
+          "y": 356.0,
+          "w": 448.0,
+          "h": 80.0,
+          "close": false,
+          "action": null
+        },
+        {
+          "asset": "UI_56_3171",
+          "x": 742.0,
+          "y": 468.0,
+          "w": 437.0,
+          "h": 44.0,
+          "close": false,
+          "action": null
+        },
+        {
+          "asset": "UI_56_3172",
+          "x": 796.0,
+          "y": 533.0,
+          "w": 329.0,
+          "h": 44.0,
+          "close": false,
+          "action": null
+        },
+        {
+          "asset": "UI_56_3173",
+          "x": 849.0,
+          "y": 604.0,
+          "w": 222.0,
+          "h": 222.0,
+          "close": false,
+          "action": null
+        },
+        {
+          "asset": "UI_56_3174",
+          "x": 682.0,
+          "y": 505.0,
+          "w": 82.0,
+          "h": 79.0,
+          "close": false,
+          "action": null
+        }
+      ]
+    },
+    {
+      "name": "Victory",
+      "parts": [
+        {
+          "asset": "UI_56_3110",
+          "x": 734.0,
+          "y": 400.0,
+          "w": 452.0,
+          "h": 569.0,
+          "close": false,
+          "action": null
+        },
+        {
+          "asset": "UI_56_3111",
+          "x": 619.0,
+          "y": 24.0,
+          "w": 681.0,
+          "h": 306.0,
+          "close": false,
+          "action": null
+        },
+        {
+          "asset": "UI_56_3112",
+          "x": 819.0,
+          "y": 652.0,
+          "w": 117.0,
+          "h": 134.0,
+          "close": false,
+          "action": "menu"
+        },
+        {
+          "asset": "UI_56_3113",
+          "x": 960.0,
+          "y": 647.0,
+          "w": 165.0,
+          "h": 143.0,
+          "close": false,
+          "action": "next"
+        },
+        {
+          "asset": "UI_115_4",
+          "x": 713.0,
+          "y": 273.0,
+          "w": 493.0,
+          "h": 164.0,
+          "close": false,
+          "action": null
+        }
+      ]
+    }
+  ]
+}

@@ -11,19 +11,39 @@ public class TankMovement : MonoBehaviour
     [SerializeField] private Bullet bulletPrefab;
     [SerializeField] private Camera gameCamera;
     [SerializeField] private float shotInterval = 0.4f;
+    [SerializeField, Min(0.01f)] private float reloadDuration = 1.5f;
+    [SerializeField] private Sprite ammoIcon;
+
+    public const int MagazineSize = 4;
+    public int BulletsRemaining { get; private set; } = MagazineSize;
+    public bool IsReloading { get; private set; }
+    public float ReloadProgress => IsReloading
+        ? Mathf.Clamp01((Time.time - reloadStartedAt) / reloadDuration) : 1f;
+    public Sprite AmmoIcon => ammoIcon;
 
     private Rigidbody2D body;
     private Collider2D ownCollider;
     private Vector2 movement;
     private float nextShotTime;
+    private float reloadStartedAt;
 
     public void Configure(Transform turretTransform, Transform muzzleTransform,
-        Bullet projectilePrefab, Camera camera)
+        Bullet projectilePrefab, Camera camera, Sprite magazineIcon = null)
     {
         turret = turretTransform;
         muzzle = muzzleTransform;
         bulletPrefab = projectilePrefab;
         gameCamera = camera;
+        if (magazineIcon != null) ammoIcon = magazineIcon;
+    }
+
+    private void Start()
+    {
+        if (gameCamera == null) return;
+        if (!TryGetComponent<TutorialPlayer>(out var health))
+            health = gameObject.AddComponent<TutorialPlayer>();
+        var hud = new GameObject("Player Ammo HUD").AddComponent<PlayerAmmoHud>();
+        hud.Initialize(this, gameCamera);
     }
 
     private void Awake()
@@ -47,6 +67,12 @@ public class TankMovement : MonoBehaviour
 
     private void Update()
     {
+        if (IsReloading && Time.time >= reloadStartedAt + reloadDuration)
+        {
+            BulletsRemaining = MagazineSize;
+            IsReloading = false;
+        }
+
         movement = Vector2.zero;
 
         var keyboard = Keyboard.current;
@@ -91,6 +117,7 @@ public class TankMovement : MonoBehaviour
         }
 
         if (Time.timeScale > 0 &&
+            !IsReloading && BulletsRemaining > 0 &&
             mouse.leftButton.isPressed &&
             Time.time >= nextShotTime && bulletPrefab != null)
         {
@@ -104,6 +131,12 @@ public class TankMovement : MonoBehaviour
 
             bullet.gameObject.SetActive(true);
             bullet.Launch(muzzle.up, ownCollider);
+            BulletsRemaining--;
+            if (BulletsRemaining == 0)
+            {
+                reloadStartedAt = Time.time;
+                IsReloading = true;
+            }
         }
     }
 

@@ -14,6 +14,16 @@ public class TutorialTarget : MonoBehaviour
     private Collider2D bodyCollider;
     private Sprite healthSprite;
 
+    public void Configure(bool hasShield, GameObject visual, int health = 5)
+    {
+        shielded = hasShield;
+        shieldVisual = visual;
+        maxHealth = Mathf.Max(1, health);
+        Health = maxHealth;
+        IsDestroyed = false;
+        if (shieldVisual != null) shieldVisual.SetActive(shielded);
+    }
+
     private void Awake()
     {
         maxHealth = Mathf.Max(1, maxHealth);

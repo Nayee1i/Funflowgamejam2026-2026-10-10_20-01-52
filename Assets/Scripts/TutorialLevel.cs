@@ -12,7 +12,6 @@ public class TutorialLevel : MonoBehaviour
         public Vector2 size = new Vector2(18, 10);
         public GameObject gate;
         public TutorialTarget[] targets;
-        public Transform checkpoint;
     }
 
     [SerializeField] private Transform player;
@@ -25,48 +24,7 @@ public class TutorialLevel : MonoBehaviour
     private bool restarting;
     private GUIStyle textStyle;
     private float finishedAt;
-    private static int resumeRoom = -1;
-    private static string resumeScene;
-
-    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
-    private static void ResetResumeState()
-    {
-        resumeRoom = -1;
-        resumeScene = null;
-    }
-
-    private void Start()
-    {
-        if (resumeRoom < 0 || resumeScene != SceneManager.GetActiveScene().path) return;
-        CurrentRoom = Mathf.Clamp(resumeRoom, 0, rooms.Length - 1);
-        resumeRoom = -1;
-        resumeScene = null;
-        // A fresh scene resets the current encounter, while completed rooms stay cleared.
-        for (int i = 0; i < CurrentRoom; i++)
-        {
-            foreach (TutorialTarget target in rooms[i].targets)
-                if (target != null) target.Complete();
-            if (rooms[i].gate != null) rooms[i].gate.SetActive(false);
-        }
-        Transform checkpoint = rooms[CurrentRoom].checkpoint;
-        Vector3 position = checkpoint != null ? checkpoint.position : (Vector3)rooms[CurrentRoom].center;
-        Quaternion rotation = checkpoint != null ? checkpoint.rotation : Quaternion.identity;
-        player.SetPositionAndRotation(position, rotation);
-        if (player.TryGetComponent<Rigidbody2D>(out var body))
-        {
-            body.position = position;
-            body.rotation = rotation.eulerAngles.z;
-            body.linearVelocity = Vector2.zero;
-            body.angularVelocity = 0f;
-        }
-        Physics2D.SyncTransforms();
-        if (gameCamera != null)
-        {
-            gameCamera.transform.position = new Vector3(position.x, position.y, gameCamera.transform.position.z);
-            if (gameCamera.TryGetComponent<CameraDeadZone>(out var follow)) follow.ResetSmoothing();
-        }
-    }
-
+    private float elapsedSeconds;
     private bool Cleared(int index)
     {
         foreach (TutorialTarget target in rooms[index].targets)
@@ -89,17 +47,18 @@ public class TutorialLevel : MonoBehaviour
 
     private void Update()
     {
-        if (Keyboard.current != null && Keyboard.current.rKey.wasPressedThisFrame)
-        {
-            Restart();
-            return;
-        }
         if (Finished)
         {
             if (Time.time >= finishedAt + 1.5f) OpenLevelSelection();
             return;
         }
+        if (Keyboard.current != null && Keyboard.current.rKey.wasPressedThisFrame)
+        {
+            Restart();
+            return;
+        }
         if (restarting || rooms == null || rooms.Length == 0 || player == null) return;
+        elapsedSeconds += Time.deltaTime;
         Room current = rooms[CurrentRoom];
         bool cleared = Cleared(CurrentRoom);
         if (cleared && current.gate != null) current.gate.SetActive(false);
@@ -107,6 +66,7 @@ public class TutorialLevel : MonoBehaviour
         {
             Finished = true;
             finishedAt = Time.time;
+            LevelProgression.RecordResult(SceneManager.GetActiveScene().name, elapsedSeconds);
             if (player.TryGetComponent<TankMovement>(out var movement)) movement.enabled = false;
             foreach (Bullet ball in FindObjectsByType<Bullet>())
                 Destroy(ball.gameObject);
@@ -129,10 +89,8 @@ public class TutorialLevel : MonoBehaviour
 
     public void Restart()
     {
-        if (restarting) return;
+        if (restarting || Finished) return;
         restarting = true;
-        resumeRoom = CurrentRoom;
-        resumeScene = SceneManager.GetActiveScene().path;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
@@ -143,18 +101,26 @@ public class TutorialLevel : MonoBehaviour
         {
             textStyle = new GUIStyle(GUI.skin.box) { fontSize = 18, alignment = TextAnchor.MiddleCenter, wordWrap = true };
         }
-        GUI.Box(new Rect(10, 10, Screen.width - 20, 76),
+        float healthHudWidth = gameCamera != null
+            ? 160f * Mathf.Min(gameCamera.pixelWidth / 1280f, gameCamera.pixelHeight / 720f) : 160f;
+        GUI.Box(new Rect(healthHudWidth, 10, Mathf.Max(1f, Screen.width - healthHudWidth - 10), 76),
             Finished ? completionMessage : $"Комната {CurrentRoom + 1}/{rooms.Length}\n{rooms[CurrentRoom].instruction}", textStyle);
         GUI.Box(new Rect(10, Screen.height - 42, Screen.width - 20, 32),
-            "WASD / стрелки — движение    Мышь — прицел    ЛКМ — огонь    R — чекпоинт", textStyle);
+            "WASD / стрелки — движение    Мышь — прицел    ЛКМ — огонь    R — заново", textStyle);
         if (!Finished) return;
         float x = Screen.width * .5f - 140;
+        GUI.Box(new Rect(x - 80, Screen.height * .5f - 70, 440, 56), completionMessage, textStyle);
         if (GUI.Button(new Rect(x, Screen.height * .5f, 280, 48), "Выбор уровня"))
             OpenLevelSelection();
     }
 
     private void OpenLevelSelection()
     {
+        if (levelSelectionScene == "MainMenu")
+        {
+            MainMenuWindows.ReturnToLevelSelection();
+            return;
+        }
         if (!string.IsNullOrEmpty(levelSelectionScene) && Application.CanStreamedLevelBeLoaded(levelSelectionScene))
             SceneManager.LoadScene(levelSelectionScene);
     }

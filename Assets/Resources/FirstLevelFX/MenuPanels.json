@@ -1,0 +1,185 @@
+{
+  "panels": [
+    {
+      "name": "Settings",
+      "parts": [
+        {
+          "asset": "UI_56_3248",
+          "x": 509.0,
+          "y": 89.0,
+          "w": 901.0,
+          "h": 901.0,
+          "close": false,
+          "action": null
+        },
+        {
+          "asset": "UI_56_3250",
+          "x": 869.0,
+          "y": 353.0,
+          "w": 183.0,
+          "h": 40.0,
+          "close": false,
+          "action": null
+        },
+        {
+          "asset": "UI_56_3256",
+          "x": 1217.0,
+          "y": 348.0,
+          "w": 82.0,
+          "h": 68.6090316772461,
+          "close": false,
+          "action": "close"
+        },
+        {
+          "asset": "UI_56_3249",
+          "x": 1178.0,
+          "y": 627.0,
+          "w": 28.0,
+          "h": 53.0,
+          "close": false,
+          "action": "soundUp"
+        },
+        {
+          "asset": "UI_56_3251",
+          "x": 685.0,
+          "y": 641.0,
+          "w": 82.0,
+          "h": 40.0,
+          "close": false,
+          "action": null
+        },
+        {
+          "asset": "UI_56_3252",
+          "x": 685.0,
+          "y": 761.0,
+          "w": 122.0,
+          "h": 40.0,
+          "close": false,
+          "action": null
+        },
+        {
+          "asset": "UI_56_3253",
+          "x": 856.0,
+          "y": 627.0,
+          "w": 28.0,
+          "h": 53.0,
+          "close": false,
+          "action": "soundDown"
+        },
+        {
+          "asset": "UI_56_3254",
+          "x": 1178.0,
+          "y": 747.0,
+          "w": 28.0,
+          "h": 53.0,
+          "close": false,
+          "action": "musicUp"
+        },
+        {
+          "asset": "UI_56_3255",
+          "x": 856.0,
+          "y": 747.0,
+          "w": 28.0,
+          "h": 53.0,
+          "close": false,
+          "action": "musicDown"
+        },
+        {
+          "asset": "UI_126_93",
+          "x": 785.0,
+          "y": 434.0,
+          "w": 350.7431640625,
+          "h": 40.0,
+          "close": false,
+          "action": null
+        },
+        {
+          "asset": "UI_126_94",
+          "x": 785.0,
+          "y": 491.0458984375,
+          "w": 28.0,
+          "h": 53.0,
+          "close": false,
+          "action": "sensitivityDown"
+        },
+        {
+          "asset": "UI_126_92",
+          "x": 1107.7431640625,
+          "y": 491.0458984375,
+          "w": 28.0,
+          "h": 53.0,
+          "close": false,
+          "action": "sensitivityUp"
+        }
+      ]
+    },
+    {
+      "name": "Modes",
+      "parts": [
+        {
+          "asset": "UI_56_3017",
+          "x": 232.0,
+          "y": 211.0,
+          "w": 1456.0,
+          "h": 659.0,
+          "close": false,
+          "action": null
+        },
+        {
+          "asset": "UI_56_3018",
+          "x": 610.0,
+          "y": 414.0,
+          "w": 223.0,
+          "h": 114.0,
+          "close": false,
+          "action": "level1"
+        },
+        {
+          "asset": "UI_56_3019",
+          "x": 845.0,
+          "y": 417.0,
+          "w": 223.0,
+          "h": 111.0,
+          "close": false,
+          "action": "level2"
+        },
+        {
+          "asset": "UI_56_3020",
+          "x": 1084.0,
+          "y": 417.0,
+          "w": 223.0,
+          "h": 111.0,
+          "close": false,
+          "action": "level3"
+        },
+        {
+          "asset": "UI_56_3021",
+          "x": 838.0,
+          "y": 590.0,
+          "w": 239.0,
+          "h": 97.0,
+          "close": false,
+          "action": "arena"
+        },
+        {
+          "asset": "UI_56_3022",
+          "x": 1423.0,
+          "y": 373.0,
+          "w": 82.0,
+          "h": 68.6090316772461,
+          "close": false,
+          "action": "close"
+        },
+        {
+          "asset": "UI_56_3025",
+          "x": 837.0,
+          "y": 701.0,
+          "w": 240.0,
+          "h": 26.0,
+          "close": false,
+          "action": null
+        }
+      ]
+    }
+  ]
+}
