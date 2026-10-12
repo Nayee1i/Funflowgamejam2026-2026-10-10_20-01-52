@@ -16,7 +16,6 @@ public class FirstLevelTankAim : MonoBehaviour
         get => MouseSensitivitySettings.Value;
         set => MouseSensitivitySettings.Set(value);
     }
-    Vector2 mouseAimOffset = Vector2.up * 160f;
     public Vector2 AimDirection { get; private set; } = Vector2.up;
     public const int MagazineSize=4;
     public float reloadDuration=1.5f;
@@ -35,28 +34,24 @@ public class FirstLevelTankAim : MonoBehaviour
     }
     bool previousVisible;
     CursorLockMode previousLock;
-    bool mouseControlActive;
     FirstLevelAimPreview aimPreview;
 
     void OnEnable() { previousVisible=Cursor.visible; previousLock=Cursor.lockState; }
     void OnDisable() { if(aimPreview!=null)aimPreview.Hide(); Cursor.visible=previousVisible; Cursor.lockState=previousLock; FirstLevelShot.ClearAll(); }
-    void OnApplicationFocus(bool focused) { if(!focused) { Cursor.visible=true; mouseControlActive=false; } }
+    void OnApplicationFocus(bool focused) { if(!focused) { Cursor.lockState=CursorLockMode.None; Cursor.visible=true; } }
     void LateUpdate()
     {
         AdvanceReload(Time.deltaTime);
         bool gameplay=Application.isFocused && level!=null && level.CanPlay;
-        Cursor.visible=!gameplay;
-        Cursor.lockState=gameplay ? CursorLockMode.Locked : CursorLockMode.None;
-        if(!gameplay || turret==null || Mouse.current==null)
+        Cursor.lockState=CursorLockMode.None;
+        Cursor.visible=true;
+        var camera=Camera.main;
+        if(!gameplay || turret==null || Mouse.current==null || camera==null)
         {
-            mouseControlActive=false;
             if(aimPreview!=null)aimPreview.Hide();
             return;
         }
-        // Ignore the capture frame: opening the game or closing a panel may warp the cursor.
-        Vector2 mouseDelta=mouseControlActive ? Mouse.current.delta.ReadValue() : Vector2.zero;
-        mouseControlActive=true;
-        ApplyMouseAim(mouseDelta);
+        AimAtScreen(Mouse.current.position.ReadValue(),camera);
         if(aimPreview==null)
         {
             var preview=new GameObject("Ricochet Aim Preview");
@@ -66,14 +61,12 @@ public class FirstLevelTankAim : MonoBehaviour
         if(Mouse.current.leftButton.wasPressedThisFrame && level.AllowMouseShotThisFrame &&
             (EventSystem.current==null || !EventSystem.current.IsPointerOverGameObject()))Fire();
     }
-    public void ApplyMouseAim(Vector2 mouseDelta)
+    public bool AimAtScreen(Vector2 screenPosition,Camera camera)
     {
-        // The hidden aiming point travels with the tank, but mouse motion moves it
-        // on both screen axes. Circular mouse motion therefore gives a full turn.
-        mouseAimOffset+=mouseDelta*mouseTurnSensitivity;
-        if(mouseAimOffset.sqrMagnitude>=16f)AimDirection=mouseAimOffset.normalized;
-        float angle=Mathf.Atan2(AimDirection.y,AimDirection.x)*Mathf.Rad2Deg;
-        if(turret!=null)turret.rotation=Quaternion.Euler(0,0,angle-spriteAimOffset);
+        if(camera==null || turret==null)return false;
+        var ray=camera.ScreenPointToRay(screenPosition);
+        var plane=new Plane(Vector3.forward,turret.position);
+        return plane.Raycast(ray,out float distance) && AimAt(ray.GetPoint(distance));
     }
     public bool AimAt(Vector2 world)
     {
@@ -81,7 +74,6 @@ public class FirstLevelTankAim : MonoBehaviour
         Vector2 delta=world-(Vector2)turret.position;
         if(delta.sqrMagnitude<.0001f)return false;
         AimDirection=delta.normalized;
-        mouseAimOffset=AimDirection*160f;
         turret.rotation=Quaternion.Euler(0,0,Mathf.Atan2(delta.y,delta.x)*Mathf.Rad2Deg-spriteAimOffset);
         return true;
     }

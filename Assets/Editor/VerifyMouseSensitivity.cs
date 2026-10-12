@@ -23,6 +23,7 @@ public static class VerifyMouseSensitivity
         bool existed = PlayerPrefs.HasKey(MouseSensitivitySettings.PreferenceKey);
         float previous = PlayerPrefs.GetFloat(MouseSensitivitySettings.PreferenceKey);
         var tank = new GameObject("Sensitivity verification");
+        var cameraObject = new GameObject("Cursor aiming verification camera");
         try
         {
             MouseSensitivitySettings.Set(-100);
@@ -35,23 +36,33 @@ public static class VerifyMouseSensitivity
             Require(Mathf.Abs(MouseSensitivitySettings.Value - 1.55f) < .0001f, "Slider mapping");
             Require(PlayerPrefs.GetFloat(MouseSensitivitySettings.PreferenceKey) == MouseSensitivitySettings.Value, "Persistence");
             var gun = tank.AddComponent<FirstLevelTankAim>();
+            gun.turret = tank.transform;
+            var camera = cameraObject.AddComponent<Camera>();
+            camera.enabled = false;
+            camera.orthographic = true;
+            camera.transform.position = new Vector3(0, 0, -10);
+            Vector2 target = new Vector2(2, 3);
+            Vector2 screen = camera.WorldToScreenPoint(target);
             MouseSensitivitySettings.Set(1);
-            gun.ApplyMouseAim(new Vector2(80, 0));
-            float first = gun.AimDirection.x;
-            Object.DestroyImmediate(gun);
-            gun = tank.AddComponent<FirstLevelTankAim>();
-            MouseSensitivitySettings.Set(2);
-            gun.ApplyMouseAim(new Vector2(80, 0));
-            Require(gun.AimDirection.x > first + .2f, "Sensitivity applies to aiming");
+            Require(gun.AimAtScreen(screen, camera), "Cursor projection");
+            Require(Vector2.Distance(gun.AimDirection, target.normalized) < .0001f, "Aim follows cursor placement");
             Vector2 direction = gun.AimDirection;
+            MouseSensitivitySettings.Set(2);
+            gun.AimAtScreen(screen, camera);
+            Require(Vector2.Distance(direction, gun.AimDirection) < .0001f, "Sensitivity must not offset cursor aim");
+            tank.transform.position = Vector3.right;
+            gun.AimAtScreen(screen, camera);
+            Require(Vector2.Distance(gun.AimDirection, (target - Vector2.right).normalized) < .0001f, "Aim tracks stationary cursor while driving");
+            direction = gun.AimDirection;
             MouseSensitivitySettings.Reset();
-            gun.ApplyMouseAim(Vector2.zero);
+            gun.AimAtScreen(screen, camera);
             Require(Vector2.Distance(direction, gun.AimDirection) < .0001f, "Changing setting does not turn stationary aim");
-            Debug.Log("MOUSE_SENSITIVITY_VERIFIED: clamp, invalid values, slider mapping, persistence, immediate aim gain, stationary aim.");
+            Debug.Log("MOUSE_SENSITIVITY_VERIFIED: settings persistence, cursor projection, cursor alignment independent of sensitivity, stationary cursor while driving.");
         }
         finally
         {
             Object.DestroyImmediate(tank);
+            Object.DestroyImmediate(cameraObject);
             if (existed) PlayerPrefs.SetFloat(MouseSensitivitySettings.PreferenceKey, previous);
             else PlayerPrefs.DeleteKey(MouseSensitivitySettings.PreferenceKey);
             PlayerPrefs.Save();

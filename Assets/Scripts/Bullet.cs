@@ -79,8 +79,9 @@ public class Bullet : MonoBehaviour
                 Destroy(gameObject);
                 return;
             }
-            bool red = hit.collider.GetComponentInParent<RedMirror>() != null;
-            if (reflectionCount >= MaxReflections || (!red && hit.collider.GetComponentInParent<BlueMirror>() == null))
+            var mirror = hit.collider.GetComponentInParent<MirrorRicochetSurface>();
+            bool red = mirror != null ? mirror.chargesShot : hit.collider.GetComponentInParent<RedMirror>() != null;
+            if (reflectionCount >= MaxReflections || (mirror == null && !red && hit.collider.GetComponentInParent<BlueMirror>() == null))
             {
                 Destroy(gameObject);
                 return;

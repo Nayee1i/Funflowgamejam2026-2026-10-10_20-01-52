@@ -43,16 +43,15 @@ public static class FinishFirstLevel
         Quaternion initialRotation=level.player.rotation;
         level.player.position+=Vector3.up*3;
         level.player.rotation=Quaternion.Euler(0,0,120);
-        gun.ApplyMouseAim(Vector2.zero);
+        gun.AimAt((Vector2)gun.turret.position+initialAim);
         Require(Vector2.Distance(initialAim,gun.AimDirection)<.0001f,"Driving changed turret aim without mouse input.");
         Require(Quaternion.Angle(gun.turret.rotation,Quaternion.Euler(0,0,90-gun.spriteAimOffset))<.001f,"Body rotation changed turret world rotation.");
-        Vector2 previousOffset=Vector2.up*160;
         foreach(Vector2 direction in new[]{Vector2.right,Vector2.down,Vector2.left,Vector2.up})
         {
-            Vector2 nextOffset=direction*160;
-            gun.ApplyMouseAim((nextOffset-previousOffset)/gun.mouseTurnSensitivity);
-            Require(Vector2.Distance(gun.AimDirection,direction)<.0001f,"Circular mouse input aimed in the wrong direction.");
-            previousOffset=nextOffset;
+            var camera=Camera.main;
+            var screen=camera.WorldToScreenPoint(gun.turret.position+(Vector3)direction);
+            Require(gun.AimAtScreen(screen,camera),"Cursor could not be projected onto the gameplay plane.");
+            Require(Vector2.Distance(gun.AimDirection,direction)<.0001f,"Cursor position aimed in the wrong direction.");
         }
         level.player.position=initialPosition;level.player.rotation=initialRotation;
         for(int i=0;i<4;i++)

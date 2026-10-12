@@ -20,7 +20,8 @@ public static class VerifyMirrorFaceAndHint
                 EditorSceneManager.OpenScene("Assets/Scenes/"+name+".unity");
                 foreach(var mirror in UnityEngine.Object.FindObjectsByType<MirrorRicochetSurface>(FindObjectsInactive.Include,FindObjectsSortMode.None))
                 {
-                    if(mirror.reflectFromCollider)throw new Exception("Outer-frame reflection: "+mirror.name);
+                    var colliders=mirror.GetComponentsInChildren<Collider2D>();
+                    if(!Array.Exists(colliders,c=>c.enabled && !c.isTrigger))throw new Exception("Mirror has no solid collider: "+mirror.name);
                     count++;
                 }
             }
@@ -40,7 +41,7 @@ public static class VerifyMirrorFaceAndHint
                 if(Mathf.Abs(a-b)>.01f)throw new Exception("Off-centre label");
             }
             BuildFullSecondLevel.Capture("Tools/controls-hint-review.png");
-            File.WriteAllText("Tools/mirror-face-result.txt","PASSED: "+count+" face-reflecting mirrors; left shot/right aim icons and centred labels.\n");
+            File.WriteAllText("Tools/mirror-face-result.txt","PASSED: "+count+" mirrors with physical colliders; left shot/right aim icons and centred labels.\n");
         }
         catch(Exception e){File.WriteAllText("Tools/mirror-face-result.txt","FAILED: "+e);Debug.LogException(e);}
         finally{EditorSceneManager.OpenScene("Assets/Scenes/MainMenu.unity");}

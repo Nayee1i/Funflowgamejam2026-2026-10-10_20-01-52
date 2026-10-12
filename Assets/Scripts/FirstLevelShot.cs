@@ -54,7 +54,6 @@ public class FirstLevelShot : MonoBehaviour
             float nearest=distance;
             Collider2D solid=null;
             MirrorRicochetSurface mirror=null;
-            Vector2 contactNormal=Vector2.zero;
             Collider2D mirrorCollider=null;
             bool hitPlayer=false;
             if((hostile || Reflections>0) && level!=null)
@@ -74,7 +73,7 @@ public class FirstLevelShot : MonoBehaviour
             if(contact.Hit)
             {
                 nearest=contact.distance;solid=contact.solid;mirror=contact.mirror;
-                contactNormal=contact.normal;mirrorCollider=contact.mirrorCollider;hitPlayer=false;
+                mirrorCollider=contact.mirrorCollider;hitPlayer=false;
             }
             transform.position=origin+Direction*nearest;
             distance-=nearest;
@@ -87,7 +86,7 @@ public class FirstLevelShot : MonoBehaviour
             if(mirror!=null)
             {
                 if(Reflections>=MaxReflections){Finish();return;}
-                Direction=mirror.reflectFromCollider ? Vector2.Reflect(Direction,contactNormal).normalized : mirror.Reflect(Direction);
+                Direction=contact.Reflect(Direction);
                 lastMirrorCollider=mirrorCollider;Reflections++;
                 Charged|=mirror.chargesShot;
                 if(Charged)FirstLevelEffects.ProjectileVisual(gameObject,hostile,level,true);
